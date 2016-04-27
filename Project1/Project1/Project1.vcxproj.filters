@@ -22,6 +22,9 @@
     <Filter Include="Source Files\app">
       <UniqueIdentifier>{a278c1bd-5eec-4109-afd9-e087d5591bd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NewFilter1">
+      <UniqueIdentifier>{372b3180-292d-4f91-bb06-660844146f50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Czolg.h">
