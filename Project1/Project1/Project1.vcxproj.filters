@@ -22,12 +22,45 @@
     <Filter Include="Source Files\app">
       <UniqueIdentifier>{a278c1bd-5eec-4109-afd9-e087d5591bd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NewFilter1">
-      <UniqueIdentifier>{372b3180-292d-4f91-bb06-660844146f50}</UniqueIdentifier>
+    <Filter Include="Source Files\controllers">
+      <UniqueIdentifier>{b3faafc1-e1c2-4848-829e-e77fabb1e8f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\views">
+      <UniqueIdentifier>{5f071954-4e73-4e56-8615-31f2ef7f2328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\net">
+      <UniqueIdentifier>{f6e4ad50-52e8-4182-a88e-003b27958840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\gracz">
+      <UniqueIdentifier>{71f115ca-97e0-41ae-bbf2-e9e1a778d302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\przeszkoda">
+      <UniqueIdentifier>{d0b96bbe-b95c-457e-96bd-74dd288428fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\czolg\pocisk">
+      <UniqueIdentifier>{a6f8b169-b492-4d37-bcee-ed7205e2c5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\gra">
+      <UniqueIdentifier>{20f5987b-183e-4919-989a-07eaabe5134a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\gra\mapa">
+      <UniqueIdentifier>{f7c255e2-5339-4496-8a1d-8801d571f3da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\Blok">
+      <UniqueIdentifier>{0c327246-151b-4062-bc83-dfe05f9c401e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Czolg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Blok.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pocisk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gracz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,6 +70,15 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="Blok.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pocisk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gracz.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
