@@ -1,5 +1,5 @@
 #pragma once
-class Czolg : public Blok
+class Czolg //: public Blok
 {
 public:
 	Czolg();
@@ -7,7 +7,7 @@ public:
 	
 
 private:
-	Pocisk pociski[20];
+	//Pocisk pociski[20];
 
 };
 

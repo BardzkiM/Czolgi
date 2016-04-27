@@ -1,5 +1,5 @@
 #pragma once
-class Pocisk: public Blok
+class Pocisk //: public Blok
 {
 public:
 	Pocisk();
@@ -8,4 +8,3 @@ public:
 	float speed;
 	char type;
 };
-

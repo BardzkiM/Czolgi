@@ -6,10 +6,10 @@ public:
 	gracz();
 	~gracz();
 	int id_gracza;
-	string name;
+	//string player_name;
 	char team;
 	int id_server;
-	Czolg tank;
+	//Czolg tank;
 	int score;
 };
 
