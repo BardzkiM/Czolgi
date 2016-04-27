@@ -1,5 +1,9 @@
 #pragma once
-class Czolg //: public Blok
+#include "Pocisk.h"
+#include "Blok.h"
+#ifndef Czolg_h
+#define Czolg_h
+class Czolg : public Blok
 {
 public:
 	Czolg();
@@ -11,3 +15,4 @@ private:
 
 };
 
+#endif

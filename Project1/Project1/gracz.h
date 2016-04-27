@@ -1,5 +1,8 @@
 #pragma once
-
+#include <string>
+#include "Czolg.h"
+#ifndef gracz_h
+#define gracz_h
 class gracz
 {
 public:
@@ -13,3 +16,4 @@ public:
 	int score;
 };
 
+#endif

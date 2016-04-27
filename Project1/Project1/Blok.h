@@ -1,4 +1,6 @@
 #pragma once
+#ifndef Blok_h
+#define Blok_h
 class Blok
 {
 public:
@@ -8,4 +10,4 @@ public:
 	float angle;
 	int width, height, hp;
 };
-
+#endif

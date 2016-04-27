@@ -1,5 +1,8 @@
 #pragma once
-class Pocisk //: public Blok
+#include "Blok.h"
+#ifndef Pocisk_h
+#define Pocisk_h
+class Pocisk : public Blok
 {
 public:
 	Pocisk();
@@ -8,3 +11,4 @@ public:
 	float speed;
 	char type;
 };
+#endif
