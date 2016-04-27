@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include "Czolg.h"
 
 
 using namespace std;
@@ -35,9 +36,10 @@ int main()
 	string dsp = "";
 	int index = 0;
 
-
+	Czolg tank;
+	
 	/////obraz///////////
-	sf::Texture texture;
+	/*sf::Texture texture;
 	if (!texture.loadFromFile("tank.png"))
 	{
 		cout << "nie mo¿na za³adowaæ pliku" << endl;
@@ -46,8 +48,8 @@ int main()
 	sf::Sprite sprite(texture);
 
 	sf::Vector2u movement(10, 10);
-
-
+	*/
+	sf::Sprite sprite(tank.texture);
 
 
 	while (window.isOpen())

@@ -5,6 +5,7 @@
 
 Czolg::Czolg()
 {
+	this->texture.loadFromFile("images/img.png");
 }
 
 
