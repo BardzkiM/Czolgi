@@ -2,8 +2,8 @@
 #include "Pocisk.h"
 #include "Blok.h"
 #include "SFML/Graphics.hpp"
-#ifndef Czolg_h
-#define Czolg_h
+#ifndef _CZOLG_H
+#define _CZOLG_H
 class Czolg : public Blok
 {
 public:
@@ -13,7 +13,7 @@ public:
 	sf::Texture textureu;
 	sf::Texture texturer;
 	sf::Texture textured;
-	
+
 	std::vector <Pocisk> pociski;
 	void addPocisk();
 

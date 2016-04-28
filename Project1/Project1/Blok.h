@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#ifndef Blok_h
-#define Blok_h
+#ifndef _BLOK_H
+#define _BLOK_H
 class Blok
 {
 public:

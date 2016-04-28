@@ -1,18 +1,17 @@
 #pragma once
-#include <string>
 #include "Czolg.h"
-#ifndef gracz_h
-#define gracz_h
+#ifndef _GRACZ_H
+#define _GRACZ_H
 class gracz
 {
 public:
 	gracz();
 	~gracz();
 	int id_gracza;
-	//string player_name;
+	std::string player_name;
 	char team;
 	int id_server;
-	//Czolg tank;
+	Czolg tank;
 	int score;
 };
 

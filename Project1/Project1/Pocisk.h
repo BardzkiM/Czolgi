@@ -1,8 +1,8 @@
 #pragma once
 #include "Blok.h"
 #include <SFML\Graphics.hpp>
-#ifndef Pocisk_h
-#define Pocisk_h
+#ifndef _POCISK_H
+#define _POCISK_H
 class Pocisk : public Blok
 {
 public:

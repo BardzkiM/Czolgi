@@ -8,7 +8,7 @@ Pocisk::Pocisk(int x, int y, int rot)
 	this->textureu.loadFromFile("images/pocisku.png");
 	this->texturer.loadFromFile("images/pociskr.png");
 	this->textured.loadFromFile("images/pociskd.png");
-	sf::Vector2u pociskSize(texture.getSize());
+	sf::Vector2u pociskSize(texturel.getSize());
 	this->width = pociskSize.x;
 	this->height = pociskSize.y;
 	this->x = x;
