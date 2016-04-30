@@ -106,7 +106,7 @@ int main()
 				//window.draw(pociska);
 			}
 			
-			tank_sprite.setTexture(tank.texture, false);
+			tank_sprite.setTexture(tank.texture);
 			tank_sprite.setPosition(tank.x, tank.y);
 			
 
