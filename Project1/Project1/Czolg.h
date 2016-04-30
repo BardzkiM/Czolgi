@@ -9,13 +9,12 @@ class Czolg : public Blok
 public:
 	Czolg();
 	~Czolg();
-	sf::Texture texturel;
-	sf::Texture textureu;
-	sf::Texture texturer;
-	sf::Texture textured;
 
 	std::vector <Pocisk> pociski;
 	void addPocisk();
+	void setInitialPosition(int x, int y);
+	void move(int direction);
+	void rotate(int angle);
 
 };
 
