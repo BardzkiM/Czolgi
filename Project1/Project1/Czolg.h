@@ -9,11 +9,6 @@ class Czolg : public Blok
 public:
 	Czolg();
 	~Czolg();
-	sf::Texture texturel;
-	sf::Texture textureu;
-	sf::Texture texturer;
-	sf::Texture textured;
-	sf::Texture texture;
 
 	std::vector <Pocisk> pociski;
 	void addPocisk();

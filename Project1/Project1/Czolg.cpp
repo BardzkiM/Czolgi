@@ -56,21 +56,5 @@ void Czolg::rotate(int angle)
 		this->angle = 270;
 	}
 
-	switch (this->angle)
-	{
-		case 0:
-			texture = texturel;
-			break;
-		case 90:
-			texture = textureu;
-			break;
-		case 180:
-			texture = texturer;
-			break;
-		case 270:
-			texture = textured;
-			break;
-
-
-	}
+	setRotation();
 }

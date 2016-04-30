@@ -14,6 +14,8 @@ Pocisk::Pocisk(int x, int y, int rot)
 	this->x = x - width/2;
 	this->y = y - height/2;
 	this->angle = rot;
+
+	setRotation();
 }
 
 

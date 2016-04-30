@@ -11,10 +11,6 @@ public:
 	int id_czolgu;
 	float speed;
 	char type;
-	sf::Texture texturel;
-	sf::Texture textureu;
-	sf::Texture textured;
-	sf::Texture texturer;
 
 };
 #endif

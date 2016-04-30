@@ -93,28 +93,9 @@ int main()
 				int nr = 0;
 				tank.pociski.clear();
 				tank.addPocisk();
-				
-				
-				if (tank.angle == 0)
-				{
-					pociska.setTexture(tank.pociski[nr].texturel);
-					pociska.setPosition(tank.pociski[nr].x-tank.pociski[nr].width, tank.pociski[nr].y- (tank.pociski[nr].height/2));
-				}
-				if (tank.angle == 90)
-				{
-					pociska.setTexture(tank.pociski[nr].textureu);
-					pociska.setPosition(tank.pociski[nr].x-(tank.pociski[nr].width/2), tank.pociski[nr].y- tank.pociski[nr].height);
-				}
-				if (tank.angle == 180)
-				{
-					pociska.setTexture(tank.pociski[nr].texturer);
-					pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y - (tank.pociski[nr].height/2));
-				}
-				if (tank.angle == 270)
-				{
-					pociska.setTexture(tank.pociski[nr].textured);
-					pociska.setPosition(tank.pociski[nr].x-(tank.pociski[nr].height/2), tank.pociski[nr].y);
-				}
+
+				pociska.setTexture(tank.pociski[nr].texture);
+				pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 
 				//pociska.rotate(tank.pociski[nr].angle);
 
