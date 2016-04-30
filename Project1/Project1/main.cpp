@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	sf::Sprite pociska;
+	
 	///////WINDOW/////////////////
 	sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
 
@@ -38,6 +38,7 @@ int main()
 
 	Czolg tank;
 	
+	
 	/////obraz///////////
 	/*sf::Texture texture;
 	if (!texture.loadFromFile("tank.png"))
@@ -49,9 +50,10 @@ int main()
 
 	sf::Vector2u movement(10, 10);
 	*/
-	sf::Sprite sprite(tank.texturel);
+	sf::Sprite tank_sprite(tank.texturel);
+	sf::Sprite pociska;
 	tank.setInitialPosition(100,100);
-	sprite.setPosition(tank.x- tank.width/2, tank.y - tank.height / 2);
+	tank_sprite.setPosition(tank.x- tank.width/2, tank.y - tank.height / 2);
 
 
 	while (window.isOpen())
@@ -95,29 +97,21 @@ int main()
 				
 				if (tank.angle == 0)
 				{
-					tank.pociski[nr].x = tank.x;
-					tank.pociski[nr].y = tank.y + (tank.height / 2);
 					pociska.setTexture(tank.pociski[nr].texturel);
 					pociska.setPosition(tank.pociski[nr].x-tank.pociski[nr].width, tank.pociski[nr].y- (tank.pociski[nr].height/2));
 				}
 				if (tank.angle == 90)
 				{
-					tank.pociski[nr].x = tank.x + (tank.width / 2);
-					tank.pociski[nr].y = tank.y;
 					pociska.setTexture(tank.pociski[nr].textureu);
 					pociska.setPosition(tank.pociski[nr].x-(tank.pociski[nr].width/2), tank.pociski[nr].y- tank.pociski[nr].height);
 				}
 				if (tank.angle == 180)
 				{
-					tank.pociski[nr].x = tank.x + tank.width;
-					tank.pociski[nr].y = tank.y + (tank.height / 2);
 					pociska.setTexture(tank.pociski[nr].texturer);
 					pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y - (tank.pociski[nr].height/2));
 				}
 				if (tank.angle == 270)
 				{
-					tank.pociski[nr].x = tank.x + tank.width / 2;
-					tank.pociski[nr].y = tank.y + tank.height;
 					pociska.setTexture(tank.pociski[nr].textured);
 					pociska.setPosition(tank.pociski[nr].x-(tank.pociski[nr].height/2), tank.pociski[nr].y);
 				}
@@ -126,13 +120,13 @@ int main()
 
 				cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
 				cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
-				cout << "sprite " << sprite.getPosition().x << "  " << sprite.getPosition().y << " " << sprite.getRotation() << endl;
+				cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
 				cout << endl;
 				//window.draw(pociska);
 			}
 			
-			sprite.setTexture(tank.texture, false);
-			sprite.setPosition(tank.x, tank.y);
+			tank_sprite.setTexture(tank.texture, false);
+			tank_sprite.setPosition(tank.x, tank.y);
 			
 
 
@@ -173,8 +167,8 @@ int main()
 		}
 		// Clear screen
 		window.clear();
-		// Draw the sprite
-		window.draw(sprite);
+		// Draw the tank_sprite
+		window.draw(tank_sprite);
 		//if (!tank.pociski.empty())
 			window.draw(pociska);
 
@@ -203,7 +197,7 @@ int main()
 		cout << time.asSeconds() << endl;
 		clock.restart();
 		*/
-		//window.draw(spriteImage);
+		//window.draw(tank_spriteImage);
 		//window.clear();
 		//window.draw(shape);
 		//window.display();

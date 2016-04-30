@@ -11,8 +11,8 @@ Pocisk::Pocisk(int x, int y, int rot)
 	sf::Vector2u pociskSize(texturel.getSize());
 	this->width = pociskSize.x;
 	this->height = pociskSize.y;
-	this->x = x;
-	this->y = y;
+	this->x = x - width/2;
+	this->y = y - height/2;
 	this->angle = rot;
 }
 
