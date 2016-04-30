@@ -130,8 +130,9 @@ int main()
 				cout << endl;
 				//window.draw(pociska);
 			}
-			sprite.setPosition(tank.x, tank.y);
+			
 			sprite.setTexture(tank.texture, false);
+			sprite.setPosition(tank.x, tank.y);
 			
 
 
