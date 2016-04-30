@@ -16,6 +16,8 @@ public:
 
 	std::vector <Pocisk> pociski;
 	void addPocisk();
+	void move(int direction);
+	void rotate(int angle);
 
 };
 

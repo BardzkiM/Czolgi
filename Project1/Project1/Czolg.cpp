@@ -27,3 +27,35 @@ void Czolg::addPocisk()
 	Pocisk pocisk(this->x, this->y, this->angle);
 	this->pociski.push_back(pocisk);
 }
+
+void Czolg::move(int direction)
+{
+	if (this->angle == 0)
+	{
+		this->x -= 5*direction;
+	}
+	if (this->angle == 90)
+	{
+		this->y -= 5 * direction;
+	}
+	if (this->angle == 180)
+	{
+		this->x += 5 * direction;
+	}
+	if (this->angle == 270)
+	{
+		this->y += 5 * direction;
+	}
+}
+void Czolg::rotate(int angle)
+{
+	this->angle += angle;
+	if (this->angle == 360)
+	{
+		this->angle = 0;
+	}
+	else if (this->angle == -90)
+	{
+		this->angle = 270;
+	}
+}

@@ -70,98 +70,25 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
-				if (tank.angle == 0)
-				{
-					tank.x -= 5;
-				}
-				if (tank.angle == 90)
-				{
-					tank.y -= 5;
-				}
-				if (tank.angle == 180)
-				{
-					tank.x += 5;
-				}
-				if (tank.angle == 270)
-				{
-					tank.y += 5;
-				}
+				tank.move(1);
 				sprite.setPosition(tank.x, tank.y);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
-				if (tank.angle == 0)
-				{
-					tank.x += 5;
-				}
-				if (tank.angle == 90)
-				{
-					tank.y += 5;
-				}
-				if (tank.angle == 180)
-				{
-					tank.x -= 5;
-				}
-				if (tank.angle == 270)
-				{
-					tank.y -= 5;
-				}
+				tank.move(-1);
+				
 				sprite.setPosition(tank.x, tank.y);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
 				//sprite.move(30,0);
-				tank.angle += 90;
-				if (tank.angle == 360)
-					tank.angle = 0;
-				if (tank.angle == -90)
-					tank.angle = 270;
-				
-				if (tank.angle == 0)
-				{
-					sprite.setTexture(tank.texturel);
-				}
-				if (tank.angle == 90)
-				{
-					sprite.setTexture(tank.textureu);
-				}
-				if (tank.angle == 180)
-				{
-					sprite.setTexture(tank.texturer);
-				}
-				if (tank.angle == 270)
-				{
-					sprite.setTexture(tank.textured);
-				}
-
-
+				tank.rotate(90);
 				
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			{
 				//sprite.move(-30, 0);
-				tank.angle -= 90;
-				if (tank.angle == 360)
-					tank.angle = 0;
-				if (tank.angle == -90)
-					tank.angle = 270;
-
-				if (tank.angle == 0)
-				{
-					sprite.setTexture(tank.texturel);
-				}
-				if (tank.angle == 90)
-				{
-					sprite.setTexture(tank.textureu);
-				}
-				if (tank.angle == 180)
-				{
-					sprite.setTexture(tank.texturer);
-				}
-				if (tank.angle == 270)
-				{
-					sprite.setTexture(tank.textured);
-				}
+				tank.rotate(-90);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
@@ -207,7 +134,23 @@ int main()
 				cout << endl;
 				//window.draw(pociska);
 			}
-
+			
+			if (tank.angle == 0)
+			{
+				sprite.setTexture(tank.texturel);
+			}
+			if (tank.angle == 90)
+			{
+				sprite.setTexture(tank.textureu);
+			}
+			if (tank.angle == 180)
+			{
+				sprite.setTexture(tank.texturer);
+			}
+			if (tank.angle == 270)
+			{
+				sprite.setTexture(tank.textured);
+			}
 			
 
 
