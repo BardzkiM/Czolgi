@@ -8,7 +8,7 @@ public:
 	Blok();
 	~Blok();
 	int x, y;
-	float angle;
+	int angle;
 	int width, height, hp;
 	sf::Texture texture;
 };

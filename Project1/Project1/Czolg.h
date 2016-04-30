@@ -13,9 +13,11 @@ public:
 	sf::Texture textureu;
 	sf::Texture texturer;
 	sf::Texture textured;
+	sf::Texture texture;
 
 	std::vector <Pocisk> pociski;
 	void addPocisk();
+	void setInitialPosition(int x, int y);
 	void move(int direction);
 	void rotate(int angle);
 

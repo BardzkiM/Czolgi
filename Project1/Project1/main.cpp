@@ -50,9 +50,8 @@ int main()
 	sf::Vector2u movement(10, 10);
 	*/
 	sf::Sprite sprite(tank.texturel);
-	tank.x =100;
-	tank.y =100;
-	sprite.setPosition(tank.x, tank.y);
+	tank.setInitialPosition(100,100);
+	sprite.setPosition(tank.x- tank.width/2, tank.y - tank.height / 2);
 
 
 	while (window.isOpen())
@@ -71,23 +70,20 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
 				tank.move(1);
-				sprite.setPosition(tank.x, tank.y);
+				
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
 				tank.move(-1);
 				
-				sprite.setPosition(tank.x, tank.y);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
-				//sprite.move(30,0);
 				tank.rotate(90);
 				
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			{
-				//sprite.move(-30, 0);
 				tank.rotate(-90);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -134,25 +130,9 @@ int main()
 				cout << endl;
 				//window.draw(pociska);
 			}
+			sprite.setPosition(tank.x, tank.y);
+			sprite.setTexture(tank.texture, false);
 			
-			if (tank.angle == 0)
-			{
-				sprite.setTexture(tank.texturel);
-			}
-			if (tank.angle == 90)
-			{
-				sprite.setTexture(tank.textureu);
-			}
-			if (tank.angle == 180)
-			{
-				sprite.setTexture(tank.texturer);
-			}
-			if (tank.angle == 270)
-			{
-				sprite.setTexture(tank.textured);
-			}
-			
-
 
 
 
