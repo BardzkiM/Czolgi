@@ -70,6 +70,15 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
+				if (tank.angle != 90)
+				{
+					tank.angle = 90;
+					sprite.setTexture(tank.textureu);
+				}
+				else
+					tank.y -= 5;
+				
+				/*
 				if (tank.angle == 0)
 				{
 					tank.x -= 5;
@@ -86,10 +95,19 @@ int main()
 				{
 					tank.y += 5;
 				}
+				*/
 				sprite.setPosition(tank.x, tank.y);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
+				if (tank.angle != 270)
+				{
+					tank.angle = 270;
+					sprite.setTexture(tank.textured);
+				}
+				else
+					tank.y += 5;
+				/*
 				if (tank.angle == 0)
 				{
 					tank.x += 5;
@@ -106,11 +124,21 @@ int main()
 				{
 					tank.y -= 5;
 				}
+				*/
 				sprite.setPosition(tank.x, tank.y);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
+				if (tank.angle != 180)
+				{
+					tank.angle = 180;
+					sprite.setTexture(tank.texturer);
+				}
+				else
+					tank.x += 5;
+				sprite.setPosition(tank.x, tank.y);
 				//sprite.move(30,0);
+				/*
 				tank.angle += 90;
 				if (tank.angle == 360)
 					tank.angle = 0;
@@ -133,13 +161,22 @@ int main()
 				{
 					sprite.setTexture(tank.textured);
 				}
-
+				*/
 
 				
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			{
+				if (tank.angle != 0)
+				{
+					tank.angle = 0;
+					sprite.setTexture(tank.texturel);
+				}
+				else
+					tank.x -= 5;
+				sprite.setPosition(tank.x, tank.y);
 				//sprite.move(-30, 0);
+				/*
 				tank.angle -= 90;
 				if (tank.angle == 360)
 					tank.angle = 0;
@@ -162,6 +199,7 @@ int main()
 				{
 					sprite.setTexture(tank.textured);
 				}
+				*/
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
