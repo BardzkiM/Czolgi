@@ -3,7 +3,7 @@
 #include <string>
 #include <math.h>
 #include "Czolg.h"
-/*
+#include "Menu.h"
 
 using namespace std;
 
@@ -150,9 +150,13 @@ int main()
 		// Clear screen
 		window.clear();
 		// Draw the tank_sprite
-		window.draw(tank_sprite);
+		//window.draw(tank_sprite);
+
 		//if (!tank.pociski.empty())
-			window.draw(pociska);
+		//window.draw(pociska);
+
+		Menu menu;
+		menu.set_bg(&window);
 
 		window.display();
 
