@@ -3,7 +3,7 @@
 #include <string>
 #include <math.h>
 #include "Czolg.h"
-#include "Menu.cpp"
+#include "Menu.h"
 
 
 using namespace std;

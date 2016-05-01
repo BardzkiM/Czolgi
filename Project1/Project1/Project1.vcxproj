@@ -126,6 +126,7 @@
     <ClInclude Include="Blok.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="gracz.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Pocisk.h" />
     <ClInclude Include="Przeszkoda.h" />
