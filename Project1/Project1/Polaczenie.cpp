@@ -1,72 +1,73 @@
-/*JESZCZE NIE DZIALA POPRAWNIE
-PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*/
+/*
+Bind socket to port 8888 on localhost
+*/
+#include<io.h>
+#include<stdio.h>
+#include<winsock2.h>
 
-#include "SFML\Network.hpp"
-#include <string>
-#include<iostream>
-#include <cstdio>
-using namespace std;
-using namespace sf;
-int main()
+#pragma comment(lib,"ws2_32.lib") //Winsock Library
+
+int main(int argc, char *argv[])
 {
-	IpAddress ip = IpAddress::getLocalAddress();
-	TcpSocket socket;
-	char connectionType;
+	WSADATA wsa;
+	SOCKET s, new_socket;
+	struct sockaddr_in server, client;
+	int c;
+	char *message;
 
-	char mode;//rola serwera lub rola klienta
-	string message = "";
-	char buffer[2000];
-	size_t received;//ilosc bajtow, ktore sa przesylane
-
-
-
-	cout << "Enter s for server or enter c for client" << endl;
-	cin >> connectionType;
-	if (connectionType == 's') //server
+	printf("\nInitialising Winsock...");
+	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 	{
-		TcpListener listener;
-		listener.listen(2000);
-		listener.accept(socket);
-
-		message += "Tu SERWER, placzenie zostalo nawiazane \n";
-		mode = 's'; //send - tryb wysylania
-
-	}
-	else if (connectionType == 'c') //client
-	{
-		socket.connect(ip, 2000); //adres ip, port przez który siê ³¹cz¹
-		message += "Tu KLIENT, polaczenie zostalo nawiazane \n";
-		mode = 'r'; //received - tryb otrzymywania
+		printf("Failed. Error Code : %d", WSAGetLastError());
+		return 1;
 	}
 
-	socket.send(message.c_str(), message.length() + 1);
+	printf("Initialised.\n");
 
-	socket.receive(buffer, sizeof(buffer), received);
-	cout << buffer << endl;
-
-	bool done = true;
-	while (done)
+	//Create a socket
+	if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
 	{
-		if (mode == 's')
-		{
-			getline(cin, message);
-			socket.send(message.c_str(), message.length() + 1);
-			message = 'r';
-		}
-		else if (mode == 'r')
-		{
-			socket.receive(buffer, sizeof(buffer), received);
-			//if (received > 0)
-			//{
-			cout << "received: " << buffer << endl;
-			mode = 's';
-			//	}
-		}
+		printf("Could not create socket : %d", WSAGetLastError());
 	}
+
+	printf("Socket created.\n");
+
+	//Prepare the sockaddr_in structure
+	server.sin_family = AF_INET;
+	server.sin_addr.s_addr = INADDR_ANY;
+	server.sin_port = htons(8888);
+
+	//Bind
+	if (bind(s, (struct sockaddr *)&server, sizeof(server)) == SOCKET_ERROR)
+	{
+		printf("Bind failed with error code : %d", WSAGetLastError());
+	}
+
+	puts("Bind done");
+
+	//Listen to incoming connections
+	listen(s, 3);
+
+	//Accept and incoming connection
+	puts("Waiting for incoming connections...");
+
+	c = sizeof(struct sockaddr_in);
+	new_socket = accept(s, (struct sockaddr *)&client, &c);
+	if (new_socket == INVALID_SOCKET)
+	{
+		printf("accept failed with error code : %d", WSAGetLastError());
+	}
+
+	puts("Connection accepted");
+
+	//Reply to client
+	message = "Hello Client , I have received your connection. But I have to go now, bye\n";
+	send(new_socket, message, strlen(message), 0);
+
+	getchar();
+
+	closesocket(s);
+	WSACleanup();
 
 	return 0;
-
-	system("pause");//by nie zamykal sie za szybko
-
-
 }
