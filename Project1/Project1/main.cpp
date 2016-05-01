@@ -5,7 +5,6 @@
 #include "Czolg.h"
 #include "Menu.h"
 
-
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
 
@@ -209,4 +208,4 @@ int main()
 	return EXIT_SUCCESS;
 
 	//return 0;
-}
+}*/

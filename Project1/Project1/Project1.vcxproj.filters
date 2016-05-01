@@ -72,6 +72,12 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Klient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obiekt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -106,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="Przeszkoda.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obiekt.cpp">
+      <Filter>Source Files\net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
