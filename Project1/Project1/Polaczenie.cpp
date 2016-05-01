@@ -1,5 +1,5 @@
 /*JESZCZE NIE DZIALA POPRAWNIE
-PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*/
+PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*
 
 #include "SFML\Network.hpp"
 #include <string>
@@ -69,4 +69,4 @@ int main()
 	system("pause");//by nie zamykal sie za szybko
 
 
-}
+*/
