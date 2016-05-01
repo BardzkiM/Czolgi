@@ -89,5 +89,8 @@
     <ClCompile Include="Polaczenie.cpp">
       <Filter>Source Files\net</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\views</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

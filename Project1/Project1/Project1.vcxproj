@@ -134,6 +134,7 @@
     <ClCompile Include="gracz.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pocisk.cpp" />
     <ClCompile Include="Polaczenie.cpp" />
     <ClCompile Include="Serwer.cpp" />
