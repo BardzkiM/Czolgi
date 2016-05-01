@@ -5,7 +5,7 @@ using namespace std;
 
 
 Gracz::Gracz()
-{
+{ 
 }
 
 
