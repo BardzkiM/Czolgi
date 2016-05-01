@@ -1,14 +1,14 @@
-#include "gracz.h"
+#include "Gracz.h"
 
 
 using namespace std;
 
-gracz::gracz()
+
+Gracz::Gracz()
 {
-	
 }
 
 
-gracz::~gracz()
+Gracz::~Gracz()
 {
 }

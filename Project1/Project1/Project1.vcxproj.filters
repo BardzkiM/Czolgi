@@ -63,6 +63,12 @@
     <ClInclude Include="gracz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mapa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Przeszkoda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -73,9 +79,6 @@
     </ClCompile>
     <ClCompile Include="Pocisk.cpp">
       <Filter>Source Files\modules\czolg\pocisk</Filter>
-    </ClCompile>
-    <ClCompile Include="gracz.cpp">
-      <Filter>Source Files\modules\gracz</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
@@ -88,6 +91,15 @@
     </ClCompile>
     <ClCompile Include="Polaczenie.cpp">
       <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="Gracz.cpp">
+      <Filter>Source Files\modules\gracz</Filter>
+    </ClCompile>
+    <ClCompile Include="Mapa.cpp">
+      <Filter>Source Files\modules\gra\mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="Przeszkoda.cpp">
+      <Filter>Source Files\modules\gra\mapa</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
