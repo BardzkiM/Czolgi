@@ -126,24 +126,17 @@
     <ClInclude Include="Blok.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="gracz.h" />
-    <ClInclude Include="Mapa.h" />
     <ClInclude Include="Pocisk.h" />
-    <ClInclude Include="Przeszkoda.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Blok.cpp" />
     <ClCompile Include="Czolg.cpp" />
-    <ClCompile Include="Gracz.cpp" />
+    <ClCompile Include="gracz.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="main.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Mapa.cpp" />
-=======
     <ClCompile Include="Menu.cpp" />
->>>>>>> fd9ed2a457870c46cd8f9c2a8ccc82fd823e3d39
     <ClCompile Include="Pocisk.cpp" />
     <ClCompile Include="Polaczenie.cpp" />
-    <ClCompile Include="Przeszkoda.cpp" />
     <ClCompile Include="Serwer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

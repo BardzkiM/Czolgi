@@ -47,7 +47,7 @@ void Czolg::moveUp()
 		
 	}
 	else
-		this->y -= this->movement;
+		this->y -= 5;
 }
 void Czolg::moveDown()
 {
@@ -57,7 +57,7 @@ void Czolg::moveDown()
 		
 	}
 	else
-		this->y += this->movement;
+		this->y += 5;
 
 }
 void Czolg::moveRight()
@@ -69,7 +69,7 @@ void Czolg::moveRight()
 		
 	}
 	else
-		this->x += this->movement;
+		this->x += 5;
 
 }
 void Czolg::moveLeft()
@@ -80,6 +80,6 @@ void Czolg::moveLeft()
 		
 	}
 	else
-		this->x -= this->movement;
+		this->x -= 5;
 
 }
