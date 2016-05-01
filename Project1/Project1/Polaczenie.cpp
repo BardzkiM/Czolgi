@@ -1,5 +1,5 @@
 /*JESZCZE NIE DZIALA POPRAWNIE
-PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*/
+PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*
 
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 
@@ -66,3 +66,4 @@ int main(int argc, char *argv[])
 	WSACleanup();
 
 }
+*/
