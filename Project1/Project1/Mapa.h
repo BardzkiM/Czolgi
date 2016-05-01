@@ -1,5 +1,6 @@
 #pragma once
-#include "Gracz.h"
+#include "gracz.h"
+#include <SFML/Graphics.hpp>
 #include "Przeszkoda.h"
 #ifndef _MAPA_H
 #define _MAPA_H
@@ -8,11 +9,11 @@ class Mapa
 public:
 	Mapa();
 	~Mapa();
-	std::vector <Gracz> gracze;
+	std::vector <gracz> gracze;
 	std::vector <Przeszkoda> przeszkody;
 	void initializeMap();
 	void setPlayers();
-
+	sf::Texture texture;
 
 };
 
