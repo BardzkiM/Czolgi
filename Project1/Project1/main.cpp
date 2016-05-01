@@ -53,7 +53,7 @@ int main()
 	sf::Sprite tank_sprite(tank.texturel);
 	sf::Sprite pociska;
 	tank.setInitialPosition(100,100);
-	tank_sprite.setPosition(tank.x- tank.width/2, tank.y - tank.height / 2);
+	tank_sprite.setPosition(tank.x, tank.y);
 
 
 	while (window.isOpen())
@@ -71,26 +71,23 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
-
-				tank.move(1);
-				
+				tank_sprite.setTexture(tank.textureu);
+				tank.moveUp();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
-				tank.move(-1);
-				
+				tank_sprite.setTexture(tank.textured);
+				tank.moveDown();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
-				tank.rotate(90);
-
-				
+				tank_sprite.setTexture(tank.texturer);
+				tank.moveRight();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			{
-
-				tank.rotate(-90);
-
+				tank_sprite.setTexture(tank.texturel);
+				tank.moveLeft();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
@@ -103,14 +100,14 @@ int main()
 
 				//pociska.rotate(tank.pociski[nr].angle);
 
-				cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
-				cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
-				cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
-				cout << endl;
+				//cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
+				//cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
+				//cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
+				//cout << endl;
 				//window.draw(pociska);
 			}
 			
-			tank_sprite.setTexture(tank.texture);
+			//tank_sprite.setTexture(tank.texture);
 			tank_sprite.setPosition(tank.x, tank.y);
 			
 
@@ -130,7 +127,7 @@ int main()
 		}
 		if (!tank.pociski.empty())
 		{
-			cout << "jestem!!!!!!!!!!" << endl;
+			//cout << "jestem!!!!!!!!!!" << endl;
 			if (tank.pociski[0].angle == 0)
 			{
 				tank.pociski[0].x -= 1;

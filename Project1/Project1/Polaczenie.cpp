@@ -1,9 +1,5 @@
-/*
-Bind socket to port 8888 on localhost
-*/
-#include<io.h>
-#include<stdio.h>
-#include<winsock2.h>
+/*JESZCZE NIE DZIALA POPRAWNIE
+PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*/
 
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 
@@ -69,5 +65,4 @@ int main(int argc, char *argv[])
 	closesocket(s);
 	WSACleanup();
 
-	return 0;
 }

@@ -9,12 +9,15 @@ class Czolg : public Blok
 public:
 	Czolg();
 	~Czolg();
-
+	int movement;
 	std::vector <Pocisk> pociski;
 	void addPocisk();
 	void setInitialPosition(int x, int y);
-	void move(int direction);
-	void rotate(int angle);
+	void moveUp();
+	void moveDown();
+	void moveRight();
+	void moveLeft();
+	
 
 };
 
