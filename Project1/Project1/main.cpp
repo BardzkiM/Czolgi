@@ -4,12 +4,15 @@
 #include <math.h>
 #include "Czolg.h"
 #include "Menu.h"
+#include "Klient.h"
 
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
 
 int main()
 {
+	Client klient("127.0.0.1");
+	klient.uruchomKlienta();
 	int menu_pos = 1;
 	Menu menu;
 	///////WINDOW/////////////////
