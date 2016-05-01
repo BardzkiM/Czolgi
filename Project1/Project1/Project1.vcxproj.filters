@@ -63,6 +63,12 @@
     <ClInclude Include="gracz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mapa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Przeszkoda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -91,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Mapa.cpp">
+      <Filter>Source Files\modules\gra\mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="Przeszkoda.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
