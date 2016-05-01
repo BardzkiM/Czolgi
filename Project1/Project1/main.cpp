@@ -7,12 +7,14 @@
 
 
 using namespace std;
+sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
 
 int main()
 {
-	
+	int menu_pos = 1;
+	Menu menu;
 	///////WINDOW/////////////////
-	sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
+	
 
 	//sf::Vector2u size(800, 600);
 	//window.setSize(size);//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
@@ -56,6 +58,10 @@ int main()
 	tank.setInitialPosition(100,100);
 	tank_sprite.setPosition(tank.x, tank.y);
 
+	menu.set_bg(&window);
+	menu.set_menu_pos_1(&window);
+
+	
 
 	while (window.isOpen())
 	{
@@ -72,13 +78,30 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
-				tank_sprite.setTexture(tank.textureu);
-				tank.moveUp();
+				if (menu_pos == 1)
+				{
+					menu_pos = 3;
+				}
+				else {
+					menu_pos--;
+				}
+				menu.set_auto_menu_pos(menu_pos, &window);
+				/*tank_sprite.setTexture(tank.textureu);
+				tank.moveUp();*/
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
-				tank_sprite.setTexture(tank.textured);
-				tank.moveDown();
+				if (menu_pos == 3)
+				{
+					menu_pos = 1;
+				}
+				else
+				{
+					menu_pos++;
+				}
+				menu.set_auto_menu_pos(menu_pos, &window);
+				/*tank_sprite.setTexture(tank.textured);
+				tank.moveDown();*/
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
@@ -149,21 +172,15 @@ int main()
 
 		}
 		// Clear screen
-		window.clear();
+		//window.clear();
 		// Draw the tank_sprite
 		//window.draw(tank_sprite);
 
 		//if (!tank.pociski.empty())
 		//window.draw(pociska);
 
-		Menu menu;
-		menu.set_bg(&window);
-
-		window.display();
-
-
-
-
+		
+		
 
 
 

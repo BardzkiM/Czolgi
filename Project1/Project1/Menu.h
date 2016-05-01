@@ -15,6 +15,20 @@ public:
 	~Menu();
 
 	int set_bg(sf::RenderWindow * window);
+
+	int set_menu_pos_1(sf::RenderWindow * window);
+
+	int set_menu_pos_2(sf::RenderWindow * window);
+
+	int set_menu_pos_3(sf::RenderWindow * window);
+
+	int set_auto_menu_pos(int pos, sf::RenderWindow * window);
+
+	
+
+	
+
+	
 	
 
 

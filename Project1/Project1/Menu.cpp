@@ -21,3 +21,84 @@ int Menu::set_bg(sf::RenderWindow *window)
 	return 1;
 }
 
+int Menu::set_menu_pos_1(sf::RenderWindow *window)
+{
+	window->clear();
+	if (!menu_bg.loadFromFile("images/menu_bg1.jpg"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite(menu_bg);
+	window->draw(sprite);
+	if (!menu_bg.loadFromFile("images/bullets1.png"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite1(menu_bg);
+	window->draw(sprite1);
+	window->display();
+	return 1;
+}
+
+int Menu::set_menu_pos_2(sf::RenderWindow *window)
+{
+	//window->clear();
+	if (!menu_bg.loadFromFile("images/menu_bg1.jpg"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite(menu_bg);
+	window->draw(sprite);
+	if (!menu_bg.loadFromFile("images/bullets2.png"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite1(menu_bg);
+	window->draw(sprite1);
+	window->display();
+	return 1;
+}
+
+int Menu::set_menu_pos_3(sf::RenderWindow *window)
+{
+	//window->clear();
+	if (!menu_bg.loadFromFile("images/menu_bg1.jpg"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite1(menu_bg);
+	window->draw(sprite1);
+	if (!menu_bg.loadFromFile("images/bullets3.png"))
+	{
+		return EXIT_FAILURE;
+	}
+	sf::Sprite sprite(menu_bg);
+	window->draw(sprite);
+	window->display();
+	return 1;
+}
+
+int Menu::set_auto_menu_pos(int pos, sf::RenderWindow *window)
+{
+	window->clear();
+	switch(pos)
+	{
+	case 1:
+	{
+		set_menu_pos_1(window);
+		break;
+	}
+	case 2:
+	{
+		set_menu_pos_2(window);
+		break;
+	}
+	case 3:
+	{
+		set_menu_pos_3(window);
+		break;
+	}
+	default:
+		return 1;
+	}
+}
