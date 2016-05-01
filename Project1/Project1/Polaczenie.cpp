@@ -2,7 +2,7 @@
 PODCZAS KOMPILACJI CALEGO PROJEKTU - TEN PLIK ZAKOMENTOWAC!*/
 
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-
+/*
 int main(int argc, char *argv[])
 {
 	WSADATA wsa;
@@ -65,4 +65,4 @@ int main(int argc, char *argv[])
 	closesocket(s);
 	WSACleanup();
 
-}
+}*/
