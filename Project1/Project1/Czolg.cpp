@@ -17,6 +17,7 @@ Czolg::Czolg()
 	sf::Vector2u tankSize(texturel.getSize());
 	this->width = tankSize.x;
 	this->height = tankSize.y;
+	this->movement = 5;
 	 
 
 }
@@ -38,23 +39,47 @@ void Czolg::addPocisk()
 	this->pociski.push_back(pocisk);
 }
 
-void Czolg::move(int direction)
+void Czolg::moveUp()
 {
-	this->x -= (int)(cos(angle*M_PI / 180) *5)*direction;
-	this->y -= (int)(sin(angle*M_PI / 180) * 5)*direction;
-
-}
-void Czolg::rotate(int angle)
-{
-	this->angle += angle;
-	if (this->angle == 360)
+	if (this->angle != 90)
 	{
-		this->angle = 0;
+		this->angle = 90;
+		
 	}
-	else if (this->angle == -90)
+	else
+		this->y -= 5;
+}
+void Czolg::moveDown()
+{
+	if (this->angle != 270)
 	{
 		this->angle = 270;
+		
 	}
+	else
+		this->y += 5;
 
-	setRotation();
+}
+void Czolg::moveRight()
+{
+
+	if (this->angle != 180)
+	{
+		this->angle = 180;
+		
+	}
+	else
+		this->x += 5;
+
+}
+void Czolg::moveLeft()
+{
+	if (this->angle != 0)
+	{
+		this->angle = 0;
+		
+	}
+	else
+		this->x -= 5;
+
 }
