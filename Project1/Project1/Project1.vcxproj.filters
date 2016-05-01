@@ -102,7 +102,7 @@
       <Filter>Source Files\modules\gra\mapa</Filter>
     </ClCompile>
     <ClCompile Include="Przeszkoda.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\modules\przeszkoda</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
