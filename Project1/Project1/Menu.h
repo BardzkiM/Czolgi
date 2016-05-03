@@ -28,13 +28,13 @@ public:
 	void key_up(sf::RenderWindow * window);
 
 	void key_down(sf::RenderWindow * window);
-	
+
 	void key_enter(sf::RenderWindow *window);
 
-	
 
-	
-	
+
+
+
 
 
 private:

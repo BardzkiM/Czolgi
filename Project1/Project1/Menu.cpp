@@ -115,7 +115,7 @@ int Menu::set_menu_pos_3(sf::RenderWindow *window)
 int Menu::set_auto_menu_pos(sf::RenderWindow *window)
 {
 	window->clear();
-	switch(this->position)
+	switch (this->position)
 	{
 	case 1:
 	{

@@ -17,7 +17,7 @@ int main()
 	Menu menu;
 	bool menu_open = true;
 	///////WINDOW/////////////////
-	
+
 
 	//sf::Vector2u size(800, 600);
 	//window.setSize(size);//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
@@ -43,14 +43,14 @@ int main()
 	int index = 0;
 
 	Czolg tank;
-	
-	
+
+
 	/////obraz///////////
 	/*sf::Texture texture;
 	if (!texture.loadFromFile("tank.png"))
 	{
-		cout << "nie mo¿na za³adowaæ pliku" << endl;
-		return EXIT_FAILURE;
+	cout << "nie mo¿na za³adowaæ pliku" << endl;
+	return EXIT_FAILURE;
 	}
 	sf::Sprite sprite(texture);
 
@@ -58,13 +58,13 @@ int main()
 	*/
 	sf::Sprite tank_sprite(tank.texturel);
 	sf::Sprite pociska;
-	tank.setInitialPosition(100,100);
+	tank.setInitialPosition(100, 100);
 	tank_sprite.setPosition(tank.x, tank.y);
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
 
-	
+
 
 	while (window.isOpen())
 	{
@@ -86,10 +86,10 @@ int main()
 					menu.key_up(&window);
 					/*if (menu_pos == 1)
 					{
-						menu_pos = 3;
+					menu_pos = 3;
 					}
 					else {
-						menu_pos--;
+					menu_pos--;
 					}
 					menu.set_auto_menu_pos(menu_pos, &window);
 					/*tank_sprite.setTexture(tank.textureu);
@@ -100,11 +100,11 @@ int main()
 					menu.key_down(&window);
 					/*if (menu_pos == 3)
 					{
-						menu_pos = 1;
+					menu_pos = 1;
 					}
 					else
 					{
-						menu_pos++;
+					menu_pos++;
 					}
 					menu.set_auto_menu_pos(menu_pos, &window);
 					/*tank_sprite.setTexture(tank.textured);
@@ -116,16 +116,17 @@ int main()
 					cout << "hello" << endl;
 					//window.draw();
 				}
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				{
-					tank_sprite.setTexture(tank.textureu);
-					tank.moveUp();
-				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				{
-					tank_sprite.setTexture(tank.textured);
-					tank.moveDown();
-				}
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				tank_sprite.setTexture(tank.textureu);
+				tank.moveUp();
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				tank_sprite.setTexture(tank.textured);
+				tank.moveDown();
+			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
 				tank_sprite.setTexture(tank.texturer);
@@ -153,10 +154,10 @@ int main()
 				//cout << endl;
 				//window.draw(pociska);
 			}
-			
+
 			//tank_sprite.setTexture(tank.texture);
 			tank_sprite.setPosition(tank.x, tank.y);
-			
+
 
 
 
@@ -202,8 +203,8 @@ int main()
 		//if (!tank.pociski.empty())
 		//window.draw(pociska);
 
-		
-		
+
+
 
 
 
