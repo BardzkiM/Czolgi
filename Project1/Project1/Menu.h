@@ -31,14 +31,16 @@ public:
 
 	void key_enter(sf::RenderWindow *window);
 
+	sf::Texture menu_bg;
 
+	sf::Texture menu_bg_bullets;
 
 
 
 
 
 private:
-	sf::Texture menu_bg;
+	
 };
 
 #endif

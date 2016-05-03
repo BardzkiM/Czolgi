@@ -17,7 +17,7 @@ Mapa::~Mapa()
 
 void Mapa::initializeMap()
 {
-	this->texture.loadFromFile("mapa.bg");
+	this->texture.loadFromFile("images/mapa.png");
 }
 
 void Mapa::setPlayers()

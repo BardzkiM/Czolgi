@@ -2,6 +2,7 @@
 #include "gracz.h"
 #include <SFML/Graphics.hpp>
 #include "Przeszkoda.h"
+#include <iostream>
 #ifndef _MAPA_H
 #define _MAPA_H
 class Mapa

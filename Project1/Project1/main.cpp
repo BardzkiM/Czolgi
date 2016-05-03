@@ -5,9 +5,10 @@
 #include "Czolg.h"
 #include "Menu.h"
 #include "Klient.h"
+#include "Mapa.h"
 
 using namespace std;
-sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
+sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
 int main()
 {
@@ -16,13 +17,18 @@ int main()
 	//int menu_pos = 1;
 	Menu menu;
 	bool menu_open = true;
+	Mapa mapa;
+	sf::Sprite spriteMap(mapa.texture);
+
+
 	///////WINDOW/////////////////
 
 
-	//sf::Vector2u size(800, 600);
-	//window.setSize(size);//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
+	//sf::Vector2u size(1200, 900);
+	//window.setSize(menu.menu_bg.getSize());//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
 
 	sf::CircleShape shape(100.f); //ko³o
+	shape.setPosition(100, 100);
 	shape.setFillColor(sf::Color::Yellow);
 
 	///////PRZYCISK TRZYMANIE BLOKADA////////////
@@ -56,14 +62,14 @@ int main()
 
 	sf::Vector2u movement(10, 10);
 	*/
-	sf::Sprite tank_sprite(tank.texturel);
+	sf::Sprite tank_sprite;
+	
 	sf::Sprite pociska;
 	tank.setInitialPosition(100, 100);
 	tank_sprite.setPosition(tank.x, tank.y);
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
-
 
 
 	while (window.isOpen())
@@ -113,48 +119,51 @@ int main()
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
 				{
 					menu_open = false;
-					cout << "hello" << endl;
-					//window.draw();
+					//window.setSize(size);
+					tank_sprite.setTexture(tank.texturel);
 				}
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			else if (!menu_open)
 			{
-				tank_sprite.setTexture(tank.textureu);
-				tank.moveUp();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				tank_sprite.setTexture(tank.textured);
-				tank.moveDown();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				tank_sprite.setTexture(tank.texturer);
-				tank.moveRight();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				tank_sprite.setTexture(tank.texturel);
-				tank.moveLeft();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			{
-				int nr = 0;
-				tank.pociski.clear();
-				tank.addPocisk();
+				
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				{
+					tank_sprite.setTexture(tank.textureu);
+					tank.moveUp();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					tank_sprite.setTexture(tank.textured);
+					tank.moveDown();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				{
+					tank_sprite.setTexture(tank.texturer);
+					tank.moveRight();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				{
+					tank_sprite.setTexture(tank.texturel);
+					tank.moveLeft();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				{
+					int nr = 0;
+					tank.pociski.clear();
+					tank.addPocisk();
 
-				pociska.setTexture(tank.pociski[nr].texture);
-				pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
+					pociska.setTexture(tank.pociski[nr].texture);
+					pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 
-				//pociska.rotate(tank.pociski[nr].angle);
+					//pociska.rotate(tank.pociski[nr].angle);
 
-				//cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
-				//cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
-				//cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
-				//cout << endl;
-				//window.draw(pociska);
+					//cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
+					//cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
+					//cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
+					//cout << endl;
+					//window.draw(pociska);
+				}
 			}
-
 			//tank_sprite.setTexture(tank.texture);
 			tank_sprite.setPosition(tank.x, tank.y);
 
@@ -195,13 +204,23 @@ int main()
 			pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
 
 		}
-		// Clear screen
-		//window.clear();
-		// Draw the tank_sprite
-		//window.draw(tank_sprite);
 
-		//if (!tank.pociski.empty())
-		//window.draw(pociska);
+
+		///GAME GAME GAME
+		// Clear screen
+		if (!(menu_open))
+		{
+			//cout << "jestem" << endl;
+			window.clear();
+			// Draw the tank_sprite
+			window.draw(spriteMap);
+			window.draw(tank_sprite);
+			if (!tank.pociski.empty())
+				window.draw(pociska);
+			window.display();
+
+			
+		}
 
 
 
