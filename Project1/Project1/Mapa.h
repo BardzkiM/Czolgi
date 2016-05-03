@@ -12,7 +12,10 @@ public:
 	~Mapa();
 	std::vector <gracz> gracze;
 	std::vector <Przeszkoda> przeszkody;
+	int przeszkodyTablica[20][15];
+	
 	void initializeMap();
+	void initializeTable();
 	void setPlayers();
 	sf::Texture texture;
 

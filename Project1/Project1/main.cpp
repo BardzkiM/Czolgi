@@ -65,8 +65,11 @@ int main()
 	sf::Sprite tank_sprite;
 	
 	sf::Sprite pociska;
-	tank.setInitialPosition(100, 100);
+	tank.setInitialPosition(0, 0);
 	tank_sprite.setPosition(tank.x, tank.y);
+
+	sf::Sprite przeszkodaSprite;
+	//Przeszkoda Przeszkoda();
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
@@ -215,6 +218,14 @@ int main()
 			// Draw the tank_sprite
 			window.draw(spriteMap);
 			window.draw(tank_sprite);
+
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
+				przeszkodaSprite.setTexture(mapa.przeszkody[i].texture);
+				przeszkodaSprite.setPosition(mapa.przeszkody[i].x, mapa.przeszkody[i].y);
+				window.draw(przeszkodaSprite);
+			}
+
 			if (!tank.pociski.empty())
 				window.draw(pociska);
 			window.display();
