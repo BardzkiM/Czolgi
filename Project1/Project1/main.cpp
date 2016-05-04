@@ -9,7 +9,64 @@
 
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
+Mapa mapa;
+Czolg tank;
 
+bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
+{
+	switch (direction)
+	{
+	case 'u':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+
+			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+				(tank.x < (mapa.przeszkody[i].x + 60)) &&
+				((tank.y + 60) > mapa.przeszkody[i].y) &&
+				(tank.y < (mapa.przeszkody[i].y + 65)))
+				return true;
+		}
+		return false;
+		break;
+	case 'd':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+
+			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+				(tank.x < (mapa.przeszkody[i].x + 60)) &&
+				((tank.y + 65) > mapa.przeszkody[i].y) &&
+				(tank.y < (mapa.przeszkody[i].y + 60)))
+				return true;
+		}
+		return false;
+		break;
+	case 'l':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+
+			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+				(tank.x < (mapa.przeszkody[i].x + 65)) &&
+				((tank.y + 60) > mapa.przeszkody[i].y) &&
+				(tank.y < (mapa.przeszkody[i].y + 60)))
+				return true;
+		}
+		return false;
+		break;
+	case'r':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+
+			if (((tank.x + 65) > mapa.przeszkody[i].x) &&
+				(tank.x < (mapa.przeszkody[i].x + 60)) &&
+				((tank.y + 60) > mapa.przeszkody[i].y) &&
+				(tank.y < (mapa.przeszkody[i].y + 60)))
+				return true;
+		}
+		return false;
+		break;
+	}
+	
+}
 int main()
 {
 	Client klient("127.0.0.1");
@@ -17,7 +74,7 @@ int main()
 	//int menu_pos = 1;
 	Menu menu;
 	bool menu_open = true;
-	Mapa mapa;
+	
 	sf::Sprite spriteMap(mapa.texture);
 
 
@@ -48,7 +105,7 @@ int main()
 	string dsp = "";
 	int index = 0;
 
-	Czolg tank;
+	
 
 
 	/////obraz///////////
@@ -131,23 +188,35 @@ int main()
 				
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
-					tank_sprite.setTexture(tank.textureu);
-					tank.moveUp();
+					if (!sprawdzKolizjeCzolgPrzeszkoda('u'))
+					{
+						tank_sprite.setTexture(tank.textureu);
+						tank.moveUp();
+					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
-					tank_sprite.setTexture(tank.textured);
-					tank.moveDown();
+					if (!sprawdzKolizjeCzolgPrzeszkoda('d'))
+					{
+						tank_sprite.setTexture(tank.textured);
+						tank.moveDown();
+					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 				{
-					tank_sprite.setTexture(tank.texturer);
-					tank.moveRight();
+					if (!sprawdzKolizjeCzolgPrzeszkoda('r'))
+					{
+						tank_sprite.setTexture(tank.texturer);
+						tank.moveRight();
+					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 				{
-					tank_sprite.setTexture(tank.texturel);
-					tank.moveLeft();
+					if (!sprawdzKolizjeCzolgPrzeszkoda('l'))
+					{
+						tank_sprite.setTexture(tank.texturel);
+						tank.moveLeft();
+					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{

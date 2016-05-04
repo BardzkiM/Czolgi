@@ -15,7 +15,6 @@ public:
 	int przeszkodyTablica[20][15];
 	
 	void initializeMap();
-	void initializeTable();
 	void setPlayers();
 	sf::Texture texture;
 
