@@ -11,6 +11,7 @@ public:
 	int id_czolgu;
 	float speed;
 	char type;
+	void setTexture();
 
 };
 #endif

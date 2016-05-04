@@ -12,6 +12,72 @@ sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 Mapa mapa;
 Czolg tank;
 
+bool sprawdzKolizjePociskPrzeszkoda(char direction)
+{
+	switch (direction)
+	{
+	case 'u':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+			for (int j = 0; j < tank.pociski.size(); j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + 1)))
+					return true;
+			}
+		}
+		return false;
+		break;
+	case 'd':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+			for (int j = 0; j < tank.pociski.size(); j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height + 1) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					
+					return true;
+			}
+		}
+		return false;
+		break;
+	case 'l':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+			for (int j = 0; j < tank.pociski.size(); j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + 1)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					return true;
+			}
+		}
+		return false;
+		break;
+	case'r':
+		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		{
+			for (int j = 0; j < tank.pociski.size(); j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width + 1) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					return true;
+			}
+		}
+		return false;
+		break;
+	default:
+		return false;
+	}
+}
+////////
 bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 {
 	switch (direction)
@@ -64,8 +130,10 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 		}
 		return false;
 		break;
+
+	default:
+		return false;
 	}
-	
 }
 int main()
 {
@@ -256,22 +324,34 @@ int main()
 		}
 		if (!tank.pociski.empty())
 		{
-			//cout << "jestem!!!!!!!!!!" << endl;
+			//cout << mapa.przeszkody[0].width << " " << mapa.przeszkody[0].height << endl;
 			if (tank.pociski[0].angle == 0)
 			{
-				tank.pociski[0].x -= 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('l'))
+				{
+					tank.pociski[0].x -= 1;
+				}
 			}
 			if (tank.pociski[0].angle == 90)
 			{
-				tank.pociski[0].y -= 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('u'))
+				{
+					tank.pociski[0].y -= 1;
+				}
 			}
 			if (tank.pociski[0].angle == 180)
 			{
-				tank.pociski[0].x += 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('r'))
+				{
+					tank.pociski[0].x += 1;
+				}
 			}
 			if (tank.pociski[0].angle == 270)
 			{
-				tank.pociski[0].y += 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('d'))
+				{
+					tank.pociski[0].y += 1;
+				}
 			}
 			pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
 
