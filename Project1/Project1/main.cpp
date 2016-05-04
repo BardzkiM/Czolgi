@@ -80,59 +80,71 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 ////////
 bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 {
-	switch (direction)
-	{
-	case 'u':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		switch (direction)
 		{
-
-			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-				(tank.x < (mapa.przeszkody[i].x + 60)) &&
-				((tank.y + 60) > mapa.przeszkody[i].y) &&
-				(tank.y < (mapa.przeszkody[i].y + 65)))
+		case 'u':
+			if (tank.y - 5 < 0)
+			{
 				return true;
-		}
-		return false;
-		break;
-	case 'd':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
-		{
+				break;
+			}
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
 
-			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-				(tank.x < (mapa.przeszkody[i].x + 60)) &&
-				((tank.y + 65) > mapa.przeszkody[i].y) &&
-				(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 65)))
+					return true;
+			}
+			return false;
+			break;
+		case 'd':
+			if ((tank.y + tank.height + 5) > 900)
 				return true;
-		}
-		return false;
-		break;
-	case 'l':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
-		{
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
 
-			if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-				(tank.x < (mapa.przeszkody[i].x + 65)) &&
-				((tank.y + 60) > mapa.przeszkody[i].y) &&
-				(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 65) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			return false;
+			break;
+		case 'l':
+			if (tank.x - 5 < 0)
 				return true;
-		}
-		return false;
-		break;
-	case'r':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
-		{
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
 
-			if (((tank.x + 65) > mapa.przeszkody[i].x) &&
-				(tank.x < (mapa.przeszkody[i].x + 60)) &&
-				((tank.y + 60) > mapa.przeszkody[i].y) &&
-				(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 65)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			return false;
+			break;
+		case'r':
+			if ((tank.x + tank.width + 5) > 1200)
 				return true;
-		}
-		return false;
-		break;
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
 
-	default:
-		return false;
+				if (((tank.x + 65) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			return false;
+			break;
+
+		default:
+			return false;
+
 	}
 }
 int main()
