@@ -29,7 +29,7 @@ public:
 
 	void key_down(sf::RenderWindow * window);
 
-	void key_enter(sf::RenderWindow *window);
+
 
 	sf::Texture menu_bg;
 

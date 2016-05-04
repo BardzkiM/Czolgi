@@ -258,9 +258,17 @@ int main()
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
 				{
-					menu_open = false;
-					//window.setSize(size);
-					tank_sprite.setTexture(tank.texturel);
+					if (menu.position == 1)
+					{
+						menu_open = false;
+						tank_sprite.setTexture(tank.texturel);
+					}
+					if (menu.position == 3)
+					{
+						window.close();
+						break;
+					}
+
 				}
 			}
 			else if (!menu_open)

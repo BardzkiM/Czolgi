@@ -14,17 +14,7 @@ Menu::~Menu()
 {
 
 }
-void Menu::key_enter(sf::RenderWindow *window)
-{
-	if (this->position == 1)
-	{
-		this->position = 3;
-	}
-	else {
-		this->position--;
-	}
-	this->set_auto_menu_pos(window);
-}
+
 void Menu::key_up(sf::RenderWindow *window)
 {
 	if (this->position == 1)
