@@ -14,12 +14,14 @@ Czolg tank;
 
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
+	int mapa_przeszkody_size = mapa.przeszkody.size();
+	int tank_pociski_size = tank.pociski.size();
 	switch (direction)
 	{
 	case 'u':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			for (int j = 0; j < tank.pociski.size(); j++)
+			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
@@ -28,27 +30,24 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					return true;
 			}
 		}
-		return false;
 		break;
 	case 'd':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			for (int j = 0; j < tank.pociski.size(); j++)
+			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height + 1) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-					
 					return true;
 			}
 		}
-		return false;
 		break;
 	case 'l':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			for (int j = 0; j < tank.pociski.size(); j++)
+			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + 1)) &&
@@ -57,12 +56,11 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					return true;
 			}
 		}
-		return false;
 		break;
 	case'r':
-		for (int i = 0; i < mapa.przeszkody.size(); i++)
+		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			for (int j = 0; j < tank.pociski.size(); j++)
+			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width + 1) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
@@ -71,15 +69,16 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					return true;
 			}
 		}
-		return false;
 		break;
-	default:
-		return false;
+	default: 
+		break;
 	}
+	return false;
 }
 //////// komyntosz
 bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 {
+	int mapa_przeszkody_size = mapa.przeszkody.size();	
 		switch (direction)
 		{
 		case 'u':
@@ -88,7 +87,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 				return true;
 				break;
 			}
-			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
@@ -97,12 +96,11 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					(tank.y < (mapa.przeszkody[i].y + 65)))
 					return true;
 			}
-			return false;
 			break;
 		case 'd':
 			if ((tank.y + tank.height + 5) > 900)
 				return true;
-			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
@@ -111,12 +109,11 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					(tank.y < (mapa.przeszkody[i].y + 60)))
 					return true;
 			}
-			return false;
 			break;
 		case 'l':
 			if (tank.x - 5 < 0)
 				return true;
-			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
@@ -125,12 +122,11 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					(tank.y < (mapa.przeszkody[i].y + 60)))
 					return true;
 			}
-			return false;
 			break;
 		case'r':
 			if ((tank.x + tank.width + 5) > 1200)
 				return true;
-			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
 				if (((tank.x + 65) > mapa.przeszkody[i].x) &&
@@ -139,13 +135,13 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					(tank.y < (mapa.przeszkody[i].y + 60)))
 					return true;
 			}
-			return false;
 			break;
 
 		default:
-			return false;
+			break;
 
 	}
+		return false;
 }
 int main()
 {
