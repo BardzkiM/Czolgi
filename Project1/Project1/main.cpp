@@ -77,7 +77,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 		return false;
 	}
 }
-////////
+//////// komyntosz
 bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 {
 		switch (direction)
