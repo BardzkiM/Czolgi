@@ -78,6 +78,9 @@
     <ClInclude Include="Obiekt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServerTCP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="Przeszkoda.cpp">
       <Filter>Source Files\modules\przeszkoda</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerTCP.cpp">
+      <Filter>Source Files\net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
