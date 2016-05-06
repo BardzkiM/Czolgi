@@ -5,18 +5,16 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
-class ClientTCP: public sf::Thread
+class ClientTCP
 {
 public:
-	
+	ClientTCP();
 	~ClientTCP();
 
-	
-
-	
+	virtual void Run();	
 
 private:
-	virtual void Run();
+	
 
 };
 

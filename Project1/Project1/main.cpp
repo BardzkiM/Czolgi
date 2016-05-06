@@ -157,6 +157,11 @@ int main()
 	sf::Thread server_thread(&ServerTCP::Run,&servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 	server_thread.launch();									//uruchomienie w¹tku
 
+	ClientTCP clienttcp;
+	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);
+	clienttcp_thread.launch();
+
+
 	//int menu_pos = 1;
 	Menu menu;
 	bool menu_open = true;

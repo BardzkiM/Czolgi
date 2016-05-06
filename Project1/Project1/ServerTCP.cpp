@@ -28,15 +28,15 @@ void ServerTCP::Run()
 		// error...
 		std::cout << "error";
 	}
-	//char data[100];
-	//std::size_t received;
+	char data[100];
+	std::size_t received;
 
-	//// TCP socket:
-	//if (client.receive(data, 100, received) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
-	//std::cout << "Received " << received << " bytes" << std::endl;
+	// TCP socket:
+	if (client.receive(data, 100, received) != sf::Socket::Done)
+	{
+		// error...
+		std::cout << "error";
+	}
+	std::cout << "Received " << received << " bytes" << data << std::endl;
 }
 
