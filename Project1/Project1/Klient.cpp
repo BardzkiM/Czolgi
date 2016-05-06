@@ -143,7 +143,7 @@ int Client::uruchomKlienta()
 	std::vector<std::string> data;
 	//do maina:
 	//Client client("127.0.0.1");
-	Obiekt obiekt; //obiekt, ktorego elementy bedziemy przesylac
+	Obiekt obiekt;
 
 	if (!Start())
 		return 1;
@@ -159,11 +159,11 @@ int Client::uruchomKlienta()
 			break;
 		}
 
-		std::string msg2 = ""; //string, by mozna go bylo wyslac za pomoca 'Send', ktorego parametrem sa wskazniki
-		data = obiekt.zwrocNazwe(); //data- vector, w ktorym sa przechowywane elementy do wyslania
+		std::string msg2 = ""; //string, by mozna go bylo wysalc za pomoca 'Send', ktorego parametrem sa wskazniki
+		data = obiekt.zwrocNazwe();
 		for (int i = 0; i < data.size(); i++)
 		{
-			msg2 += data.at(i) + " "; //dodajemy kazdy element z vectora do stringa
+			msg2 += data.at(i) + " ";
 		}
 
 		Send((char*)msg2.c_str());
