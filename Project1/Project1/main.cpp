@@ -6,11 +6,16 @@
 #include "Menu.h"
 #include "Klient.h"
 #include "Mapa.h"
+#include "ServerTCP.h"
+#include "ClientTCP.h"
+
 
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 Mapa mapa;
 Czolg tank;
+
+
 
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
@@ -147,6 +152,10 @@ int main()
 {
 	Client klient("127.0.0.1"); 
 	klient.uruchomKlienta();
+	ServerTCP servertcp;									//stworzenie obiektu klasy
+	servertcp.argument = 5;									//przekazanie do klasy argumentu
+	sf::Thread server_thread(&ServerTCP::Run,&servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
+	server_thread.launch();									//uruchomienie w¹tku
 
 	//int menu_pos = 1;
 	Menu menu;

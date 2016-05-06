@@ -9,15 +9,16 @@ ServerTCP::~ServerTCP()
 
 }
 
-
-void ServerTCP::server_creation()
+void ServerTCP::Run()
 {
-	sf::TcpListener listener;
+	std::cout << "Start w¹tku servera"<<argument;
+	sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
+	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
 
-	// bind the listener to a port
-	if (listener.listen(53000) != sf::Socket::Done)
+	if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
 	{
-		// error...
+		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
+		exit(1);
 	}
 
 	// accept a new connection
@@ -25,31 +26,17 @@ void ServerTCP::server_creation()
 	if (listener.accept(client) != sf::Socket::Done)
 	{
 		// error...
+		std::cout << "error";
 	}
-	char data[100];
-	std::size_t received;
+	//char data[100];
+	//std::size_t received;
 
-	// TCP socket:
-	if (client.receive(data, 100, received) != sf::Socket::Done)
-	{
-		// error...
-	}
-	std::cout << "Received " << received << " bytes" << std::endl;
+	//// TCP socket:
+	//if (client.receive(data, 100, received) != sf::Socket::Done)
+	//{
+	//	// error...
+	//	std::cout << "error";
+	//}
+	//std::cout << "Received " << received << " bytes" << std::endl;
 }
 
-void ServerTCP::client_connection()
-{
-	sf::TcpSocket socket;
-	sf::Socket::Status status = socket.connect("192.168.0.5", 53000);
-	if (status != sf::Socket::Done)
-	{
-		// error...
-	}
-	char data[100] = { 'c','d','n' };
-
-	// TCP socket:
-	if (socket.send(data, 100) != sf::Socket::Done)
-	{
-		// error...
-	}
-}

@@ -3,6 +3,7 @@
 #ifndef _SERVERTCP_H
 #define _SERVERTCP_H
 #include <SFML/Network.hpp>
+#include <SFML/System.hpp>
 #include <iostream>
 class ServerTCP
 {
@@ -10,10 +11,11 @@ public:
 	ServerTCP();
 	~ServerTCP();
 
-	void server_creation();
+	int argument;
+	void Run(int argument);
 
-	void client_connection();
-
+	void Run();
+	
 private:
 	
 
