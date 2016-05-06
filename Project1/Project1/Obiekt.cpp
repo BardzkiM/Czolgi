@@ -13,7 +13,7 @@ Obiekt::Obiekt()
 //do vectora wrzucamy,  co ma byc wyslane do serwera 
 //string - typ przechowywanych danych
 //vector przechowuje tylko jeden typ danych, 
-//jesli chcemy przeslac int, zamiast stringa, dajemy inta
+//jesli chcemy przeslac int, zamiast stringa, dajemy std::vector<std::int>
 std::vector<std::string> Obiekt::zwrocNazwe()
 {
 	std::vector <std::string> zwracane;
