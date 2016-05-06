@@ -6,13 +6,11 @@
 #include "Menu.h"
 #include "Klient.h"
 #include "Mapa.h"
-#include "ServerTCP.h"
 
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 Mapa mapa;
 Czolg tank;
-ServerTCP servertcp;
 
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
@@ -152,8 +150,6 @@ int main()
 
 	//int menu_pos = 1;
 	Menu menu;
-	servertcp.server_creation();
-	servertcp.client_connection();
 	bool menu_open = true;
 	
 	sf::Sprite spriteMap(mapa.texture);

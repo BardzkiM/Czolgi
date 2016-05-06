@@ -126,7 +126,6 @@
     <ClInclude Include="Blok.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="gracz.h" />
-    <ClInclude Include="ServerTCP.h" />
     <ClInclude Include="Klient.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mapa.h" />
@@ -147,7 +146,6 @@
     <ClCompile Include="Polaczenie.cpp" />
     <ClCompile Include="Przeszkoda.cpp" />
     <ClCompile Include="Serwer.cpp" />
-    <ClCompile Include="ServerTCP.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
