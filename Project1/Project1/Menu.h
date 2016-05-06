@@ -13,6 +13,7 @@ class Menu
 public:
 	Menu();
 	~Menu();
+	int position;
 
 	int set_bg(sf::RenderWindow * window);
 
@@ -22,18 +23,24 @@ public:
 
 	int set_menu_pos_3(sf::RenderWindow * window);
 
-	int set_auto_menu_pos(int pos, sf::RenderWindow * window);
+	int set_auto_menu_pos(sf::RenderWindow * window);
 
-	
+	void key_up(sf::RenderWindow * window);
 
-	
+	void key_down(sf::RenderWindow * window);
 
-	
-	
+
+
+	sf::Texture menu_bg;
+
+	sf::Texture menu_bg_bullets;
+
+
+
 
 
 private:
-	sf::Texture menu_bg;
+	
 };
 
 #endif

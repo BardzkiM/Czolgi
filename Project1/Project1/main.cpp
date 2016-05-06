@@ -5,23 +5,167 @@
 #include "Czolg.h"
 #include "Menu.h"
 #include "Klient.h"
+#include "Mapa.h"
+#include "ServerTCP.h"
 
 using namespace std;
-sf::RenderWindow window(sf::VideoMode(800, 600), "KOLO");
+sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
+Mapa mapa;
+Czolg tank;
+ServerTCP servertcp;
 
+bool sprawdzKolizjePociskPrzeszkoda(char direction)
+{
+	int mapa_przeszkody_size = mapa.przeszkody.size();
+	int tank_pociski_size = tank.pociski.size();
+	switch (direction)
+	{
+	case 'u':
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			for (int j = 0; j <tank_pociski_size; j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + 1)))
+					return true;
+			}
+		}
+		break;
+	case 'd':
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			for (int j = 0; j <tank_pociski_size; j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height + 1) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					return true;
+			}
+		}
+		break;
+	case 'l':
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			for (int j = 0; j <tank_pociski_size; j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + 1)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					return true;
+			}
+		}
+		break;
+	case'r':
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			for (int j = 0; j <tank_pociski_size; j++)
+			{
+				if (((tank.pociski[j].x + tank.pociski[j].width + 1) > mapa.przeszkody[i].x) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+					return true;
+			}
+		}
+		break;
+	default: 
+		break;
+	}
+	return false;
+}
+//////// komyntosz
+bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
+{
+	int mapa_przeszkody_size = mapa.przeszkody.size();	
+		switch (direction)
+		{
+		case 'u':
+			if (tank.y - 5 < 0)
+			{
+				return true;
+				break;
+			}
+			for (int i = 0; i <mapa_przeszkody_size; i++)
+			{
+
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 65)))
+					return true;
+			}
+			break;
+		case 'd':
+			if ((tank.y + tank.height + 5) > 900)
+				return true;
+			for (int i = 0; i <mapa_przeszkody_size; i++)
+			{
+
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 65) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			break;
+		case 'l':
+			if (tank.x - 5 < 0)
+				return true;
+			for (int i = 0; i <mapa_przeszkody_size; i++)
+			{
+
+				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 65)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			break;
+		case'r':
+			if ((tank.x + tank.width + 5) > 1200)
+				return true;
+			for (int i = 0; i <mapa_przeszkody_size; i++)
+			{
+
+				if (((tank.x + 65) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + 60)) &&
+					((tank.y + 60) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + 60)))
+					return true;
+			}
+			break;
+
+		default:
+			break;
+
+	}
+		return false;
+}
 int main()
 {
 	Client klient("127.0.0.1");
 	klient.uruchomKlienta();
-	int menu_pos = 1;
+	//int menu_pos = 1;
 	Menu menu;
-	///////WINDOW/////////////////
+	servertcp.server_creation();
+	servertcp.client_connection();
+	bool menu_open = true;
 	
+	sf::Sprite spriteMap(mapa.texture);
 
-	//sf::Vector2u size(800, 600);
-	//window.setSize(size);//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
+
+	///////WINDOW/////////////////
+
+
+	//sf::Vector2u size(1200, 900);
+	//window.setSize(menu.menu_bg.getSize());//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
 
 	sf::CircleShape shape(100.f); //ko³o
+	shape.setPosition(100, 100);
 	shape.setFillColor(sf::Color::Yellow);
 
 	///////PRZYCISK TRZYMANIE BLOKADA////////////
@@ -41,29 +185,32 @@ int main()
 	string dsp = "";
 	int index = 0;
 
-	Czolg tank;
 	
-	
+
+
 	/////obraz///////////
 	/*sf::Texture texture;
 	if (!texture.loadFromFile("tank.png"))
 	{
-		cout << "nie mo¿na za³adowaæ pliku" << endl;
-		return EXIT_FAILURE;
+	cout << "nie mo¿na za³adowaæ pliku" << endl;
+	return EXIT_FAILURE;
 	}
 	sf::Sprite sprite(texture);
 
 	sf::Vector2u movement(10, 10);
 	*/
-	sf::Sprite tank_sprite(tank.texturel);
+	sf::Sprite tank_sprite;
+	
 	sf::Sprite pociska;
-	tank.setInitialPosition(100,100);
+	tank.setInitialPosition(0, 0);
 	tank_sprite.setPosition(tank.x, tank.y);
+
+	sf::Sprite przeszkodaSprite;
+	//Przeszkoda Przeszkoda();
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
 
-	
 
 	while (window.isOpen())
 	{
@@ -78,64 +225,108 @@ int main()
 				window.close();
 				break;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			if (menu_open == true)
 			{
-				if (menu_pos == 1)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
+					menu.key_up(&window);
+					/*if (menu_pos == 1)
+					{
 					menu_pos = 3;
-				}
-				else {
+					}
+					else {
 					menu_pos--;
+					}
+					menu.set_auto_menu_pos(menu_pos, &window);
+					/*tank_sprite.setTexture(tank.textureu);
+					tank.moveUp();*/
 				}
-				menu.set_auto_menu_pos(menu_pos, &window);
-				/*tank_sprite.setTexture(tank.textureu);
-				tank.moveUp();*/
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				if (menu_pos == 3)
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
+					menu.key_down(&window);
+					/*if (menu_pos == 3)
+					{
 					menu_pos = 1;
-				}
-				else
-				{
+					}
+					else
+					{
 					menu_pos++;
+					}
+					menu.set_auto_menu_pos(menu_pos, &window);
+					/*tank_sprite.setTexture(tank.textured);
+					tank.moveDown();*/
 				}
-				menu.set_auto_menu_pos(menu_pos, &window);
-				/*tank_sprite.setTexture(tank.textured);
-				tank.moveDown();*/
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				tank_sprite.setTexture(tank.texturer);
-				tank.moveRight();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				tank_sprite.setTexture(tank.texturel);
-				tank.moveLeft();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			{
-				int nr = 0;
-				tank.pociski.clear();
-				tank.addPocisk();
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
+				{
+					if (menu.position == 1)
+					{
+						menu_open = false;
+						tank_sprite.setTexture(tank.texturel);
+					}
+					if (menu.position == 3)
+					{
+						window.close();
+						break;
+					}
 
-				pociska.setTexture(tank.pociski[nr].texture);
-				pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
-
-				//pociska.rotate(tank.pociski[nr].angle);
-
-				//cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
-				//cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
-				//cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
-				//cout << endl;
-				//window.draw(pociska);
+				}
 			}
-			
+			else if (!menu_open)
+			{
+				
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				{
+					if (!sprawdzKolizjeCzolgPrzeszkoda('u'))
+					{
+						tank_sprite.setTexture(tank.textureu);
+						tank.moveUp();
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					if (!sprawdzKolizjeCzolgPrzeszkoda('d'))
+					{
+						tank_sprite.setTexture(tank.textured);
+						tank.moveDown();
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				{
+					if (!sprawdzKolizjeCzolgPrzeszkoda('r'))
+					{
+						tank_sprite.setTexture(tank.texturer);
+						tank.moveRight();
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				{
+					if (!sprawdzKolizjeCzolgPrzeszkoda('l'))
+					{
+						tank_sprite.setTexture(tank.texturel);
+						tank.moveLeft();
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				{
+					int nr = 0;
+					tank.pociski.clear();
+					tank.addPocisk();
+
+					pociska.setTexture(tank.pociski[nr].texture);
+					pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
+
+					//pociska.rotate(tank.pociski[nr].angle);
+
+					//cout << "pocisk " << tank.pociski[nr].x << " " << tank.pociski[nr].y <<" " << tank.pociski[nr].angle << "----------" << tank.pociski[nr].height << " " << tank.pociski[nr].width <<  endl;
+					//cout << "tank " << tank.x << " " << tank.y << " " << tank.angle << endl;
+					//cout << "tank_sprite " << tank_sprite.getPosition().x << "  " << tank_sprite.getPosition().y << " " << tank_sprite.getRotation() << endl;
+					//cout << endl;
+					//window.draw(pociska);
+				}
+			}
 			//tank_sprite.setTexture(tank.texture);
 			tank_sprite.setPosition(tank.x, tank.y);
-			
+
 
 
 
@@ -153,36 +344,66 @@ int main()
 		}
 		if (!tank.pociski.empty())
 		{
-			//cout << "jestem!!!!!!!!!!" << endl;
+			//cout << mapa.przeszkody[0].width << " " << mapa.przeszkody[0].height << endl;
 			if (tank.pociski[0].angle == 0)
 			{
-				tank.pociski[0].x -= 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('l'))
+				{
+					tank.pociski[0].x -= 1;
+				}
 			}
 			if (tank.pociski[0].angle == 90)
 			{
-				tank.pociski[0].y -= 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('u'))
+				{
+					tank.pociski[0].y -= 1;
+				}
 			}
 			if (tank.pociski[0].angle == 180)
 			{
-				tank.pociski[0].x += 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('r'))
+				{
+					tank.pociski[0].x += 1;
+				}
 			}
 			if (tank.pociski[0].angle == 270)
 			{
-				tank.pociski[0].y += 1;
+				if (!sprawdzKolizjePociskPrzeszkoda('d'))
+				{
+					tank.pociski[0].y += 1;
+				}
 			}
 			pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
 
 		}
+
+
+		///GAME GAME GAME
 		// Clear screen
-		//window.clear();
-		// Draw the tank_sprite
-		//window.draw(tank_sprite);
+		if (!(menu_open))
+		{
+			//cout << "jestem" << endl;
+			window.clear();
+			// Draw the tank_sprite
+			window.draw(spriteMap);
+			window.draw(tank_sprite);
 
-		//if (!tank.pociski.empty())
-		//window.draw(pociska);
+			for (int i = 0; i < mapa.przeszkody.size(); i++)
+			{
+				przeszkodaSprite.setTexture(mapa.przeszkody[i].texture);
+				przeszkodaSprite.setPosition(mapa.przeszkody[i].x, mapa.przeszkody[i].y);
+				window.draw(przeszkodaSprite);
+			}
 
-		
-		
+			if (!tank.pociski.empty())
+				window.draw(pociska);
+			window.display();
+
+			
+		}
+
+
+
 
 
 

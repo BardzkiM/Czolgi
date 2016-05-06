@@ -6,7 +6,7 @@
 class Przeszkoda : public Blok
 {
 public:
-	Przeszkoda();
+	Przeszkoda(int x, int y);
 	~Przeszkoda();
 };
 
