@@ -147,8 +147,9 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 }
 int main()
 {
-	Client klient("127.0.0.1");
+	Client klient("127.0.0.1"); 
 	klient.uruchomKlienta();
+
 	//int menu_pos = 1;
 	Menu menu;
 	servertcp.server_creation();
