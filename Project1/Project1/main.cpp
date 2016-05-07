@@ -161,6 +161,11 @@ int main()
 	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);
 	clienttcp_thread.launch();
 
+	ClientTCP clienttcp1;
+	sf::Thread clienttcp_thread1(&ClientTCP::Run, &clienttcp1);
+	clienttcp_thread1.launch();
+
+
 
 	//int menu_pos = 1;
 	Menu menu;
