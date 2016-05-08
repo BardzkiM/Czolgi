@@ -8,6 +8,7 @@
 #include "Mapa.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
+#include <vector>
 #include "Wykonawcy.h"
 
 using namespace std;
