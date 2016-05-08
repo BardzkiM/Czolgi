@@ -10,7 +10,7 @@ public:
 	int x, y;
 	int angle;
 	int width, height, hp;
-	float movement;
+	int movement;
 	void setRotation();
 	sf::Texture texture;
 	sf::Texture texturel;

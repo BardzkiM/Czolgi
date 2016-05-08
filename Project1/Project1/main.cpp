@@ -88,7 +88,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 		switch (direction)
 		{
 		case 'u':
-			if (tank.y - 5 < 0)
+			if (tank.y - tank.movement < 0)
 			{
 				return true;
 				break;
@@ -104,7 +104,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			}
 			break;
 		case 'd':
-			if ((tank.y + tank.height + 5) > 900)
+			if ((tank.y + tank.height + tank.movement) > 900)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
@@ -117,7 +117,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			}
 			break;
 		case 'l':
-			if (tank.x - 5 < 0)
+			if (tank.x - tank.movement < 0)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
@@ -130,7 +130,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			}
 			break;
 		case'r':
-			if ((tank.x + tank.width + 5) > 1200)
+			if ((tank.x + tank.width + tank.movement) > 1200)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
@@ -212,28 +212,28 @@ void gra()
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('l'))
 			{
-				tank.pociski[0].x -= tank.pociski[0].speed;
+				tank.pociski[0].x -= tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 90)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('u'))
 			{
-				tank.pociski[0].y -= tank.pociski[0].speed;
+				tank.pociski[0].y -= tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 180)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('r'))
 			{
-				tank.pociski[0].x += tank.pociski[0].speed;
+				tank.pociski[0].x += tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 270)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('d'))
 			{
-				tank.pociski[0].y += tank.pociski[0].speed;
+				tank.pociski[0].y += tank.pociski[0].movement;
 			}
 		}
 		pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);

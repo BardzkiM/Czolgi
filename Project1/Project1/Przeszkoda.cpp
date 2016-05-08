@@ -10,6 +10,7 @@ Przeszkoda::Przeszkoda(int x, int y)
 	this->height = przeszkodaSize.y;
 	this->x = x;
 	this->y = y;
+	this->movement = 0;
 }
 
 
