@@ -8,6 +8,7 @@
 #include "Mapa.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
+#include <vector>
 
 
 using namespace std;
@@ -33,7 +34,10 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.pociski[j].movement)))
+				{
+					//tank.pociski.erase(j);
 					return true;
+				}
 			}
 		}
 		break;
@@ -46,7 +50,9 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -59,7 +65,9 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.pociski[j].movement)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -72,7 +80,9 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -96,10 +106,10 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60 + tank.movement)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.movement)))
 					return true;
 			}
 			break;
@@ -109,10 +119,10 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 60 + tank.movement) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height + tank.movement) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
@@ -122,10 +132,10 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60 + tank.movement)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.movement)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
@@ -135,10 +145,10 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60 + tank.movement) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width + tank.movement) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
