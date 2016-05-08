@@ -8,12 +8,13 @@
 #include "Mapa.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
-
+#include "Wykonawcy.h"
 
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 Mapa mapa;
 Czolg tank;
+
 
 
 
@@ -149,7 +150,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 	}
 		return false;
 }
-Client klient("127.0.0.1");
+//Client klient("127.0.0.1");
 ServerTCP servertcp;
 ClientTCP clienttcp;
 ClientTCP clienttcp1;
@@ -260,7 +261,7 @@ void gra()
 int main()
 {
 	
-	klient.uruchomKlienta();
+	//klient.uruchomKlienta();
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
 	
@@ -281,7 +282,8 @@ int main()
 	Menu menu;
 	bool menu_open = true;
 	
-	
+	Wykonawcy wykonawcy;
+	//window.draw(wykonawcy.set_bg);
 
 
 	///////WINDOW/////////////////
@@ -334,6 +336,7 @@ int main()
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
+	
 
 	sf::Clock clock;
 
@@ -388,6 +391,11 @@ int main()
 						menu_open = false;
 						tank_sprite.setTexture(tank.texturel);
 					}
+					if (menu.position == 2) //wykonawcy
+					{						
+						menu_open = false;
+						wykonawcy.set_bg(&window);
+					}
 					if (menu.position == 3)
 					{
 						window.close();
@@ -416,7 +424,7 @@ int main()
 			//}
 			
 		}
-		if (!menu_open)
+		if (!menu_open&&menu.position==1)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{
