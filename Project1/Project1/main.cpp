@@ -166,33 +166,41 @@ void gra()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
+		tank_sprite.setTexture(tank.textureu);
+		tank.angle = 90;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('u'))
 		{
-			tank_sprite.setTexture(tank.textureu);
+			
 			tank.moveUp();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
+		tank_sprite.setTexture(tank.textured);
+		tank.angle = 270;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('d'))
 		{
-			tank_sprite.setTexture(tank.textured);
+			
 			tank.moveDown();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
+		tank_sprite.setTexture(tank.texturer);
+		tank.angle = 180;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('r'))
 		{
-			tank_sprite.setTexture(tank.texturer);
+			
 			tank.moveRight();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
+		tank_sprite.setTexture(tank.texturel);
+		tank.angle = 0;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('l'))
 		{
-			tank_sprite.setTexture(tank.texturel);
+			
 			tank.moveLeft();
 		}
 	}
