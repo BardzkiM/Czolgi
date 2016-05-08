@@ -32,7 +32,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + 1)))
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.pociski[j].movement)))
 					return true;
 			}
 		}
@@ -44,7 +44,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.pociski[j].y + tank.pociski[j].height + 1) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
+					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
@@ -56,7 +56,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + 1)) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.pociski[j].movement)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
@@ -68,7 +68,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
-				if (((tank.pociski[j].x + tank.pociski[j].width + 1) > mapa.przeszkody[i].x) &&
+				if (((tank.pociski[j].x + tank.pociski[j].width + tank.pociski[j].movement) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
@@ -99,7 +99,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
 					(tank.x < (mapa.przeszkody[i].x + 60)) &&
 					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 65)))
+					(tank.y < (mapa.przeszkody[i].y + 60 + tank.movement)))
 					return true;
 			}
 			break;
@@ -111,7 +111,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
 					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 65) > mapa.przeszkody[i].y) &&
+					((tank.y + 60 + tank.movement) > mapa.przeszkody[i].y) &&
 					(tank.y < (mapa.przeszkody[i].y + 60)))
 					return true;
 			}
@@ -123,7 +123,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			{
 
 				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 65)) &&
+					(tank.x < (mapa.przeszkody[i].x + 60 + tank.movement)) &&
 					((tank.y + 60) > mapa.przeszkody[i].y) &&
 					(tank.y < (mapa.przeszkody[i].y + 60)))
 					return true;
@@ -135,7 +135,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 65) > mapa.przeszkody[i].x) &&
+				if (((tank.x + 60 + tank.movement) > mapa.przeszkody[i].x) &&
 					(tank.x < (mapa.przeszkody[i].x + 60)) &&
 					((tank.y + 60) > mapa.przeszkody[i].y) &&
 					(tank.y < (mapa.przeszkody[i].y + 60)))
@@ -212,28 +212,28 @@ void gra()
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('l'))
 			{
-				tank.pociski[0].x -= 1;
+				tank.pociski[0].x -= tank.pociski[0].speed;
 			}
 		}
 		if (tank.pociski[0].angle == 90)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('u'))
 			{
-				tank.pociski[0].y -= 1;
+				tank.pociski[0].y -= tank.pociski[0].speed;
 			}
 		}
 		if (tank.pociski[0].angle == 180)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('r'))
 			{
-				tank.pociski[0].x += 1;
+				tank.pociski[0].x += tank.pociski[0].speed;
 			}
 		}
 		if (tank.pociski[0].angle == 270)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('d'))
 			{
-				tank.pociski[0].y += 1;
+				tank.pociski[0].y += tank.pociski[0].speed;
 			}
 		}
 		pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
@@ -291,8 +291,8 @@ int main()
 	//window.setSize(menu.menu_bg.getSize());//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
 
 	
-	shape.setPosition(100, 100);
-	shape.setFillColor(sf::Color::Yellow);
+	//shape.setPosition(100, 100);
+	//shape.setFillColor(sf::Color::Yellow);
 
 	///////PRZYCISK TRZYMANIE BLOKADA////////////
 	//window.setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy

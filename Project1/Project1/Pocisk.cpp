@@ -15,6 +15,7 @@ Pocisk::Pocisk(int x, int y, int rot)
 	this->height = pociskSize.y;
 	this->x = x - width/2;
 	this->y = y - height/2;
+	this->movement = 8.0f;
 	
 	
 	//setRotation();

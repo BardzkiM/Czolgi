@@ -17,7 +17,7 @@ Czolg::Czolg()
 	sf::Vector2u tankSize(texturel.getSize());
 	this->width = tankSize.x;
 	this->height = tankSize.y;
-	this->movement = 5;
+	this->movement = 5.0f;
 	 
 
 }
@@ -47,7 +47,7 @@ void Czolg::moveUp()
 		
 	}
 	else
-		this->y -= 5;
+		this->y -= this->movement;
 }
 void Czolg::moveDown()
 {
@@ -57,7 +57,7 @@ void Czolg::moveDown()
 		
 	}
 	else
-		this->y += 5;
+		this->y += this->movement;
 
 }
 void Czolg::moveRight()
@@ -69,7 +69,7 @@ void Czolg::moveRight()
 		
 	}
 	else
-		this->x += 5;
+		this->x += this->movement;
 
 }
 void Czolg::moveLeft()
@@ -80,6 +80,6 @@ void Czolg::moveLeft()
 		
 	}
 	else
-		this->x -= 5;
+		this->x -= this->movement;
 
 }
