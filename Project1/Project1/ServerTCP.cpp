@@ -1,4 +1,5 @@
 #include "ServerTCP.h"
+#include "Czolg.h"
 ServerTCP::ServerTCP()
 {
 
@@ -11,7 +12,7 @@ ServerTCP::~ServerTCP()
 
 void ServerTCP::accept_client()
 {
-	std::cout << "Oczekiwanie na akceptacjê klienta";
+	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
 		nr_of_clients++;
 		sf::TcpSocket *temp = new sf::TcpSocket[nr_of_clients];
 		//std::copy(client, client + (nr_of_clients - 1), temp);
@@ -23,29 +24,29 @@ void ServerTCP::accept_client()
 			// error...
 			std::cout << "error";
 		}
-		this->receive(nr_of_clients-1);
-		
-		
-	
+		this->receive(nr_of_clients-1);	
 }
 
 void ServerTCP::receive(int which_client)
 {
 	char data[100];
+	Czolg *czolg;
+	sf::Packet pakiet;
 	std::size_t received;
 
 	// TCP socket:
-	if (client[which_client].receive(data, 100, received) != sf::Socket::Done)
+	if (client[which_client].receive(pakiet) != sf::Socket::Done)
 	{
 		// error...
 		std::cout << "error";
 	}
-	std::cout << "Received " << received << " bytes" << data << std::endl;
+	czolg=pakiet.getData;
+	std::cout << "Received " <<  " bytes" << " " << data << std::endl;
 }
 
 void ServerTCP::Run()
 {
-	std::cout << "Start w¹tku servera"<<argument;
+	std::cout << std::endl << "Start w¹tku servera"<<argument << std::endl;
 	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
 

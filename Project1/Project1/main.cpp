@@ -17,6 +17,7 @@ Czolg tank;
 
 
 
+
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
@@ -157,9 +158,9 @@ int main()
 	sf::Thread server_thread(&ServerTCP::Run,&servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 	server_thread.launch();									//uruchomienie w¹tku
 
-	ClientTCP clienttcp;
-	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);
-	clienttcp_thread.launch();
+	ClientTCP clienttcp;											//stworzenie pierwszego klienta
+	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);		//stworzenie w¹tku pierwszego klienta
+	clienttcp_thread.launch();										//odpalenie pierwszego klienta
 
 	ClientTCP clienttcp1;
 	sf::Thread clienttcp_thread1(&ClientTCP::Run, &clienttcp1);
