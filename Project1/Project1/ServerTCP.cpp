@@ -30,18 +30,18 @@ void ServerTCP::accept_client()
 void ServerTCP::receive(int which_client)
 {
 	char data[100];
-	Czolg *czolg;
+	
 	sf::Packet pakiet;
 	std::size_t received;
 
 	// TCP socket:
-	if (client[which_client].receive(pakiet) != sf::Socket::Done)
+	if (client[which_client].receive(&data,100,received) != sf::Socket::Done)
 	{
 		// error...
 		std::cout << "error";
 	}
-	czolg=pakiet.getData;
-	std::cout << "Received " <<  " bytes" << " " << data << std::endl;
+	
+	std::cout << "Received " << received <<  " bytes" << " " << data << std::endl;
 }
 
 void ServerTCP::Run()

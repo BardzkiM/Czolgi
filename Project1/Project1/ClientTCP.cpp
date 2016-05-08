@@ -26,7 +26,7 @@ void ClientTCP::Run()
 	// TCP socket:
 	sf::Packet pakiet;
 	pakiet.append(&czolg, sizeof(czolg));
-	socket.send(pakiet);
+	
 	if (socket.send(data, 100) != sf::Socket::Done)
 	{
 		// error...
