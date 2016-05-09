@@ -19,7 +19,6 @@ Czolg tank;
 
 
 
-
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
@@ -34,8 +33,11 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + 1)))
+					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.pociski[j].movement)))
+				{
+					//tank.pociski.erase(j);
 					return true;
+				}
 			}
 		}
 		break;
@@ -46,9 +48,11 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.pociski[j].y + tank.pociski[j].height + 1) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
+					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -58,10 +62,12 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + 1)) &&
+					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.pociski[j].movement)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -70,11 +76,13 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
-				if (((tank.pociski[j].x + tank.pociski[j].width + 1) > mapa.przeszkody[i].x) &&
+				if (((tank.pociski[j].x + tank.pociski[j].width + tank.pociski[j].movement) > mapa.przeszkody[i].x) &&
 					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
+				{
 					return true;
+				}
 			}
 		}
 		break;
@@ -90,7 +98,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 		switch (direction)
 		{
 		case 'u':
-			if (tank.y - 5 < 0)
+			if (tank.y - tank.movement < 0)
 			{
 				return true;
 				break;
@@ -98,49 +106,49 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 65)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.movement)))
 					return true;
 			}
 			break;
 		case 'd':
-			if ((tank.y + tank.height + 5) > 900)
+			if ((tank.y + tank.height + tank.movement) > 900)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 65) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height + tank.movement) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
 		case 'l':
-			if (tank.x - 5 < 0)
+			if (tank.x - tank.movement < 0)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 60) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 65)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.movement)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
 		case'r':
-			if ((tank.x + tank.width + 5) > 1200)
+			if ((tank.x + tank.width + tank.movement) > 1200)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
 			{
 
-				if (((tank.x + 65) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + 60)) &&
-					((tank.y + 60) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + 60)))
+				if (((tank.x + mapa.przeszkody[i].width + tank.movement) > mapa.przeszkody[i].x) &&
+					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
+					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
+					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 					return true;
 			}
 			break;
@@ -151,7 +159,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 	}
 		return false;
 }
-//Client klient("127.0.0.1");
+Client klient("127.0.0.1");
 ServerTCP servertcp;
 ClientTCP clienttcp;
 ClientTCP clienttcp1;
@@ -168,33 +176,41 @@ void gra()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
+		tank_sprite.setTexture(tank.textureu);
+		tank.angle = 90;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('u'))
 		{
-			tank_sprite.setTexture(tank.textureu);
+			
 			tank.moveUp();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
+		tank_sprite.setTexture(tank.textured);
+		tank.angle = 270;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('d'))
 		{
-			tank_sprite.setTexture(tank.textured);
+			
 			tank.moveDown();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
+		tank_sprite.setTexture(tank.texturer);
+		tank.angle = 180;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('r'))
 		{
-			tank_sprite.setTexture(tank.texturer);
+			
 			tank.moveRight();
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
+		tank_sprite.setTexture(tank.texturel);
+		tank.angle = 0;
 		if (!sprawdzKolizjeCzolgPrzeszkoda('l'))
 		{
-			tank_sprite.setTexture(tank.texturel);
+			
 			tank.moveLeft();
 		}
 	}
@@ -214,28 +230,28 @@ void gra()
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('l'))
 			{
-				tank.pociski[0].x -= 1;
+				tank.pociski[0].x -= tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 90)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('u'))
 			{
-				tank.pociski[0].y -= 1;
+				tank.pociski[0].y -= tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 180)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('r'))
 			{
-				tank.pociski[0].x += 1;
+				tank.pociski[0].x += tank.pociski[0].movement;
 			}
 		}
 		if (tank.pociski[0].angle == 270)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('d'))
 			{
-				tank.pociski[0].y += 1;
+				tank.pociski[0].y += tank.pociski[0].movement;
 			}
 		}
 		pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
@@ -262,7 +278,7 @@ void gra()
 int main()
 {
 	
-	//klient.uruchomKlienta();
+	klient.uruchomKlienta();
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
 	
@@ -280,11 +296,11 @@ int main()
 
 
 	//int menu_pos = 1;
+	Wykonawcy wykonawcy;
 	Menu menu;
 	bool menu_open = true;
 	
-	Wykonawcy wykonawcy;
-	//window.draw(wykonawcy.set_bg);
+	
 
 
 	///////WINDOW/////////////////
@@ -294,8 +310,8 @@ int main()
 	//window.setSize(menu.menu_bg.getSize());//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
 
 	
-	shape.setPosition(100, 100);
-	shape.setFillColor(sf::Color::Yellow);
+	//shape.setPosition(100, 100);
+	//shape.setFillColor(sf::Color::Yellow);
 
 	///////PRZYCISK TRZYMANIE BLOKADA////////////
 	//window.setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy
@@ -337,7 +353,6 @@ int main()
 
 	menu.set_bg(&window);
 	menu.set_menu_pos_1(&window);
-	
 
 	sf::Clock clock;
 
@@ -393,7 +408,7 @@ int main()
 						tank_sprite.setTexture(tank.texturel);
 					}
 					if (menu.position == 2) //wykonawcy
-					{						
+					{
 						menu_open = false;
 						wykonawcy.set_bg(&window);
 					}
@@ -425,7 +440,7 @@ int main()
 			//}
 			
 		}
-		if (!menu_open&&menu.position==1)
+		if (!menu_open&&menu.position == 1)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{
