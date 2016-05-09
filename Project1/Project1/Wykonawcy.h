@@ -15,7 +15,7 @@ public:
 	~Wykonawcy();
 	
 	int set_bg(sf::RenderWindow * window);
-	sf::Text napisy(sf::Text text, std::string nazwa, int x, int y, bool style, int size);
+	sf::Text napisy(sf::Text text, std::string nazwa, float x, float y, bool style, int size);
 	sf::Texture wykonawcy_bg;
 	sf::Text wstep;
 	sf::Text wykonawca1;
