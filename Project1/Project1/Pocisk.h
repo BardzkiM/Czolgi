@@ -11,6 +11,7 @@ public:
 	int id_czolgu;
 	char type;
 	void setTexture();
+	void setStartPosition();
 
 };
 #endif

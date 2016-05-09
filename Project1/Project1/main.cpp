@@ -23,11 +23,13 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
 	int tank_pociski_size = tank.pociski.size();
+	std::vector<Pocisk>::iterator k;
 	switch (direction)
 	{
 	case 'u':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
+			 k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
@@ -35,7 +37,15 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.pociski[j].movement)))
 				{
-					//tank.pociski.erase(j);
+					//tank.pociski[j].
+					//if (!tank.pociski.empty())
+					if (tank.pociski.size() > 1)
+					{
+						tank.pociski[j] = tank.pociski.back();
+						tank.pociski.pop_back();
+					}
+					else
+						tank.pociski.clear();
 					return true;
 				}
 			}
@@ -44,6 +54,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case 'd':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
+			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
@@ -51,6 +62,13 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
+					if (tank.pociski.size() > 1)
+					{
+						tank.pociski[j] = tank.pociski.back();
+						tank.pociski.pop_back();
+					}
+					else
+						tank.pociski.clear();
 					return true;
 				}
 			}
@@ -59,6 +77,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case 'l':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
+			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
@@ -66,6 +85,13 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
+					if (tank.pociski.size() > 1)
+					{
+						tank.pociski[j] = tank.pociski.back();
+						tank.pociski.pop_back();
+					}
+					else
+						tank.pociski.clear();
 					return true;
 				}
 			}
@@ -74,6 +100,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case'r':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
+			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width + tank.pociski[j].movement) > mapa.przeszkody[i].x) &&
@@ -81,6 +108,13 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
+					if (tank.pociski.size() > 1)
+					{
+						tank.pociski[0] = tank.pociski.back();
+						tank.pociski.pop_back();
+					}
+					else
+						tank.pociski.clear();
 					return true;
 				}
 			}
@@ -233,28 +267,29 @@ void gra()
 				tank.pociski[0].x -= tank.pociski[0].movement;
 			}
 		}
-		if (tank.pociski[0].angle == 90)
+		else if (tank.pociski[0].angle == 90)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('u'))
 			{
 				tank.pociski[0].y -= tank.pociski[0].movement;
 			}
 		}
-		if (tank.pociski[0].angle == 180)
+		else if (tank.pociski[0].angle == 180)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('r'))
 			{
 				tank.pociski[0].x += tank.pociski[0].movement;
 			}
 		}
-		if (tank.pociski[0].angle == 270)
+		else if (tank.pociski[0].angle == 270)
 		{
 			if (!sprawdzKolizjePociskPrzeszkoda('d'))
 			{
 				tank.pociski[0].y += tank.pociski[0].movement;
 			}
 		}
-		pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
+		if(!tank.pociski.empty())
+			pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
 
 	}
 	//cout << "jestem" << endl;

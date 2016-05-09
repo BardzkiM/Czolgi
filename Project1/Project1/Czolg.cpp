@@ -36,7 +36,7 @@ void Czolg::setInitialPosition(int x, int y)
 void Czolg::addPocisk()
 {
 
-	Pocisk pocisk(x + width/2,y + height/2, this->angle);
+	Pocisk pocisk(x ,y , this->angle);
 
 	this->pociski.push_back(pocisk);
 }
