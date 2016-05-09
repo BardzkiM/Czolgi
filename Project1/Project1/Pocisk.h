@@ -9,9 +9,9 @@ public:
 	Pocisk(int x, int y, int rot);
 	~Pocisk();
 	int id_czolgu;
-	float speed;
 	char type;
 	void setTexture();
+	void setStartPosition();
 
 };
 #endif

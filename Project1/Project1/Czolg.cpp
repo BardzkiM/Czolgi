@@ -64,7 +64,9 @@ void Czolg::setInitialPosition(int x, int y)
 
 void Czolg::addPocisk()
 {
-	Pocisk pocisk(x + width/2,y + height/2, this->angle);
+
+	Pocisk pocisk(x ,y , this->angle);
+
 	this->pociski.push_back(pocisk);
 }
 
@@ -76,7 +78,7 @@ void Czolg::moveUp()
 		
 	}
 	else
-		this->y -= 5;
+		this->y -= this->movement;
 }
 void Czolg::moveDown()
 {
@@ -86,7 +88,7 @@ void Czolg::moveDown()
 		
 	}
 	else
-		this->y += 5;
+		this->y += this->movement;
 
 }
 void Czolg::moveRight()
@@ -98,7 +100,7 @@ void Czolg::moveRight()
 		
 	}
 	else
-		this->x += 5;
+		this->x += this->movement;
 
 }
 void Czolg::moveLeft()
@@ -109,6 +111,6 @@ void Czolg::moveLeft()
 		
 	}
 	else
-		this->x -= 5;
+		this->x -= this->movement;
 
 }

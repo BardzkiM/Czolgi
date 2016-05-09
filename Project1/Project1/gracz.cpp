@@ -1,14 +1,24 @@
 #include "gracz.h"
-
+#include "ServerTCP.h"
+#include "Czolg.h"
 
 using namespace std;
 
-gracz::gracz()
+//int id_gracza;
+//std::string player_name;
+//char team;
+//int id_server;
+//Czolg tank;
+//int score;
+
+gracz::gracz(string nickname, char team)
 {
-	
+	this->player_name = nickname;
+	this->team = team;
 }
 
 
 gracz::~gracz()
 {
 }
+
