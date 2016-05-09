@@ -1,2 +1,0 @@
-# Czolgi
-Projekt_Cpp
