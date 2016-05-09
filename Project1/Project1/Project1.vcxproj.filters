@@ -84,6 +84,9 @@
     <ClInclude Include="ClientTCP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Wykonawcy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="ClientTCP.cpp">
       <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="Wykonawcy.cpp">
+      <Filter>Source Files\views</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -134,6 +134,7 @@
     <ClInclude Include="Pocisk.h" />
     <ClInclude Include="Przeszkoda.h" />
     <ClInclude Include="ServerTCP.h" />
+    <ClInclude Include="Wykonawcy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Blok.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Przeszkoda.cpp" />
     <ClCompile Include="ServerTCP.cpp" />
     <ClCompile Include="Serwer.cpp" />
+    <ClCompile Include="Wykonawcy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

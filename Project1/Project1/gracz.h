@@ -5,7 +5,7 @@
 class gracz
 {
 public:
-	gracz();
+	gracz(std::string nickname, char team);
 	~gracz();
 	int id_gracza;
 	std::string player_name;
