@@ -53,17 +53,17 @@ void Pocisk::setStartPosition()
 	}
 	if (this->angle == 90)
 	{
-		this->x = x + 30 - this->width;
+		this->x = this->x + 30 - (this->width/2);
 		this->y = this->y - this->height;
 	}
 	if (this->angle == 180)
 	{
 		this->x = this->x + 60;
-		this->y = this->y + 30 - this->height;
+		this->y = this->y + 30 - (this->height / 2);
 	}
 	if (this->angle == 270)
 	{
-		this->x = this->x + 30 - this->width;
-		this->y = this->y - this->height;
+		this->x = this->x + 30 - (this->width / 2);
+		this->y = this->y + 60;
 	}
 }

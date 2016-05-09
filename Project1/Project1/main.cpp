@@ -23,13 +23,11 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
 	int tank_pociski_size = tank.pociski.size();
-	std::vector<Pocisk>::iterator k;
 	switch (direction)
 	{
 	case 'u':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			 k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
@@ -54,7 +52,6 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case 'd':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
@@ -77,7 +74,6 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case 'l':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
@@ -100,7 +96,6 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	case'r':
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-			k = tank.pociski.begin();
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((tank.pociski[j].x + tank.pociski[j].width + tank.pociski[j].movement) > mapa.przeszkody[i].x) &&
@@ -251,11 +246,11 @@ void gra()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		int nr = 0;
-		tank.pociski.clear();
+		//tank.pociski.clear();
 		tank.addPocisk();
-
-		pociska.setTexture(tank.pociski[nr].texture);
-		pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
+		
+		//pociska.setTexture(tank.pociski[nr].texture);
+		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
 	if (!tank.pociski.empty())
 	{
@@ -306,7 +301,14 @@ void gra()
 	}
 
 	if (!tank.pociski.empty())
-		window.draw(pociska);
+	{
+		for (int i = 0; i < tank.pociski.size(); i++)
+		{
+			pociska.setTexture(tank.pociski[i].texture);
+			pociska.setPosition(tank.pociski[i].x, tank.pociski[i].y);
+			window.draw(pociska);
+		}
+	}
 	window.display();
 	tank_sprite.setPosition(tank.x, tank.y);
 }
@@ -331,35 +333,16 @@ int main()
 
 
 	//int menu_pos = 1;
-	Wykonawcy wykonawcy;
+	//Wykonawcy wykonawcy;
 	Menu menu;
 	bool menu_open = true;
 	
 	
 
-
-	///////WINDOW/////////////////
-
-
-	//sf::Vector2u size(1200, 900);
-	//window.setSize(menu.menu_bg.getSize());//set window size - mo¿na w konstruktorze podaj¹æ(w,h)
-
-	
-	//shape.setPosition(100, 100);
-	//shape.setFillColor(sf::Color::Yellow);
-
 	///////PRZYCISK TRZYMANIE BLOKADA////////////
 	//window.setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy
 
 
-
-	////////czas//////////////
-	/*
-	sf::Time time = sf::seconds(5);
-	cout << time.asSeconds() << endl;
-	*/
-	////////clock////////////////
-	//sf::Clock clock;
 
 	string msg = "1234567890111213141516171819";
 	string dsp = "";
@@ -367,18 +350,6 @@ int main()
 
 	
 
-
-	/////obraz///////////
-	/*sf::Texture texture;
-	if (!texture.loadFromFile("tank.png"))
-	{
-	cout << "nie mo¿na za³adowaæ pliku" << endl;
-	return EXIT_FAILURE;
-	}
-	sf::Sprite sprite(texture);
-
-	sf::Vector2u movement(10, 10);
-	*/
 	
 	tank.setInitialPosition(0, 0);
 	tank_sprite.setPosition(tank.x, tank.y);
@@ -409,31 +380,10 @@ int main()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
 					menu.key_up(&window);
-					/*if (menu_pos == 1)
-					{
-					menu_pos = 3;
-					}
-					else {
-					menu_pos--;
-					}
-					menu.set_auto_menu_pos(menu_pos, &window);
-					/*tank_sprite.setTexture(tank.textureu);
-					tank.moveUp();*/
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
 					menu.key_down(&window);
-					/*if (menu_pos == 3)
-					{
-					menu_pos = 1;
-					}
-					else
-					{
-					menu_pos++;
-					}
-					menu.set_auto_menu_pos(menu_pos, &window);
-					/*tank_sprite.setTexture(tank.textured);
-					tank.moveDown();*/
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
 				{
@@ -444,8 +394,8 @@ int main()
 					}
 					if (menu.position == 2) //wykonawcy
 					{
-						menu_open = false;
-						wykonawcy.set_bg(&window);
+						//menu_open = false;
+						//wykonawcy.set_bg(&window);
 					}
 					if (menu.position == 3)
 					{
@@ -459,20 +409,6 @@ int main()
 			//tank_sprite.setTexture(tank.texture);
 			
 
-
-
-
-
-
-			//if (event.type == sf::Event::KeyPressed)
-			//{
-			//	if (event.key.code == sf::Keyboard::Right /*&& event.key.control*/) //KEY drugi mo¿e byæ tylko po event.key.* np alt control itp
-			//	{
-			//		system("cls");
-			//		cout << index;
-			//		index++;
-			//	}
-			//}
 			
 		}
 		if (!menu_open&&menu.position == 1)
@@ -486,23 +422,7 @@ int main()
 
 		}
 		
-		/////////////////zdarzenie////////////////////////
-		/* blokuje i czeka na jakikolwiek event
-		if (window.waitEvent(event))
-		{
-		cout << "enet" << endl;
-		}
-		*/
 
-		/////time////////////
-		/*time = clock.getElapsedTime();
-		cout << time.asSeconds() << endl;
-		clock.restart();
-		*/
-		//window.draw(tank_spriteImage);
-		//window.clear();
-		//window.draw(shape);
-		//window.display();
 	}
 	return EXIT_SUCCESS;
 
