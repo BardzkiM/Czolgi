@@ -266,7 +266,8 @@ int main()
 	
 	server_thread.launch();									//uruchomienie w¹tku
 
-
+	std::stringstream temp_string = tank.serialize();
+	std::cout << "Serializacja: " <<temp_string.str().c_str();
 	ClientTCP clienttcp;											//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 	clienttcp_thread.launch();										//odpalenie pierwszego klienta
