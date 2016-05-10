@@ -3,6 +3,35 @@
 #include <math.h>
 #define M_PI 3.14159265358979323846
 
+void Czolg::serialize()
+{
+	std::ostringstream archive_ostream;
+	std::string serialized_data_str;
+	boost::archive::text_oarchive oarchive(archive_ostream);
+	oarchive << this->x << this->y << this->angle << this->height<< this->width << this->hp;
+	serialized_data_str = archive_ostream.str();
+	std::cout << "serialized data: " << serialized_data_str << std::endl;
+
+	std::istringstream archive_istream(serialized_data_str);
+	boost::archive::text_iarchive iarchive(archive_istream);
+	iarchive >> this->x;
+	iarchive >> this->y;
+	iarchive >> this->angle;
+	iarchive >> this->height;
+	iarchive >> this->width;
+	iarchive >> this->hp;
+
+	/*cereal::BinaryOutputArchive oarchive(mystringstream);
+	oarchive(this->x,this->y,this->angle,this->height,this->width,this->hp);*/
+	
+	
+}
+
+void Czolg::deserialize(std::stringstream stream)
+{
+	/*cereal::BinaryInputArchive iarchive(stream);
+	iarchive(this->x, this->y, this->angle, this->height, this->width, this->hp);*/
+}
 
 
 Czolg::Czolg()

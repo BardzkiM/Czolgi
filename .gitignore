@@ -277,3 +277,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#Ignore boost library
+Project1/boost_1_60_0/PREFIX/

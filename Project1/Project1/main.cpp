@@ -321,7 +321,8 @@ int main()
 	
 	server_thread.launch();									//uruchomienie w¹tku
 
-
+	tank.serialize();
+	//std::cout << "Serializacja: " <<temp_string.str().c_str();
 	ClientTCP clienttcp;											//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 	clienttcp_thread.launch();										//odpalenie pierwszego klienta
@@ -333,7 +334,7 @@ int main()
 
 
 	//int menu_pos = 1;
-	//Wykonawcy wykonawcy;
+	Wykonawcy wykonawcy;
 	Menu menu;
 	bool menu_open = true;
 	
@@ -394,8 +395,8 @@ int main()
 					}
 					if (menu.position == 2) //wykonawcy
 					{
-						//menu_open = false;
-						//wykonawcy.set_bg(&window);
+						menu_open = false;
+						wykonawcy.set_bg(&window);
 					}
 					if (menu.position == 3)
 					{
