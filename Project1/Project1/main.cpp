@@ -178,6 +178,7 @@ sf::Sprite tank_sprite;
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
+sf::Clock bullet_clock;
 void gra()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -224,7 +225,13 @@ void gra()
 	{
 		int nr = 0;
 		//tank.pociski.clear();
-		tank.addPocisk();
+		cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
+		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
+		{ 
+			tank.addPocisk();
+			bullet_clock.restart();
+		}
+			
 		
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
@@ -411,6 +418,7 @@ int main()
 
 			
 		}
+		
 		if (!menu_open&&menu.position == 1)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)
