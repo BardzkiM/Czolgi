@@ -364,12 +364,18 @@ int main()
 	sf::Clock clock;
 	
 	sf::Music music;
+	sf::Music musicTank;
 	if (!music.openFromFile("sounds/musicBG.ogg"))
 	{
 		std::cerr << "blad czytania muzyki w tle!" << std::endl;
 		exit(-12);
 	}
-	
+	if (!musicTank.openFromFile("sounds/tankMusic.ogg"))
+	{
+		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		exit(-12);
+	}
+
 	music.play();
 	while (window.isOpen())
 	{
@@ -405,6 +411,7 @@ int main()
 						menu_open = false;
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
+						musicTank.play();
 						
 					}
 					if (menu.position == 2) //wykonawcy

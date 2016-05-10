@@ -28,6 +28,7 @@ public:
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;
 	sf::Sound sound;
+	sf::Music music;
 	
 private:
 	std::stringstream mystringstream;

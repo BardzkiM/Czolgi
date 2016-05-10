@@ -59,8 +59,9 @@ Czolg::Czolg()
 		std::cerr << "blad czytania dzwieku!" << std::endl;
 		exit(-12);
 	}
+	
 	 
-
+	
 }
 
 
@@ -72,6 +73,7 @@ void Czolg::setInitialPosition(int x, int y)
 {
 	this->x = x;
 	this->y = y;
+	
 }
 
 void Czolg::addPocisk()
@@ -88,7 +90,7 @@ void Czolg::addPocisk()
 void Czolg::moveUp()
 {
 	sound.setBuffer(bufferTank);
-	sound.play();
+	//sound.play();
 	if (this->angle != 90)
 	{
 		this->angle = 90;
@@ -100,7 +102,7 @@ void Czolg::moveUp()
 void Czolg::moveDown()
 {
 	sound.setBuffer(bufferTank);
-	sound.play();
+	//sound.play();
 	if (this->angle != 270)
 	{
 		this->angle = 270;
@@ -113,7 +115,7 @@ void Czolg::moveDown()
 void Czolg::moveRight()
 {
 	sound.setBuffer(bufferTank);
-	sound.play();
+	//sound.play();
 	if (this->angle != 180)
 	{
 		this->angle = 180;
@@ -126,7 +128,7 @@ void Czolg::moveRight()
 void Czolg::moveLeft()
 {
 	sound.setBuffer(bufferTank);
-	sound.play();
+	//sound.play();
 	
 	if (this->angle != 0)
 	{
