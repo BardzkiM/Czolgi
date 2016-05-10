@@ -17,6 +17,7 @@ public:
 	~Czolg();
 	std::vector <Pocisk> pociski;
 	void addPocisk();
+	void removePocisk(int j);
 	void setInitialPosition(int x, int y);
 	void moveUp();
 	void moveDown();

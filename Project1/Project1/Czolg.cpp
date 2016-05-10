@@ -86,7 +86,17 @@ void Czolg::addPocisk()
 	this->pociski.push_back(pocisk);
 	sound.play();
 }
-
+void Czolg::removePocisk(int j)
+{
+	if (this->pociski.size() > 1)
+	{
+		this->pociski[j] = this->pociski.back();
+		this->pociski.pop_back();
+	}
+	else
+		this->pociski.clear();
+	
+}
 void Czolg::moveUp()
 {
 	sound.setBuffer(bufferTank);

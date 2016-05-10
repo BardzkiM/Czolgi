@@ -37,13 +37,8 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 				{
 					//tank.pociski[j].
 					//if (!tank.pociski.empty())
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					//daæ do tank remove pocisk
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -59,13 +54,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -81,13 +70,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -103,13 +86,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[0] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
