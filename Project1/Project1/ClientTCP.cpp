@@ -24,12 +24,12 @@ void ClientTCP::Run()
 	char data[100] = { 'c','d','n' };
 	Czolg czolg;
 	// TCP socket:
-	czolg.serialize();
 	
+	std::string test = czolg.serialize();
 	
-	//if (socket.send(mystream.str().c_str(),mystream.str().length()+1) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
+	if (socket.send(test.c_str(),test.length()+1) != sf::Socket::Done)
+	{
+		// error...
+		std::cout << "error";
+	}
 }
