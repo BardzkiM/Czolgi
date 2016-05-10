@@ -2,11 +2,12 @@
 #include <SFML/Graphics.hpp>
 
 sf::Font font;
+sf::Time delay1 = sf::milliseconds(20);
 sf::Time delay = sf::milliseconds(2);
 Wykonawcy::Wykonawcy()
 {
 	
-	if (!wykonawcy_bg.loadFromFile("images/wykonawcy.bmp"))
+	if (!wykonawcy_bg.loadFromFile("images/wykonawcy.png"))
 	{
 		std::cerr << "blad czytania tla wykonawcy!" << std::endl;
 		exit(-12);
@@ -16,6 +17,12 @@ Wykonawcy::Wykonawcy()
 	if (!font.loadFromFile("fonts/shlop.ttf"))
 	{
 		std::cerr << "blad czytania czcionki do wyswiwtlenia teksu!" << std::endl;
+		exit(-12);
+	}
+
+	if (!buffer.loadFromFile("sounds/bomb.wav"))
+	{
+		std::cerr << "blad czytania dzwieku!" << std::endl;
 		exit(-12);
 	}
 
@@ -47,15 +54,18 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 	window->display();
 
 	//zjazd od góry
+	sound.setBuffer(buffer);
+	sound.play();
 	for (int i = 0; i < 185; i++)
 	{
 		window->draw(sprite);
 		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, i, true, 52));
 		window->display();
-		sf::sleep(delay);		
+		sf::sleep(delay);	
 	}
-	
+		
 	//wjazd z prawej
+	sound.play();
 	for (int k = 1200; k >=720; k--)
 	{
 		window->draw(sprite);
@@ -64,7 +74,7 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		window->display();
 		sf::sleep(delay);		
 	}
-
+	sound.play();
 	for (int k = 1200; k >= 760; k--)
 	{
 		window->draw(sprite);
@@ -74,7 +84,7 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		window->display();
 		sf::sleep(delay);
 	}
-
+	sound.play();
 	for (int k = 1200; k >= 760; k--)
 	{
 		window->draw(sprite);
@@ -86,6 +96,7 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		sf::sleep(delay);
 	}
 
+	sound.play();
 	for (int k = 1200; k >= 790; k--)
 	{
 		window->draw(sprite);
@@ -97,7 +108,8 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		window->display();
 		sf::sleep(delay);
 	}
-
+	sf::sleep(delay1);
+	sound.play();
 	for (int k = 1200; k >= 760; k--)
 	{
 		window->draw(sprite);

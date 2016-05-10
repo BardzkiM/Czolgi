@@ -42,8 +42,21 @@ Czolg::Czolg()
 	this->width = tankSize.x;
 	this->height = tankSize.y;
 	this->movement = 5;
-	 
 
+	if (!bufferTank.loadFromFile("sounds/tankMove.wav"))
+	{
+		std::cerr << "blad czytania dzwieku!" << std::endl;
+		exit(-12);
+	}
+
+	if (!bufferBullet.loadFromFile("sounds/wystrzal.wav"))
+	{
+		std::cerr << "blad czytania dzwieku!" << std::endl;
+		exit(-12);
+	}
+	
+	 
+	
 }
 
 
@@ -55,18 +68,34 @@ void Czolg::setInitialPosition(int x, int y)
 {
 	this->x = x;
 	this->y = y;
+	
 }
 
 void Czolg::addPocisk()
 {
 
 	Pocisk pocisk(x ,y , this->angle);
-
+	sound.setBuffer(bufferBullet);
+	sound.play();
+	
 	this->pociski.push_back(pocisk);
+	sound.play();
 }
-
+void Czolg::removePocisk(int j)
+{
+	if (this->pociski.size() > 1)
+	{
+		this->pociski[j] = this->pociski.back();
+		this->pociski.pop_back();
+	}
+	else
+		this->pociski.clear();
+	
+}
 void Czolg::moveUp()
 {
+	sound.setBuffer(bufferTank);
+	//sound.play();
 	if (this->angle != 90)
 	{
 		this->angle = 90;
@@ -77,6 +106,8 @@ void Czolg::moveUp()
 }
 void Czolg::moveDown()
 {
+	sound.setBuffer(bufferTank);
+	//sound.play();
 	if (this->angle != 270)
 	{
 		this->angle = 270;
@@ -88,7 +119,8 @@ void Czolg::moveDown()
 }
 void Czolg::moveRight()
 {
-
+	sound.setBuffer(bufferTank);
+	//sound.play();
 	if (this->angle != 180)
 	{
 		this->angle = 180;
@@ -100,6 +132,9 @@ void Czolg::moveRight()
 }
 void Czolg::moveLeft()
 {
+	sound.setBuffer(bufferTank);
+	//sound.play();
+	
 	if (this->angle != 0)
 	{
 		this->angle = 0;

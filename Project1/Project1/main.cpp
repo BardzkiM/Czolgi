@@ -37,13 +37,8 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 				{
 					//tank.pociski[j].
 					//if (!tank.pociski.empty())
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					//daæ do tank remove pocisk
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -59,13 +54,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -81,13 +70,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[j] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -103,13 +86,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
 					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
 				{
-					if (tank.pociski.size() > 1)
-					{
-						tank.pociski[0] = tank.pociski.back();
-						tank.pociski.pop_back();
-					}
-					else
-						tank.pociski.clear();
+					tank.removePocisk(j);
 					return true;
 				}
 			}
@@ -201,6 +178,7 @@ sf::Sprite tank_sprite;
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
+sf::Clock bullet_clock;
 void gra()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -247,7 +225,13 @@ void gra()
 	{
 		int nr = 0;
 		//tank.pociski.clear();
-		tank.addPocisk();
+		cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
+		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
+		{ 
+			tank.addPocisk();
+			bullet_clock.restart();
+		}
+			
 		
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
@@ -334,7 +318,7 @@ int main()
 
 
 	//int menu_pos = 1;
-	//Wykonawcy wykonawcy;
+	Wykonawcy wykonawcy;
 	Menu menu;
 	bool menu_open = true;
 	
@@ -362,11 +346,26 @@ int main()
 	menu.set_menu_pos_1(&window);
 
 	sf::Clock clock;
+	
+	sf::Music music;
+	sf::Music musicTank;
+	if (!music.openFromFile("sounds/musicBG.ogg"))
+	{
+		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		exit(-12);
+	}
+	if (!musicTank.openFromFile("sounds/tankMusic.ogg"))
+	{
+		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		exit(-12);
+	}
 
+	music.play();
 	while (window.isOpen())
 	{
 		// Process events
 		sf::Event event;
+		
 		while (window.pollEvent(event))
 		{
 			switch (event.type)
@@ -378,12 +377,15 @@ int main()
 			}
 			if (menu_open == true)
 			{
+				
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
+					
 					menu.key_up(&window);
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
+					
 					menu.key_down(&window);
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
@@ -392,11 +394,15 @@ int main()
 					{
 						menu_open = false;
 						tank_sprite.setTexture(tank.texturel);
+						music.stop();
+						musicTank.play();
+						
 					}
 					if (menu.position == 2) //wykonawcy
 					{
-						//menu_open = false;
-						//wykonawcy.set_bg(&window);
+						menu_open = false;
+						wykonawcy.set_bg(&window);
+						
 					}
 					if (menu.position == 3)
 					{
@@ -412,6 +418,7 @@ int main()
 
 			
 		}
+		
 		if (!menu_open&&menu.position == 1)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)

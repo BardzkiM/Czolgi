@@ -4,7 +4,7 @@
 #include <string>
 #include <math.h>
 #include "Czolg.h"
-
+#include <SFML/Audio.hpp>
 #ifndef _MENU_H
 #define _MENU_H
 
@@ -35,7 +35,10 @@ public:
 
 	sf::Texture menu_bg_bullets;
 
-
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+	sf::Music music;
+	
 
 
 
