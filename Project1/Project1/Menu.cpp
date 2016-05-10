@@ -8,6 +8,19 @@ Menu::Menu()
 		std::cerr<< "blad czytania mapy" << std::endl;
 		exit(-12);
 	}
+	/*if (!music.openFromFile("sounds/musicBG.ogg"))
+	{
+		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		exit(-12);
+	}*/
+	
+
+	if (!buffer.loadFromFile("sounds/menuOption.wav"))
+	{
+		std::cerr << "blad czytania dzwieku!" << std::endl;
+		exit(-12);
+	}
+	sound.setBuffer(buffer);
 }
 
 Menu::~Menu()
@@ -17,6 +30,7 @@ Menu::~Menu()
 
 void Menu::key_up(sf::RenderWindow *window)
 {
+
 	if (this->position == 1)
 	{
 		this->position = 3;
@@ -24,6 +38,7 @@ void Menu::key_up(sf::RenderWindow *window)
 	else {
 		this->position--;
 	}
+	sound.play();
 	this->set_auto_menu_pos(window);
 }
 void Menu::key_down(sf::RenderWindow *window)
@@ -36,14 +51,16 @@ void Menu::key_down(sf::RenderWindow *window)
 	{
 		this->position++;
 	}
+	sound.play();
 	this->set_auto_menu_pos(window);
 }
 
 int Menu::set_bg(sf::RenderWindow *window)
 {
-
+	
 	sf::Sprite sprite(menu_bg);
 	window->draw(sprite);
+	//music.play();
 	return 1;
 }
 
@@ -60,6 +77,7 @@ int Menu::set_menu_pos_1(sf::RenderWindow *window)
 	sf::Sprite sprite1(menu_bg_bullets);
 	window->draw(sprite1);
 	window->display();
+	
 	return 1;
 }
 
@@ -76,6 +94,7 @@ int Menu::set_menu_pos_2(sf::RenderWindow *window)
 	sf::Sprite sprite1(menu_bg_bullets);
 	window->draw(sprite1);
 	window->display();
+	
 	return 1;
 }
 
@@ -91,6 +110,7 @@ int Menu::set_menu_pos_3(sf::RenderWindow *window)
 	sf::Sprite sprite(menu_bg_bullets);
 	window->draw(sprite);
 	window->display();
+	
 	return 1;
 }
 

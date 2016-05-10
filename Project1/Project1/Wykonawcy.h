@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -23,6 +24,9 @@ public:
 	sf::Text wykonawca3;
 	sf::Text wykonawca4;
 	sf::Text wykonawca5;
+
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 	
 private:
 

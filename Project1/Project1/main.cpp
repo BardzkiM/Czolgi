@@ -362,11 +362,20 @@ int main()
 	menu.set_menu_pos_1(&window);
 
 	sf::Clock clock;
-
+	
+	sf::Music music;
+	if (!music.openFromFile("sounds/musicBG.ogg"))
+	{
+		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		exit(-12);
+	}
+	
+	music.play();
 	while (window.isOpen())
 	{
 		// Process events
 		sf::Event event;
+		
 		while (window.pollEvent(event))
 		{
 			switch (event.type)
@@ -378,12 +387,15 @@ int main()
 			}
 			if (menu_open == true)
 			{
+				
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
+					
 					menu.key_up(&window);
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
+					
 					menu.key_down(&window);
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//ODPALENIE GRY
@@ -392,11 +404,14 @@ int main()
 					{
 						menu_open = false;
 						tank_sprite.setTexture(tank.texturel);
+						music.stop();
+						
 					}
 					if (menu.position == 2) //wykonawcy
 					{
 						menu_open = false;
 						wykonawcy.set_bg(&window);
+						
 					}
 					if (menu.position == 3)
 					{
