@@ -6,7 +6,7 @@ sf::Time delay = sf::milliseconds(2);
 Wykonawcy::Wykonawcy()
 {
 	
-	if (!wykonawcy_bg.loadFromFile("images/wykonawcy.bmp"))
+	if (!wykonawcy_bg.loadFromFile("images/wykonawcy.png"))
 	{
 		std::cerr << "blad czytania tla wykonawcy!" << std::endl;
 		exit(-12);

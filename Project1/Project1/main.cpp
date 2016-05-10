@@ -334,7 +334,7 @@ int main()
 
 
 	//int menu_pos = 1;
-	//Wykonawcy wykonawcy;
+	Wykonawcy wykonawcy;
 	Menu menu;
 	bool menu_open = true;
 	
@@ -395,8 +395,8 @@ int main()
 					}
 					if (menu.position == 2) //wykonawcy
 					{
-						//menu_open = false;
-						//wykonawcy.set_bg(&window);
+						menu_open = false;
+						wykonawcy.set_bg(&window);
 					}
 					if (menu.position == 3)
 					{
