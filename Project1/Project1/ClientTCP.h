@@ -20,7 +20,7 @@ public:
 	std::string receive();
 
 	void RunInit();
-
+	std::string numer_klienta;
 	
 
 private:

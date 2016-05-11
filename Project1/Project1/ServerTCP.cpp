@@ -83,6 +83,7 @@ void ServerTCP::RunInit()
 		clients[i]->wait();
 		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
 		this->send(i, tank[i].serialize());	
+		this->send(i, std::to_string(i));
 		
 	}
 	int k;

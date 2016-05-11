@@ -32,7 +32,9 @@ public:
 	sf::Music music;
 	
 private:
+
 	std::stringstream mystringstream;
+
 };
 
 #endif
