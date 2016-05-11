@@ -49,7 +49,7 @@ void ServerTCP::receive(int which_client)
 
 void ServerTCP::Run()
 {
-	std::cout << std::endl << "Start w¹tku servera"<<argument << std::endl;
+	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
 

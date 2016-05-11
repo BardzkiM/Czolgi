@@ -27,6 +27,11 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	switch (direction)
 	{
 	case 'u':
+		if (tank.y - tank.movement < 0)
+		{
+			return true;
+			break;
+		}
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
@@ -300,21 +305,11 @@ void gra()
 int main()
 {
 	
-	klient.uruchomKlienta();
-									//stworzenie obiektu klasy
-	servertcp.argument = 5;									//przekazanie do klasy argumentu
-	
-	server_thread.launch();									//uruchomienie w¹tku
-
-	tank.serialize();
-	//std::cout << "Serializacja: " <<temp_string.str().c_str();
-	ClientTCP clienttcp;											//stworzenie pierwszego klienta
-	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-	clienttcp_thread.launch();										//odpalenie pierwszego klienta
-
-
-	
-	clienttcp_thread1.launch();
+										
+	//servertcp.argument = 5;										//przekazanie do klasy argumentu	
+	server_thread.launch();											//uruchomienie w¹tku			
+	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
+	clienttcp_thread1.launch();										//odpalenie drugiego klienta
 
 
 
