@@ -84,9 +84,6 @@
     <ClInclude Include="Wykonawcy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GraDane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">

@@ -94,8 +94,42 @@ void gra(Czolg &tank)
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	//tank.sprawdzKolizjePociskowPrzeszkod();
+	if (!tank.pociski.empty())
+	{
+		
+		if (tank.pociski[0].angle == 0)
+		{
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
+			{
+				tank.pociski[0].x -= tank.pociski[0].movement;
+			}
+		}
+		else if (tank.pociski[0].angle == 90)
+		{
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
+			{
+				tank.pociski[0].y -= tank.pociski[0].movement;
+			}
+		}
+		else if (tank.pociski[0].angle == 180)
+		{
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
+			{
+				tank.pociski[0].x += tank.pociski[0].movement;
+			}
+		}
+		else if (tank.pociski[0].angle == 270)
+		{
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
+			{
+				tank.pociski[0].y += tank.pociski[0].movement;
+			}
+		}
+		if(!tank.pociski.empty())
+			pociska.setPosition(tank.pociski[0].x, tank.pociski[0].y);
 
+	}
+	//cout << "jestem" << endl;
 	window.clear();
 	// Draw the tank_sprite
 	window.draw(GraDane::spriteMapa);
