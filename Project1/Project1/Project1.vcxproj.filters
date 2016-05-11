@@ -87,6 +87,9 @@
     <ClInclude Include="Wykonawcy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GraDane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="Wykonawcy.cpp">
       <Filter>Source Files\views</Filter>
+    </ClCompile>
+    <ClCompile Include="GraDane.cpp">
+      <Filter>Source Files\app</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

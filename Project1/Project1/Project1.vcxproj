@@ -127,6 +127,7 @@
     <ClInclude Include="ClientTCP.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="gracz.h" />
+    <ClInclude Include="GraDane.h" />
     <ClInclude Include="Klient.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mapa.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="ClientTCP.cpp" />
     <ClCompile Include="Czolg.cpp" />
     <ClCompile Include="gracz.cpp" />
+    <ClCompile Include="GraDane.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />

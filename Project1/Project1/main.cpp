@@ -5,7 +5,7 @@
 #include "Czolg.h"
 #include "Menu.h"
 #include "Klient.h"
-#include "Mapa.h"
+#include "GraDane.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
 #include <vector>
@@ -13,158 +13,14 @@
 
 using namespace std;
 
-Mapa mapa;
+
 Czolg tank[4];
 
 
 
 
-bool sprawdzKolizjePociskPrzeszkoda(Czolg &tank)
-{
-	int mapa_przeszkody_size = mapa.przeszkody.size();
-	int tank_pociski_size = tank.pociski.size();
-	switch (tank.angle)
-	{
-	case 90:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.pociski[j].movement)))
-				{
-					//tank.pociski[j].
-					//if (!tank.pociski.empty())
-					//daæ do tank remove pocisk
-					tank.removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	case 270:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((tank.pociski[j].x + tank.pociski[j].width) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.pociski[j].y + tank.pociski[j].height + tank.pociski[j].movement) > mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-				{
-					tank.removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	case 0:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((tank.pociski[j].x + tank.pociski[j].height) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.pociski[j].movement)) &&
-					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-				{
-					tank.removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	case 180:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((tank.pociski[j].x + tank.pociski[j].width + tank.pociski[j].movement) > mapa.przeszkody[i].x) &&
-					(tank.pociski[j].x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.pociski[j].y + tank.pociski[j].height) > mapa.przeszkody[i].y) &&
-					(tank.pociski[j].y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-				{
-					tank.removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	default: 
-		break;
-	}
-	return false;
-}
+
 //////// komyntosz
-bool sprawdzKolizjeCzolgPrzeszkoda(Czolg &tank)
-{
-	int mapa_przeszkody_size = mapa.przeszkody.size();	
-		switch (tank.angle)
-		{
-		case 90:
-			if (tank.y - tank.movement < 0)
-			{
-				return true;
-				break;
-			}
-			for (int i = 0; i <mapa_przeszkody_size; i++)
-			{
-
-				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height + tank.movement)))
-					return true;
-			}
-			break;
-		case 270:
-			if ((tank.y + tank.height + tank.movement) > 900)
-				return true;
-			for (int i = 0; i <mapa_przeszkody_size; i++)
-			{
-
-				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.y + mapa.przeszkody[i].height + tank.movement) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-					return true;
-			}
-			break;
-		case 0:
-			if (tank.x - tank.movement < 0)
-				return true;
-			for (int i = 0; i <mapa_przeszkody_size; i++)
-			{
-
-				if (((tank.x + mapa.przeszkody[i].width) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width + tank.movement)) &&
-					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-					return true;
-			}
-			break;
-		case 180:
-			if ((tank.x + tank.width + tank.movement) > 1200)
-				return true;
-			for (int i = 0; i <mapa_przeszkody_size; i++)
-			{
-
-				if (((tank.x + mapa.przeszkody[i].width + tank.movement) > mapa.przeszkody[i].x) &&
-					(tank.x < (mapa.przeszkody[i].x + mapa.przeszkody[i].width)) &&
-					((tank.y + mapa.przeszkody[i].height) > mapa.przeszkody[i].y) &&
-					(tank.y < (mapa.przeszkody[i].y + mapa.przeszkody[i].height)))
-					return true;
-			}
-			break;
-
-		default:
-			break;
-
-	}
-		return false;
-}
 
 Client klient("127.0.0.1");
 ServerTCP servertcp;
@@ -173,7 +29,7 @@ ClientTCP clienttcp1;
 sf::Thread server_thread(&ServerTCP::Run, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);
 sf::Thread clienttcp_thread1(&ClientTCP::Run, &clienttcp1);
-sf::Sprite spriteMap(mapa.texture);
+
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
 
@@ -189,7 +45,7 @@ void gra(Czolg &tank)
 	{
 		tank_sprite.setTexture(tank.textureu);
 		tank.angle = 90;
-		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
 			tank.moveUp();
@@ -199,7 +55,7 @@ void gra(Czolg &tank)
 	{
 		tank_sprite.setTexture(tank.textured);
 		tank.angle = 270;
-		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
 			tank.moveDown();
@@ -209,7 +65,7 @@ void gra(Czolg &tank)
 	{
 		tank_sprite.setTexture(tank.texturer);
 		tank.angle = 180;
-		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
 			tank.moveRight();
@@ -219,7 +75,7 @@ void gra(Czolg &tank)
 	{
 		tank_sprite.setTexture(tank.texturel);
 		tank.angle = 0;
-		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
 			tank.moveLeft();
@@ -240,33 +96,33 @@ void gra(Czolg &tank)
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	if (!tank[0].pociski.empty())
+	if (!tank.pociski.empty())
 	{
-		//cout << mapa.przeszkody[0].width << " " << mapa.przeszkody[0].height << endl;
+		
 		if (tank.pociski[0].angle == 0)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda(tank))
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
 			{
 				tank.pociski[0].x -= tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 90)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda(tank))
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
 			{
 				tank.pociski[0].y -= tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 180)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda(tank))
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
 			{
 				tank.pociski[0].x += tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 270)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda(tank))
+			if (!(tank.sprawdzKolizjePociskPrzeszkoda()))
 			{
 				tank.pociski[0].y += tank.pociski[0].movement;
 			}
@@ -278,13 +134,13 @@ void gra(Czolg &tank)
 	//cout << "jestem" << endl;
 	window.clear();
 	// Draw the tank_sprite
-	window.draw(spriteMap);
+	window.draw(GraDane::spriteMapa);
 	window.draw(tank_sprite);
 
-	for (int i = 0; i < mapa.przeszkody.size(); i++)
+	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
-		przeszkodaSprite.setTexture(mapa.przeszkody[i].texture);
-		przeszkodaSprite.setPosition(mapa.przeszkody[i].x, mapa.przeszkody[i].y);
+		przeszkodaSprite.setTexture(GraDane::mapa.przeszkody[i].texture);
+		przeszkodaSprite.setPosition(GraDane::mapa.przeszkody[i].x, GraDane::mapa.przeszkody[i].y);
 		window.draw(przeszkodaSprite);
 	}
 
@@ -303,6 +159,10 @@ void gra(Czolg &tank)
 int main()
 {
 	Czolg tank;
+	GraDane::mapa;
+	sf::Sprite spritemapa(GraDane::mapa.texture);
+	GraDane::spriteMapa = spritemapa;
+
 	klient.uruchomKlienta();
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
@@ -437,6 +297,6 @@ int main()
 
 	}
 	return EXIT_SUCCESS;
-
+	
 	//return 0;
 }

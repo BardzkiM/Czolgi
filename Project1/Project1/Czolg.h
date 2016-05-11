@@ -25,6 +25,8 @@ public:
 	void moveLeft();
 	std::string serialize();
 	void deserialize(std::string stream);
+	bool sprawdzKolizjePociskPrzeszkoda();
+	bool sprawdzKolizjeCzolgPrzeszkoda();
 
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;
