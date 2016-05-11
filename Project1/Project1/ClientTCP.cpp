@@ -15,7 +15,7 @@ void ClientTCP::Run()
 {
 	std::cout << "Start w¹tku klienta"<< std::endl;
 	sf::TcpSocket socket;
-	sf::Socket::Status status = socket.connect("159.205.16.19", 54000);
+	sf::Socket::Status status = socket.connect("192.168.1.3", 54000);
 	sf::SocketSelector selector;
 	selector.add(socket);
 	if (status != sf::Socket::Done)

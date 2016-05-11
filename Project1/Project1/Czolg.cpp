@@ -93,58 +93,13 @@ void Czolg::removePocisk(int j)
 		this->pociski.clear();
 
 }
-void Czolg::moveUp()
+void Czolg::move(int x, int y)
 {
 	sound.setBuffer(bufferTank);
 
 	//sound.play();
-	if (this->angle != 90)
-	{
-		this->angle = 90;
-
-	}
-	else
-		this->y -= this->movement;
-}
-void Czolg::moveDown()
-{
-	sound.setBuffer(bufferTank);
-	//sound.play();
-	if (this->angle != 270)
-	{
-		this->angle = 270;
-
-	}
-	else
-		this->y += this->movement;
-
-}
-void Czolg::moveRight()
-{
-	sound.setBuffer(bufferTank);
-	//sound.play();
-	if (this->angle != 180)
-	{
-		this->angle = 180;
-
-	}
-	else
-		this->x += this->movement;
-
-}
-void Czolg::moveLeft()
-{
-	sound.setBuffer(bufferTank);
-	//sound.play();
-
-	if (this->angle != 0)
-	{
-		this->angle = 0;
-
-	}
-	else
-		this->x -= this->movement;
-
+	this->y += y*movement;
+	this->x += x*movement;
 }
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
