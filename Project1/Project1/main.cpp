@@ -94,7 +94,7 @@ void gra(Czolg &tank)
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	//tank.sprawdzKolizjePociskowPrzeszkod();
+	tank.sprawdzKolizjePociskowPrzeszkod();
 
 	window.clear();
 	// Draw the tank_sprite

@@ -213,7 +213,7 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 	return false;
 }
 
-bool Czolg::sprawdzKolizjePociskowPrzeszkod()
+void Czolg::sprawdzKolizjePociskowPrzeszkod()
 {
 	int p_size = pociski.size();
 
