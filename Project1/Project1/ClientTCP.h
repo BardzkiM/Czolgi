@@ -5,15 +5,27 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include "Czolg.h"
+#include "GraDane.h"
+
 class ClientTCP
 {
 public:
-	ClientTCP();
+	
+	ClientTCP(Czolg * source_tank_pointer);
 	~ClientTCP();
 
-	virtual void Run();	
+	void send(std::string message);
+
+	std::string receive();
+
+	void RunInit();
+	std::string numer_klienta;
+	
 
 private:
+	sf::TcpSocket socket;
+	Czolg *tank;
 	
 
 };

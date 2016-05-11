@@ -20,16 +20,18 @@ using namespace std;
 
 
 //////// komyntosz
-
+Czolg tank;
 ServerTCP servertcp;
-ClientTCP clienttcp;
-ClientTCP clienttcp1;
-sf::Thread server_thread(&ServerTCP::Run, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
-sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);
-sf::Thread clienttcp_thread1(&ClientTCP::Run, &clienttcp1);
+ClientTCP clienttcp(&tank);
+ClientTCP clienttcp1(&tank);
+sf::Thread server_init(&ServerTCP::RunInit, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
+sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
+sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);
+sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
+sf::Sprite tank_enemy_sprite[3];
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
@@ -122,25 +124,18 @@ void gra(Czolg &tank)
 }
 int main()
 {
-	Czolg tank;
+	
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-
-									//stworzenie obiektu klasy
-	servertcp.argument = 5;									//przekazanie do klasy argumentu
+	server_init.launch();
 	
-	//server_thread.launch();									//uruchomienie w¹tku
-
-	tank.serialize();
-	//std::cout << "Serializacja: " <<temp_string.str().c_str();
-	ClientTCP clienttcp;											//stworzenie pierwszego klienta
-	sf::Thread clienttcp_thread(&ClientTCP::Run, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-	//clienttcp_thread.launch();										//odpalenie pierwszego klienta
-
-
 	
-	//clienttcp_thread1.launch();
+
+	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
+	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
+	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
+	clienttcp_thread1.launch();
 
 
 
@@ -226,6 +221,10 @@ int main()
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
+						//server_game.launch();
+						//server_init.terminate();
+						
+
 						
 					}
 					if (menu.position == 2) //wykonawcy

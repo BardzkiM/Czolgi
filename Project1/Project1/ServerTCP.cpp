@@ -1,8 +1,12 @@
 #include "ServerTCP.h"
 #include "Czolg.h"
+#include "GraDane.h"
 ServerTCP::ServerTCP()
 {
-
+	tank[0].setInitialPosition(0, 0);
+	tank[1].setInitialPosition(1140, 840);
+	tank[2].setInitialPosition(0, 840);
+	tank[3].setInitialPosition(1140, 0);
 }
 
 ServerTCP::~ServerTCP()
@@ -29,7 +33,10 @@ void ServerTCP::accept_client()
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	client[which_client].send(message.c_str(),message.length()+1);
+	if (client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
+	{
+		std::cout << "Bl¹d wysy³ania do klienta";
+	}
 }
 
 void ServerTCP::receive(int which_client)
@@ -53,7 +60,7 @@ void ServerTCP::receive(int which_client)
 	std::cout << "Received " << received <<  " bytes" << " " << received_data_str << std::endl;
 }
 
-void ServerTCP::Run()
+void ServerTCP::RunInit()
 {
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
@@ -64,53 +71,34 @@ void ServerTCP::Run()
 		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
 		exit(1);
 	}
-	
-	sf::Thread client_1(&ServerTCP::accept_client, this);
-	sf::Thread client_2(&ServerTCP::accept_client, this);
-	sf::Thread client_3(&ServerTCP::accept_client, this);
-	sf::Thread client_4(&ServerTCP::accept_client, this);
-
-	client_1.launch();
-	client_1.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 1"<<std::endl;
-	this->receive(0);
-	this->send(0, "Wiadomosc poszla");
-
-	client_2.launch();
-	client_2.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 2" << std::endl;
-	this->receive(1);
-
-	client_3.launch();
-	client_3.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 3" << std::endl;
-	this->receive(2);
-
-	client_4.launch();
-	client_4.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 4" << std::endl;
-	this->receive(3);
-	
+	const int clients_size = 4;
+	sf::Thread *clients[clients_size];
 	
 
-	/*this->receive(0);*/
-	//this->receive(1);
-	// accept a new connection
-	//sf::TcpSocket client;
-	//if (listener.accept(client) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
-	//char data[100];
-	//std::size_t received;
 
-	//// TCP socket:
-	//if (client[0].receive(data, 100, received) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
-	//std::cout << "Received " << received << " bytes" << data << std::endl;
+	for (int i = 0; i < 2; i++)
+	{
+		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
+		clients[i]->launch();
+		clients[i]->wait();
+		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
+		this->send(i, tank[i].serialize());	
+		this->send(i, std::to_string(i));
+		
+	}
+	int k;
+	std::cin >> k;
+	std::cout << "podano k" << std::endl;
+	for (int i = 0; i < nr_of_clients; i++)
+	{
+		this->send(i, std::to_string(nr_of_clients));
+	}
+	//sf::Thread client_1(&ServerTCP::accept_client, this);
 }
-
+void ServerTCP::runGame()
+{
+	
+		
+		//this->send(0, std::to_string(nr_of_clients - 1));
+	
+}
