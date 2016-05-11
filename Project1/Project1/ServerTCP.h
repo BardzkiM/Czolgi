@@ -5,6 +5,8 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include "Czolg.h"
+
 class ServerTCP
 {
 

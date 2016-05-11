@@ -2,7 +2,10 @@
 #include "Czolg.h"
 ServerTCP::ServerTCP()
 {
-
+	tank[0].setInitialPosition(0, 0);
+	tank[1].setInitialPosition(1140, 840);
+	tank[2].setInitialPosition(0, 840);
+	tank[3].setInitialPosition(1140, 0);
 }
 
 ServerTCP::~ServerTCP()
@@ -64,32 +67,24 @@ void ServerTCP::Run()
 		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
 		exit(1);
 	}
+	const int clients_size = 4;
+	sf::Thread *clients[clients_size];
 	
-	sf::Thread client_1(&ServerTCP::accept_client, this);
-	sf::Thread client_2(&ServerTCP::accept_client, this);
-	sf::Thread client_3(&ServerTCP::accept_client, this);
-	sf::Thread client_4(&ServerTCP::accept_client, this);
 
-	client_1.launch();
-	client_1.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 1"<<std::endl;
-	this->receive(0);
-	this->send(0, "Wiadomosc poszla");
 
-	client_2.launch();
-	client_2.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 2" << std::endl;
-	this->receive(1);
+	for (int i = 0; i < clients_size; i++)
+	{
+		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
+		clients[i]->launch();
+		clients[i]->wait();
+		
+		this->receive(i);
+		this->send(i, "Wiadomoœæ podejsz³a");
+		this->send(i, tank[i]);
+	}
 
-	client_3.launch();
-	client_3.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 3" << std::endl;
-	this->receive(2);
+	//sf::Thread client_1(&ServerTCP::accept_client, this);
 
-	client_4.launch();
-	client_4.wait();
-	std::cout << "Poczeka³ na zakoñczenie w¹tku 4" << std::endl;
-	this->receive(3);
 	
 	
 
