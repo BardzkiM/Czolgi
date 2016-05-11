@@ -4,7 +4,6 @@
 #include <math.h>
 #include "Czolg.h"
 #include "Menu.h"
-#include "Klient.h"
 #include "Mapa.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
@@ -166,7 +165,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(Czolg &tank)
 		return false;
 }
 
-Client klient("127.0.0.1");
+
 ServerTCP servertcp;
 ClientTCP clienttcp;
 ClientTCP clienttcp1;
@@ -303,8 +302,7 @@ void gra(Czolg &tank)
 int main()
 {
 	Czolg tank;
-	klient.uruchomKlienta();
-									//stworzenie obiektu klasy
+										
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
 	
 	server_thread.launch();									//uruchomienie w¹tku
