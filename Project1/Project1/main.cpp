@@ -13,7 +13,7 @@
 using namespace std;
 
 
-Czolg tank[4];
+
 
 
 
