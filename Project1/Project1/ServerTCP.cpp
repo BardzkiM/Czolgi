@@ -2,7 +2,7 @@
 #include "Czolg.h"
 ServerTCP::ServerTCP()
 {
-
+	
 }
 
 ServerTCP::~ServerTCP()
