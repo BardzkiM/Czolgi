@@ -4,7 +4,6 @@
 #include <math.h>
 #include "Czolg.h"
 #include "Menu.h"
-#include "Klient.h"
 #include "GraDane.h"
 #include "ServerTCP.h"
 #include "ClientTCP.h"
@@ -22,7 +21,6 @@ Czolg tank[4];
 
 //////// komyntosz
 
-Client klient("127.0.0.1");
 ServerTCP servertcp;
 ClientTCP clienttcp;
 ClientTCP clienttcp1;
