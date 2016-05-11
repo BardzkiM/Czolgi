@@ -161,7 +161,6 @@ int main()
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
 
-	klient.uruchomKlienta();
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
 	
