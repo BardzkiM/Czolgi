@@ -175,7 +175,8 @@ void Czolg::sprawdzKolizjePociskowPrzeszkod()
 		{
 			
 			removePocisk(i);
-			i--; p_size--;
+			i--; 
+			p_size--;
 		}
 		else
 		{
