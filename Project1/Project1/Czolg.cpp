@@ -9,11 +9,11 @@ std::string Czolg::serialize()
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
-	oarchive << this->x << this->y << this->angle << this->height<< this->width << this->hp;
+	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp;
 	serialized_data_str = archive_ostream.str();
-	std::cout << "serialized data: " << serialized_data_str << std::endl;		
+	std::cout << "serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
-	
+
 }
 
 void Czolg::deserialize(std::string stream)
@@ -55,9 +55,9 @@ Czolg::Czolg()
 		std::cerr << "blad czytania dzwieku!" << std::endl;
 		exit(-12);
 	}
-	
-	 
-	
+
+
+
 }
 
 
@@ -69,16 +69,16 @@ void Czolg::setInitialPosition(int x, int y)
 {
 	this->x = x;
 	this->y = y;
-	
+
 }
 
 void Czolg::addPocisk()
 {
 
-	Pocisk pocisk(x ,y , this->angle);
+	Pocisk pocisk(x, y, this->angle);
 	sound.setBuffer(bufferBullet);
 	sound.play();
-	
+
 	this->pociski.push_back(pocisk);
 	sound.play();
 }
@@ -91,7 +91,7 @@ void Czolg::removePocisk(int j)
 	}
 	else
 		this->pociski.clear();
-	
+
 }
 void Czolg::moveUp()
 {
@@ -101,7 +101,7 @@ void Czolg::moveUp()
 	if (this->angle != 90)
 	{
 		this->angle = 90;
-		
+
 	}
 	else
 		this->y -= this->movement;
@@ -113,7 +113,7 @@ void Czolg::moveDown()
 	if (this->angle != 270)
 	{
 		this->angle = 270;
-		
+
 	}
 	else
 		this->y += this->movement;
@@ -126,7 +126,7 @@ void Czolg::moveRight()
 	if (this->angle != 180)
 	{
 		this->angle = 180;
-		
+
 	}
 	else
 		this->x += this->movement;
@@ -136,11 +136,11 @@ void Czolg::moveLeft()
 {
 	sound.setBuffer(bufferTank);
 	//sound.play();
-	
+
 	if (this->angle != 0)
 	{
 		this->angle = 0;
-		
+
 	}
 	else
 		this->x -= this->movement;
@@ -148,7 +148,7 @@ void Czolg::moveLeft()
 }
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
-	int mapa_przeszkody_size =GraDane::mapa.przeszkody.size();
+	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
 	switch (angle)
 	{
 	case 90:
@@ -160,9 +160,9 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			if (((x + GraDane::mapa.przeszkody[i].width) > GraDane::mapa.przeszkody[i].x) &&
-				(x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
 				((y + GraDane::mapa.przeszkody[i].height) > GraDane::mapa.przeszkody[i].y) &&
-				(y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + movement)))
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + movement)))
 				return true;
 		}
 		break;
@@ -173,9 +173,9 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 		{
 
 			if (((x + GraDane::mapa.przeszkody[i].width) > GraDane::mapa.przeszkody[i].x) &&
-				(x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
 				((y + GraDane::mapa.przeszkody[i].height + movement) > GraDane::mapa.przeszkody[i].y) &&
-				(y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
 				return true;
 		}
 		break;
@@ -186,9 +186,9 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 		{
 
 			if (((x + GraDane::mapa.przeszkody[i].width) > GraDane::mapa.przeszkody[i].x) &&
-				(x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width + movement)) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width + movement)) &&
 				((y + GraDane::mapa.przeszkody[i].height) > GraDane::mapa.przeszkody[i].y) &&
-				(y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
 				return true;
 		}
 		break;
@@ -199,9 +199,9 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 		{
 
 			if (((x + GraDane::mapa.przeszkody[i].width + movement) > GraDane::mapa.przeszkody[i].x) &&
-				(x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
 				((y + GraDane::mapa.przeszkody[i].height) > GraDane::mapa.przeszkody[i].y) &&
-				(y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
 				return true;
 		}
 		break;
@@ -221,24 +221,9 @@ void Czolg::sprawdzKolizjePociskowPrzeszkod()
 	{
 		if (pociski[i].sprawdzKolizjePociskPrzeszkoda())
 		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((pociski[j].x + pociski[j].width) > GraDane::mapa.przeszkody[i].x) &&
-					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
-					((pociski[j].y + pociski[j].height) > GraDane::mapa.przeszkody[i].y) &&
-					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + pociski[j].movement)))
-				{
-					//pociski[j].
-					//if (!pociski.empty())
-					//daæ do tank remove pocisk
-					removePocisk(j);
-					return true;
-				}
-			}
+			removePocisk(i);
 		}
-		break;
-	case 270:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
+		else
 		{
 			switch (pociski[i].angle)
 			{
