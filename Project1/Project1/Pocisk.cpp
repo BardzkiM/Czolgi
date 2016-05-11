@@ -67,3 +67,73 @@ void Pocisk::setStartPosition()
 		this->y = this->y + 60;
 	}
 }
+
+
+bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
+{
+	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
+	switch (angle)
+	{
+	case 90:
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			
+			if (((x + width) > GraDane::mapa.przeszkody[i].x) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				((y + height) > GraDane::mapa.przeszkody[i].y) &&
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + movement)))
+			{
+			//
+			//if (!pociski.empty())
+			//daæ do tank remove pocisk
+			
+			return true;
+			}
+		}
+		break;
+	case 270:
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			
+			if (((x + width) > GraDane::mapa.przeszkody[i].x) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				((y + height + movement) > GraDane::mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+			{
+				return true;
+				
+			}
+		}
+		break;
+	case 0:
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			
+			if (((x + height) > GraDane::mapa.przeszkody[i].x) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width + movement)) &&
+				((y + height) > GraDane::mapa.przeszkody[i].y) &&
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+			{
+				return true;
+			}
+		}
+		break;
+	case 180:
+		for (int i = 0; i <mapa_przeszkody_size; i++)
+		{
+			
+			if (((x + width + movement) > GraDane::mapa.przeszkody[i].x) &&
+				(x < (GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+				((y + height) > GraDane::mapa.przeszkody[i].y) &&
+				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
+			{
+				
+					return true;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+	return false;
+}

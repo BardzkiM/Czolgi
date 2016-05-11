@@ -32,4 +32,13 @@ void ClientTCP::Run()
 		// error...
 		std::cout << "error";
 	}
+	std::size_t received;
+
+	if (socket.receive(&data, 100, received) != sf::Socket::Done)
+	{
+		// error...
+		std::cout << "Error during client receiveing";
+	}
+
+	std::cout << "Klient odebra³ wiadomoœæ: " << data << " , rozmiar wiadomoœci " << received << " bajty";
 }

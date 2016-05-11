@@ -27,6 +27,11 @@ void ServerTCP::accept_client()
 		//this->receive(nr_of_clients-1);	
 }
 
+void ServerTCP::send(int which_client, std::string message)
+{
+	message.c_str();
+}
+
 void ServerTCP::receive(int which_client)
 {
 	char data[100];

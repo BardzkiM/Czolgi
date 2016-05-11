@@ -8,6 +8,7 @@
 #include <sstream>
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio.hpp>
+#include "GraDane.h"
 #ifndef _CZOLG_H
 #define _CZOLG_H
 class Czolg : public Blok
@@ -25,7 +26,7 @@ public:
 	void moveLeft();
 	std::string serialize();
 	void deserialize(std::string stream);
-	bool sprawdzKolizjePociskPrzeszkoda();
+	bool sprawdzKolizjePociskowPrzeszkod();
 	bool sprawdzKolizjeCzolgPrzeszkoda();
 
 	sf::SoundBuffer bufferTank;
