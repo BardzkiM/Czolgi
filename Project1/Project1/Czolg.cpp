@@ -1,9 +1,7 @@
 #include "Czolg.h"
 #include <iostream>
 #include <math.h>
-#include "GraDane.h"
 #define M_PI 3.14159265358979323846
-using namespace std;
 
 
 std::string Czolg::serialize()
@@ -214,81 +212,36 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 	}
 	return false;
 }
-bool Czolg::sprawdzKolizjePociskPrzeszkoda()
+
+bool Czolg::sprawdzKolizjePociskowPrzeszkod()
 {
-	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
-	int tank_pociski_size = pociski.size();
-	switch (angle)
+	int p_size = pociski.size();
+
+	for (int i = 0; i < p_size; i++)
 	{
-	case 90:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
+		if (pociski[i].sprawdzKolizjePociskPrzeszkoda())
 		{
-			for (int j = 0; j <tank_pociski_size; j++)
+			removePocisk(i);
+		}
+		else
+		{
+			switch (pociski[i].angle)
 			{
-				if (((pociski[j].x + pociski[j].width) > GraDane::mapa.przeszkody[i].x) &&
-					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
-					((pociski[j].y + pociski[j].height) > GraDane::mapa.przeszkody[i].y) &&
-					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + pociski[j].movement)))
-				{
-					//pociski[j].
-					//if (!pociski.empty())
-					//daæ do tank remove pocisk
-					removePocisk(j);
-					return true;
-				}
+			case 0:
+				pociski[i].x -= pociski[i].movement;
+				break;
+
+			case 90:
+				pociski[i].y -= pociski[i].movement;
+				break;
+			case 180:
+				pociski[i].x += pociski[i].movement;
+				break;
+			case 270:
+				pociski[i].y += pociski[i].movement;
+				break;
 			}
 		}
-		break;
-	case 270:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((pociski[j].x + pociski[j].width) > GraDane::mapa.przeszkody[i].x) &&
-					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
-					((pociski[j].y + pociski[j].height + pociski[j].movement) > GraDane::mapa.przeszkody[i].y) && //jak zmienimy pocisk.height na pocisk.width to siê zmienia bug tekstury...
-					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
-				{
-					removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	case 0:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((pociski[j].x + pociski[j].height) > GraDane::mapa.przeszkody[i].x) &&
-					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width + pociski[j].movement)) &&
-					((pociski[j].y + pociski[j].height) > GraDane::mapa.przeszkody[i].y) &&
-					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
-				{
-					removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	case 180:
-		for (int i = 0; i <mapa_przeszkody_size; i++)
-		{
-			for (int j = 0; j <tank_pociski_size; j++)
-			{
-				if (((pociski[j].x + pociski[j].width + pociski[j].movement) > GraDane::mapa.przeszkody[i].x) &&
-					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
-					((pociski[j].y + pociski[j].height) > GraDane::mapa.przeszkody[i].y) &&
-					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height)))
-				{
-					removePocisk(j);
-					return true;
-				}
-			}
-		}
-		break;
-	default:
-		break;
 	}
-	return false;
+
 }
