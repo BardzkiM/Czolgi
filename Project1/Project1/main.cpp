@@ -27,7 +27,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	switch (direction)
 	{
 	case 'u':
-		if (tank.y - tank.movement < 0)
+		if (tank[0].y - tank[0].movement < 0)
 		{
 			return true;
 			break;
