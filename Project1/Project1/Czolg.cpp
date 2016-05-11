@@ -223,6 +223,7 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 	case 90:
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
+			cout << "przeszkody" << endl;
 			for (int j = 0; j <tank_pociski_size; j++)
 			{
 				if (((pociski[j].x + pociski[j].width) > GraDane::mapa.przeszkody[i].x) &&
