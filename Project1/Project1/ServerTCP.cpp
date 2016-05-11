@@ -29,7 +29,7 @@ void ServerTCP::accept_client()
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	message.c_str();
+	client[which_client].send(message.c_str(),message.length()+1);
 }
 
 void ServerTCP::receive(int which_client)
@@ -40,6 +40,7 @@ void ServerTCP::receive(int which_client)
 	
 
 	// TCP socket:
+
 	if (client[which_client].receive(&data,100,received) != sf::Socket::Done)
 	{
 		// error...
@@ -73,6 +74,7 @@ void ServerTCP::Run()
 	client_1.wait();
 	std::cout << "Poczeka³ na zakoñczenie w¹tku 1"<<std::endl;
 	this->receive(0);
+	this->send(0, "Wiadomosc poszla");
 
 	client_2.launch();
 	client_2.wait();
