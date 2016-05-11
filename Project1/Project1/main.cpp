@@ -14,6 +14,7 @@
 using namespace std;
 
 Mapa mapa;
+Czolg tank[4];
 
 
 
@@ -239,7 +240,7 @@ void gra(Czolg &tank)
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	if (!tank.pociski.empty())
+	if (!tank[0].pociski.empty())
 	{
 		//cout << mapa.przeszkody[0].width << " " << mapa.przeszkody[0].height << endl;
 		if (tank.pociski[0].angle == 0)
