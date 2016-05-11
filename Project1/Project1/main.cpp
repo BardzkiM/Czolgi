@@ -46,7 +46,7 @@ void gra(Czolg &tank)
 		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
-			tank.moveUp();
+			tank.move(0,-1);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -56,7 +56,7 @@ void gra(Czolg &tank)
 		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
-			tank.moveDown();
+			tank.move(0,1);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -66,7 +66,7 @@ void gra(Czolg &tank)
 		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
-			tank.moveRight();
+			tank.move(1,0);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -76,7 +76,7 @@ void gra(Czolg &tank)
 		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
 		{
 			
-			tank.moveLeft();
+			tank.move(-1, 0);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -130,7 +130,7 @@ int main()
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
 	
-	server_thread.launch();									//uruchomienie w¹tku
+	//server_thread.launch();									//uruchomienie w¹tku
 
 	tank.serialize();
 	//std::cout << "Serializacja: " <<temp_string.str().c_str();

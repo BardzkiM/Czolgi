@@ -20,10 +20,7 @@ public:
 	void addPocisk();
 	void removePocisk(int j);
 	void setInitialPosition(int x, int y);
-	void moveUp();
-	void moveDown();
-	void moveRight();
-	void moveLeft();
+	void move(int x, int y);
 	std::string serialize();
 	void deserialize(std::string stream);
 	void sprawdzKolizjePociskowPrzeszkod();
