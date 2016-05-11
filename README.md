@@ -7,12 +7,12 @@ Projekt_Cpp
 4. Jak działa gra “Czołgi 2D” ?
 5. Kto go napisał ten projekt ?
 
-1. Diagram Klas znajduje się w folderze diagramy (Czolgi\Diagramy).
+Ad1. Diagram Klas znajduje się w folderze diagramy (Czolgi\Diagramy).
 
-2. Kod gry został napisany w języku C++ z wykorzystaniem silnika graficznego SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
+Ad2. Kod gry został napisany w języku C++ z wykorzystaniem silnika graficznego SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
 https://www.youtube.com/watch?v=Z6alClFOGoM ).
 
-3. Jak uruchomić kod?
+Ad3. Jak uruchomić kod?
 
 Pobierz z Githuba udostępnione repozytorium (https://github.com/BardzkiM/Czolgi.git).
 Otwórz folder ’boost_1_60_0’ (Czolgi\Project1\boost_1_60_0)
@@ -32,14 +32,14 @@ Uruchom Local Windows Debugger (lub wciśnij kombinację klawiszy Ctrl+F5)
 
 Ciesz się grą :)
 
-4. Jak działa gra
+Ad4. Jak działa gra
 
 
-5. Projekt współtworzyli:
-    Michał Bardzki - kierownik
-    Dominik Pawlik
-    Piotr Fic
-    Anna Gawor
-    Mikołaj Midura
+Ad5. Projekt współtworzyli:
+    Michał Bardzki - kierownik,
+    Dominik Pawlik,
+    Piotr Fic,
+    Anna Gawor,
+    Mikołaj Midura.
 
 
