@@ -8,9 +8,6 @@ Mapa::Mapa()
 {
 	
 	initializeMap();
-	
-
-	
 }
 
 
