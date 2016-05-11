@@ -3,6 +3,8 @@
 #include <math.h>
 #include "GraDane.h"
 #define M_PI 3.14159265358979323846
+using namespace std;
+
 
 std::string Czolg::serialize()
 {
@@ -146,10 +148,9 @@ void Czolg::moveLeft()
 		this->x -= this->movement;
 
 }
-bool Czolg::sprawdzKolizjePociskPrzeszkoda()
+bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
 	int mapa_przeszkody_size =GraDane::mapa.przeszkody.size();
-	std::cout <<"Przeszkoda: "<< GraDane::mapa.przeszkody[0].x << std::endl;
 	switch (angle)
 	{
 	case 90:
@@ -160,7 +161,6 @@ bool Czolg::sprawdzKolizjePociskPrzeszkoda()
 		}
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
-
 			if (((x + GraDane::mapa.przeszkody[i].width) > GraDane::mapa.przeszkody[i].x) &&
 				(x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
 				((y + GraDane::mapa.przeszkody[i].height) > GraDane::mapa.przeszkody[i].y) &&
@@ -214,7 +214,7 @@ bool Czolg::sprawdzKolizjePociskPrzeszkoda()
 	}
 	return false;
 }
-bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
+bool Czolg::sprawdzKolizjePociskPrzeszkoda()
 {
 	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
 	int tank_pociski_size = pociski.size();
