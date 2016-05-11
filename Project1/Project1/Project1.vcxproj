@@ -130,6 +130,7 @@
     <ClInclude Include="GraDane.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mapa.h" />
+    <ClInclude Include="Obiekt.h" />
     <ClInclude Include="Pocisk.h" />
     <ClInclude Include="Przeszkoda.h" />
     <ClInclude Include="ServerTCP.h" />

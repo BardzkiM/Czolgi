@@ -12,11 +12,10 @@ public:
 	//std::vector <gracz> gracze;
 	std::vector <Przeszkoda> przeszkody;
 	int przeszkodyTablica[20][15];
-	sf::Texture texture;
-
+	
 	void initializeMap();
 	void setPlayers();
-	
+	sf::Texture texture;
 
 };
 
