@@ -1,5 +1,6 @@
 #include "ServerTCP.h"
 #include "Czolg.h"
+#include "GraDane.h"
 ServerTCP::ServerTCP()
 {
 	tank[0].setInitialPosition(0, 0);
@@ -32,7 +33,10 @@ void ServerTCP::accept_client()
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	client[which_client].send(message.c_str(),message.length()+1);
+	if (client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
+	{
+		std::cout << "Bl¹d wysy³ania do klienta";
+	}
 }
 
 void ServerTCP::receive(int which_client)
@@ -56,7 +60,7 @@ void ServerTCP::receive(int which_client)
 	std::cout << "Received " << received <<  " bytes" << " " << received_data_str << std::endl;
 }
 
-void ServerTCP::Run()
+void ServerTCP::RunInit()
 {
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
@@ -72,40 +76,28 @@ void ServerTCP::Run()
 	
 
 
-	for (int i = 0; i < clients_size; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
+		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
+		this->send(i, tank[i].serialize());	
 		
-		this->receive(i);
-		this->send(i, "Wiadomoœæ podejsz³a");
-		this->send(i, tank[i]);
 	}
-
+	int k;
+	std::cin >> k;
+	std::cout << "podano k" << std::endl;
+	for (int i = 0; i < nr_of_clients; i++)
+	{
+		this->send(i, std::to_string(nr_of_clients));
+	}
 	//sf::Thread client_1(&ServerTCP::accept_client, this);
-
-	
-	
-
-	/*this->receive(0);*/
-	//this->receive(1);
-	// accept a new connection
-	//sf::TcpSocket client;
-	//if (listener.accept(client) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
-	//char data[100];
-	//std::size_t received;
-
-	//// TCP socket:
-	//if (client[0].receive(data, 100, received) != sf::Socket::Done)
-	//{
-	//	// error...
-	//	std::cout << "error";
-	//}
-	//std::cout << "Received " << received << " bytes" << data << std::endl;
 }
-
+void ServerTCP::runGame()
+{
+	
+		
+		//this->send(0, std::to_string(nr_of_clients - 1));
+	
+}

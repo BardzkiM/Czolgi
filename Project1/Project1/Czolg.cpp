@@ -11,7 +11,7 @@ std::string Czolg::serialize()
 	boost::archive::text_oarchive oarchive(archive_ostream);
 	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp;
 	serialized_data_str = archive_ostream.str();
-	std::cout << "serialized data: " << serialized_data_str << std::endl;
+	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }

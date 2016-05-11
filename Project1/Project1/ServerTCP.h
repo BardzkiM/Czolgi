@@ -18,7 +18,10 @@ public:
 	void send(int which_client, std::string message);
 	void receive(int which_client);
 	int argument;
-	void Run();
+	int ilosc_graczy = 0;
+	
+	void RunInit();
+	void runGame();
 	Czolg tank[4];
 	
 private:

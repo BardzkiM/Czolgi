@@ -8,5 +8,6 @@ class GraDane
 public:
 	static Mapa mapa;
 	static sf::Sprite spriteMapa;
+	static int iloscGraczy;
 };
 #endif
