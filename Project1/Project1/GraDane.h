@@ -1,9 +1,8 @@
 #pragma once
-
+#include "Mapa.h"
+#include <SFML/Graphics.hpp>;
 #ifndef _GRADANE_H
 #define _GRADANE_H
-#include "Mapa.h"
-#include <SFML/Graphics.hpp>
 class GraDane
 {
 public:

@@ -1,5 +1,4 @@
 #pragma once
-#include "gracz.h"
 #include <SFML/Graphics.hpp>
 #include "Przeszkoda.h"
 #include <iostream>
@@ -10,7 +9,7 @@ class Mapa
 public:
 	Mapa();
 	~Mapa();
-	std::vector <gracz> gracze;
+	//std::vector <gracz> gracze;
 	std::vector <Przeszkoda> przeszkody;
 	int przeszkodyTablica[20][15];
 	
