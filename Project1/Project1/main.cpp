@@ -188,6 +188,9 @@ int main()
 	}
 
 	music.play();
+	music.setLoop(true);
+	musicTank.setLoop(true);
+
 	while (window.isOpen())
 	{
 		// Process events
