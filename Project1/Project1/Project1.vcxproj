@@ -127,8 +127,6 @@
     <ClInclude Include="ClientTCP.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="gracz.h" />
-    <ClInclude Include="GraDane.h" />
-    <ClInclude Include="Klient.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Obiekt.h" />
@@ -142,17 +140,13 @@
     <ClCompile Include="ClientTCP.cpp" />
     <ClCompile Include="Czolg.cpp" />
     <ClCompile Include="gracz.cpp" />
-    <ClCompile Include="GraDane.cpp" />
-    <ClCompile Include="Klient.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obiekt.cpp" />
     <ClCompile Include="Pocisk.cpp" />
-    <ClCompile Include="Polaczenie.cpp" />
     <ClCompile Include="Przeszkoda.cpp" />
     <ClCompile Include="ServerTCP.cpp" />
-    <ClCompile Include="Serwer.cpp" />
     <ClCompile Include="Wykonawcy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
