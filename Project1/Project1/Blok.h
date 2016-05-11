@@ -7,15 +7,17 @@ class Blok
 public:
 	Blok();
 	~Blok();
+
 	int x, y;
 	int angle;
 	int width, height, hp;
-	int movement;
-	void setRotation();
+	int movement;	
 	sf::Texture texture;
 	sf::Texture texturel;
 	sf::Texture textureu;
 	sf::Texture texturer;
 	sf::Texture textured;
+
+	void setRotation();
 };
 #endif
