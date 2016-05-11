@@ -73,6 +73,11 @@ bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
 	switch (angle)
 	{
 	case 90:
+		if (y - movement < 0)
+		{
+			return true;
+			break;
+		}
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 
@@ -90,6 +95,8 @@ bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
 		}
 		break;
 	case 270:
+		if ((y + height + movement) > 900)
+			return true;
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 
@@ -104,6 +111,8 @@ bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
 		}
 		break;
 	case 0:
+		if (x - movement < 0)
+			return true;
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 
@@ -117,6 +126,8 @@ bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
 		}
 		break;
 	case 180:
+		if ((x + width + movement) > 1200)
+			return true;
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 

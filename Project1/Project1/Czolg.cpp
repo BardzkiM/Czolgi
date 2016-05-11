@@ -153,10 +153,7 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 	{
 	case 90:
 		if (y - movement < 0)
-		{
 			return true;
-			break;
-		}
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			if (((x + GraDane::mapa.przeszkody[i].width) > GraDane::mapa.przeszkody[i].x) &&
