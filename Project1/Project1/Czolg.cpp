@@ -221,9 +221,24 @@ bool Czolg::sprawdzKolizjePociskowPrzeszkod()
 	{
 		if (pociski[i].sprawdzKolizjePociskPrzeszkoda())
 		{
-			removePocisk(i);
+			for (int j = 0; j <tank_pociski_size; j++)
+			{
+				if (((pociski[j].x + pociski[j].width) > GraDane::mapa.przeszkody[i].x) &&
+					(pociski[j].x < ( GraDane::mapa.przeszkody[i].x + GraDane::mapa.przeszkody[i].width)) &&
+					((pociski[j].y + pociski[j].height) > GraDane::mapa.przeszkody[i].y) &&
+					(pociski[j].y < ( GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + pociski[j].movement)))
+				{
+					//pociski[j].
+					//if (!pociski.empty())
+					//daæ do tank remove pocisk
+					removePocisk(j);
+					return true;
+				}
+			}
 		}
-		else
+		break;
+	case 270:
+		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			switch (pociski[i].angle)
 			{
