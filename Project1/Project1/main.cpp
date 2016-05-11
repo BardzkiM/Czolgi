@@ -19,6 +19,7 @@ Czolg tank[4];
 
 
 
+
 bool sprawdzKolizjePociskPrzeszkoda(char direction)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
