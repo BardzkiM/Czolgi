@@ -23,8 +23,8 @@ public:
 	void moveDown();
 	void moveRight();
 	void moveLeft();
-	void serialize();
-	void deserialize(std::stringstream stream);
+	std::string serialize();
+	void deserialize(std::string stream);
 
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;
