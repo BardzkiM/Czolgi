@@ -12,21 +12,19 @@
 #include "Wykonawcy.h"
 
 using namespace std;
-sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
+
 Mapa mapa;
-Czolg tank;
 
 
 
 
-
-bool sprawdzKolizjePociskPrzeszkoda(char direction)
+bool sprawdzKolizjePociskPrzeszkoda(Czolg &tank)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();
 	int tank_pociski_size = tank.pociski.size();
-	switch (direction)
+	switch (tank.angle)
 	{
-	case 'u':
+	case 90:
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
@@ -45,7 +43,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			}
 		}
 		break;
-	case 'd':
+	case 270:
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
@@ -61,7 +59,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			}
 		}
 		break;
-	case 'l':
+	case 0:
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
@@ -77,7 +75,7 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 			}
 		}
 		break;
-	case'r':
+	case 180:
 		for (int i = 0; i <mapa_przeszkody_size; i++)
 		{
 			for (int j = 0; j <tank_pociski_size; j++)
@@ -99,12 +97,12 @@ bool sprawdzKolizjePociskPrzeszkoda(char direction)
 	return false;
 }
 //////// komyntosz
-bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
+bool sprawdzKolizjeCzolgPrzeszkoda(Czolg &tank)
 {
 	int mapa_przeszkody_size = mapa.przeszkody.size();	
-		switch (direction)
+		switch (tank.angle)
 		{
-		case 'u':
+		case 90:
 			if (tank.y - tank.movement < 0)
 			{
 				return true;
@@ -120,7 +118,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					return true;
 			}
 			break;
-		case 'd':
+		case 270:
 			if ((tank.y + tank.height + tank.movement) > 900)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
@@ -133,7 +131,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					return true;
 			}
 			break;
-		case 'l':
+		case 0:
 			if (tank.x - tank.movement < 0)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
@@ -146,7 +144,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 					return true;
 			}
 			break;
-		case'r':
+		case 180:
 			if ((tank.x + tank.width + tank.movement) > 1200)
 				return true;
 			for (int i = 0; i <mapa_przeszkody_size; i++)
@@ -166,6 +164,7 @@ bool sprawdzKolizjeCzolgPrzeszkoda(char direction)
 	}
 		return false;
 }
+
 Client klient("127.0.0.1");
 ServerTCP servertcp;
 ClientTCP clienttcp;
@@ -180,13 +179,16 @@ sf::Sprite tank_sprite;
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
-void gra()
+sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
+
+
+void gra(Czolg &tank)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		tank_sprite.setTexture(tank.textureu);
 		tank.angle = 90;
-		if (!sprawdzKolizjeCzolgPrzeszkoda('u'))
+		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
 		{
 			
 			tank.moveUp();
@@ -196,7 +198,7 @@ void gra()
 	{
 		tank_sprite.setTexture(tank.textured);
 		tank.angle = 270;
-		if (!sprawdzKolizjeCzolgPrzeszkoda('d'))
+		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
 		{
 			
 			tank.moveDown();
@@ -206,7 +208,7 @@ void gra()
 	{
 		tank_sprite.setTexture(tank.texturer);
 		tank.angle = 180;
-		if (!sprawdzKolizjeCzolgPrzeszkoda('r'))
+		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
 		{
 			
 			tank.moveRight();
@@ -216,7 +218,7 @@ void gra()
 	{
 		tank_sprite.setTexture(tank.texturel);
 		tank.angle = 0;
-		if (!sprawdzKolizjeCzolgPrzeszkoda('l'))
+		if (!sprawdzKolizjeCzolgPrzeszkoda(tank))
 		{
 			
 			tank.moveLeft();
@@ -242,28 +244,28 @@ void gra()
 		//cout << mapa.przeszkody[0].width << " " << mapa.przeszkody[0].height << endl;
 		if (tank.pociski[0].angle == 0)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda('l'))
+			if (!sprawdzKolizjePociskPrzeszkoda(tank))
 			{
 				tank.pociski[0].x -= tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 90)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda('u'))
+			if (!sprawdzKolizjePociskPrzeszkoda(tank))
 			{
 				tank.pociski[0].y -= tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 180)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda('r'))
+			if (!sprawdzKolizjePociskPrzeszkoda(tank))
 			{
 				tank.pociski[0].x += tank.pociski[0].movement;
 			}
 		}
 		else if (tank.pociski[0].angle == 270)
 		{
-			if (!sprawdzKolizjePociskPrzeszkoda('d'))
+			if (!sprawdzKolizjePociskPrzeszkoda(tank))
 			{
 				tank.pociski[0].y += tank.pociski[0].movement;
 			}
@@ -299,7 +301,7 @@ void gra()
 }
 int main()
 {
-	
+	Czolg tank;
 	klient.uruchomKlienta();
 									//stworzenie obiektu klasy
 	servertcp.argument = 5;									//przekazanie do klasy argumentu
@@ -425,7 +427,7 @@ int main()
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{
 				clock.restart();
-				gra();
+				gra(tank);
 			}
 			
 
