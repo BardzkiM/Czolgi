@@ -72,9 +72,6 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Obiekt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ServerTCP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
