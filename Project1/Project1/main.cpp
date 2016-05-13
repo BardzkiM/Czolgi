@@ -182,7 +182,7 @@ int main()
 		exit(-12);
 	}
 
-	music.play();
+	//music.play();
 	music.setLoop(true);
 	musicTank.setLoop(true);
 

@@ -59,65 +59,67 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 	for (int i = 0; i < 185; i++)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, i, true, 52));
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, i, true, 52));
 		window->display();
 		sf::sleep(delay);	
 	}
 		
 	//wjazd z prawej
 	sound.play();
-	for (int k = 1200; k >=720; k--)
+	for (int k = 1200; k >=700; k--)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, 185, true, 52));
-		window->draw(napisy(this->wykonawca1, "Piotr Fic - kierownik", k, 275, false, 45));
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, 185, true, 52));
+		window->draw(napisy(this->wykonawca1, "Michal Bardzki - kierownik", k, 275, false, 45));
 		window->display();
 		sf::sleep(delay);		
 	}
+
 	sound.play();
-	for (int k = 1200; k >= 760; k--)
+	for (int k = 1200; k >= 820; k--)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, 185, true, 52));
-		window->draw(napisy(this->wykonawca1, "Piotr Fic - kierownik", 720, 275, false, 45));
-		window->draw(napisy(this->wykonawca2, "Michal Bardzki", k, 345, false, 45));
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, 185, true, 52));
+		window->draw(napisy(this->wykonawca1, "Michal Bardzki - kierownik", 700, 275, false, 45));
+		window->draw(napisy(this->wykonawca2, "Piotr Fic", k, 345, false, 45));
 		window->display();
 		sf::sleep(delay);
 	}
+
 	sound.play();
-	for (int k = 1200; k >= 760; k--)
+	for (int k = 1200; k >= 780; k--)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, 185, true, 52));
-		window->draw(napisy(this->wykonawca1, "Piotr Fic - kierownik", 720, 275, false, 45));
-		window->draw(napisy(this->wykonawca2, "Michal Bardzki", 760, 345, false, 45));
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, 185, true, 52));
+		window->draw(napisy(this->wykonawca1, "Michal Bardzki - kierownik", 700, 275, false, 45));
+		window->draw(napisy(this->wykonawca2, "Piotr Fic", 820, 345, false, 45));
 		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", k, 415, false, 45));//760,415
 		window->display();
 		sf::sleep(delay);
 	}
 
 	sound.play();
-	for (int k = 1200; k >= 790; k--)
+	for (int k = 1200; k >= 810; k--)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, 185, true, 52));
-		window->draw(napisy(this->wykonawca1, "Piotr Fic - kierownik", 720, 275, false, 45));
-		window->draw(napisy(this->wykonawca2, "Michal Bardzki", 760, 345, false, 45));
-		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", 760, 415, false, 45));//760,415
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, 185, true, 52));
+		window->draw(napisy(this->wykonawca1, "Michal Bardzki - kierownik", 700, 275, false, 45));
+		window->draw(napisy(this->wykonawca2, "Piotr Fic", 820, 345, false, 45));
+		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", 780, 415, false, 45));//760,415
 		window->draw(napisy(this->wykonawca3, "Anna Gawor", k, 485, false, 45)); //790,485
 		window->display();
 		sf::sleep(delay);
 	}
-	sf::sleep(delay1);
+
 	sound.play();
-	for (int k = 1200; k >= 760; k--)
+	for (int k = 1200; k >= 780; k--)
 	{
 		window->draw(sprite);
-		window->draw(napisy(this->wstep, "Projekt wykonali :", 720, 185, true, 52));
-		window->draw(napisy(this->wykonawca1, "Piotr Fic - kierownik", 720, 275, false, 45));
-		window->draw(napisy(this->wykonawca2, "Michal Bardzki", 760, 345, false, 45));
-		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", 760, 415, false, 45));//760,415
-		window->draw(napisy(this->wykonawca3, "Anna Gawor", 790, 485, false, 45)); //790,485
+		window->draw(napisy(this->wstep, "Projekt wykonali :", 740, 185, true, 52));
+		window->draw(napisy(this->wykonawca1, "Michal Bardzki - kierownik", 700, 275, false, 45));
+		window->draw(napisy(this->wykonawca2, "Piotr Fic", 820, 345, false, 45));
+		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", 780, 415, false, 45));//760,415
+		window->draw(napisy(this->wykonawca3, "Anna Gawor", 810, 485, false, 45)); //790,485
 		window->draw(napisy(this->wykonawca3, "Mikolaj Midura", k, 555, false, 45)); //760,555
 		window->display();
 		sf::sleep(delay);
