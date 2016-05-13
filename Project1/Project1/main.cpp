@@ -182,7 +182,7 @@ int main()
 		exit(-12);
 	}
 
-	//music.play();
+	music.play();
 	music.setLoop(true);
 	musicTank.setLoop(true);
 
@@ -221,9 +221,8 @@ int main()
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
-						//server_game.launch();
-						//server_init.terminate();
-						
+						server_init.terminate();
+						server_game.launch();
 
 						
 					}

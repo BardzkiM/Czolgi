@@ -18,12 +18,12 @@ void ServerTCP::accept_client()
 {
 	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
 		nr_of_clients++;
-		sf::TcpSocket *temp = new sf::TcpSocket[nr_of_clients];
-		//std::copy(client, client + (nr_of_clients - 1), temp);
-		memcpy(temp,client,nr_of_clients-1);
-		delete[] client;
-		client = temp;
-		if (listener.accept(client[nr_of_clients - 1]) != sf::Socket::Done)
+		//sf::TcpSocket *temp = new sf::TcpSocket[nr_of_clients];
+		////std::copy(client, client + (nr_of_clients - 1), temp);
+		//memcpy(temp,client,nr_of_clients-1);
+		//delete[] client;
+		//client = temp;
+		if (listener.accept(this->client[nr_of_clients - 1]) != sf::Socket::Done)
 		{
 			// error...
 			std::cout << "error";
@@ -33,7 +33,7 @@ void ServerTCP::accept_client()
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	if (client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
+	if (this->client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
 	}
@@ -42,22 +42,27 @@ void ServerTCP::send(int which_client, std::string message)
 void ServerTCP::receive(int which_client)
 {
 	char data[100];
-	
 	std::size_t received;
-	
-
-	// TCP socket:
-
-	if (client[which_client].receive(&data,100,received) != sf::Socket::Done)
+	std::string output_string;
+	do
 	{
-		// error...
-		std::cout << "error";
-	}
-	std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
-	Czolg czolg_test;								//tworzymy testowy obiekt czolg
-	czolg_test.deserialize(received_data_str);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
+		if (client[which_client].receive(&data, 100, received) != sf::Socket::Done)
+		{
+			// error...
+			//std::cout << "Error during server receiveing";
+		}
+		std::string temp_string(data);
+		output_string = temp_string;
+		//std::cout << output_string << std::endl;
+	} while (output_string.find("archive") == -1);
+
+	std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
+
+	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
+	tank[which_client].deserialize(output_string);							//tworzymy testowy obiekt czolg
+	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
 	
-	std::cout << "Received " << received <<  " bytes" << " " << received_data_str << std::endl;
+	std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
 }
 
 void ServerTCP::RunInit()
@@ -86,19 +91,32 @@ void ServerTCP::RunInit()
 		//this->send(i, std::to_string(i));
 		
 	}
-	/*int k;
-	std::cin >> k;
-	std::cout << "podano k" << std::endl;*/
-	for (int i = 0; i < nr_of_clients; i++)
+	listener.close();
+	while (1)
 	{
-		this->send(i, std::to_string(nr_of_clients));
+		for (int i = 0; i < nr_of_clients - 1; i++)
+		{
+			std::cout << "Server petla " << i << std::endl;
+			this->receive(i);
+			std::cout << "Server petla " << i << std::endl;
+			this->send(i, this->tank[i].serialize());
+		}
 	}
-	//sf::Thread client_1(&ServerTCP::accept_client, this);
+	
 }
 void ServerTCP::runGame()
 {
-	
-		
+	std::cout << "Server wszed³ w tryb ci¹g³y" << std::endl;
+	while (1)
+	{
+		for (int i = 0; i < nr_of_clients - 1; i++)
+		{
+			
+			this->receive(i);
+			std::cout << "Server petla " << i << std::endl;
+			this->send(i, this->tank[i].serialize());
+		}
+	}
 		//this->send(0, std::to_string(nr_of_clients - 1));
 	
 }

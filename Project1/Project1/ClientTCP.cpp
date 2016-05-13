@@ -53,12 +53,18 @@ void ClientTCP::RunInit()
 		std::cout << "error";
 	}
 	
-	std::string tmp = this->receive();
+	std::string tmp = this->receive();	
 	
-
-
 	std::cout << "[Klient " << tmp << "] before serialize " << tmp << std::endl;
 	this->tank->deserialize(tmp);
+
+	
+	std::cout << "Klient wszed³ w tryb ci¹g³y" << std::endl;
+	while (1)
+	{
+		this->send(this->tank->serialize());
+		this->tank->deserialize(this->receive());
+	}
 
 	
 }

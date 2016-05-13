@@ -17,7 +17,7 @@ public:
 	void accept_client();
 	void send(int which_client, std::string message);
 	void receive(int which_client);
-	int argument;
+	int argument = 0;
 	int ilosc_graczy = 0;
 	
 	void RunInit();
@@ -27,8 +27,9 @@ public:
 private:
 
 	sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
-	sf::TcpSocket *client = NULL;// new sf::TcpSocket[1];
+	//sf::TcpSocket *client = NULL;// new sf::TcpSocket[1];
 	int nr_of_clients=0;
+	sf::TcpSocket client[4];
 	
 
 };
