@@ -76,19 +76,19 @@ void ServerTCP::RunInit()
 	
 
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < clients_size; i++)
 	{
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
 		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
 		this->send(i, tank[i].serialize());	
-		this->send(i, std::to_string(i));
+		//this->send(i, std::to_string(i));
 		
 	}
-	int k;
+	/*int k;
 	std::cin >> k;
-	std::cout << "podano k" << std::endl;
+	std::cout << "podano k" << std::endl;*/
 	for (int i = 0; i < nr_of_clients; i++)
 	{
 		this->send(i, std::to_string(nr_of_clients));
