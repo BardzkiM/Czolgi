@@ -54,7 +54,7 @@ void ClientTCP::RunInit()
 {
 	std::cout << "Start w¹tku klienta" << std::endl;
 
-	sf::Socket::Status status = socket.connect("127.0.0.0", 54000);
+	sf::Socket::Status status = socket.connect("127.0.0.1", 54000);
 	if (status != sf::Socket::Done)
 	{
 		// error...
