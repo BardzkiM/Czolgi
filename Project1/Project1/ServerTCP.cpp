@@ -29,13 +29,13 @@ std::string ServerTCP::serialize()
 void ServerTCP::accept_client()
 {
 	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
-		nr_of_clients++;
+		
 		//sf::TcpSocket *temp = new sf::TcpSocket[nr_of_clients];
 		////std::copy(client, client + (nr_of_clients - 1), temp);
 		//memcpy(temp,client,nr_of_clients-1);
 		//delete[] client;
 		//client = temp;
-		if (listener.accept(this->client[nr_of_clients - 1]) != sf::Socket::Done)
+		if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
 		{
 			// error...
 			std::cout << "error";
@@ -93,14 +93,16 @@ void ServerTCP::RunInit()
 	
 
 
-	for (int i = 0; i < max_clients_size+1; i++)
+	for (int i = 0; i < max_clients_size; i++)
 	{
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
 		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
-		this->send(i, tank[i].serialize());	
+		
+		this->send(i, tank[i].serialize());	// wysy³amy do klienta jest pocz¹tkowe po³o¿enie 
 		//this->send(i, std::to_string(i));
+		nr_of_clients++;
 		
 	}
 	listener.close();
@@ -123,22 +125,22 @@ void ServerTCP::runGame()
 {
 	std::cout << "Server wszed³ w tryb ci¹g³y" << std::endl;
 	
-	for (int i = 0; i < nr_of_clients-1; i++) // wysy³amy iloœæ klientów do wszystkich klientów
+	for (int i = 0; i < nr_of_clients; i++) // wysy³amy iloœæ klientów do wszystkich klientów
 	{
 		this->send(i, this->serialize());
 	}
 	while (1)
 	{
 		std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
-		for (int i = 0; i < nr_of_clients - 1; i++)
+		for (int i = 0; i < nr_of_clients; i++)
 		{
 			
 			this->receive(i);
 			std::cout << "Server petla " << i << std::endl;
-			for (int j = 0; j < nr_of_clients-1; j++)
+			for (int j = 0; j < nr_of_clients; j++)
 			{
-				if (i == j)
-					continue;
+				//if (i == j)
+				//	continue;
 				std::cout << "HELLOO MIDURA" << std::endl;
 				this->send(i, this->tank[j].serialize());
 			}

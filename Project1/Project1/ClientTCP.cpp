@@ -61,10 +61,8 @@ void ClientTCP::RunInit()
 		std::cout << "error";
 	}
 	
-	std::string tmp = this->receive();	
 	
-	std::cout << "[Klient " << tmp << "] before serialize " << tmp << std::endl;
-	this->tank->deserialize(tmp);
+	this->tank->deserialize(this->receive()); // odbieramy w³asny czo³g przed gr¹
 
 	deserialize(this->receive());	//odbieramy liczbê klientów
 	std::cout <<std::endl<< "Klient wszed³ w tryb ci¹g³y" << std::endl;
@@ -72,7 +70,7 @@ void ClientTCP::RunInit()
 	{
 		std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
-		for (int i = 0; i < nr_of_clients - 2; i++)
+		for (int i = 0; i < nr_of_clients; i++)
 		{
 		
 			tanks[i].deserialize(this->receive());
