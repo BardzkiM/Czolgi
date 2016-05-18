@@ -31,9 +31,8 @@ sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
-sf::Sprite tank_enemy_sprite[3];
 
-sf::Sprite tanks_sprite[3];
+sf::Sprite tanks_sprite[4];
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
@@ -105,6 +104,7 @@ void gra(Czolg &tank)
 		if (i == tank.nr_czolgu)
 			continue;
 		tanks_sprite[i].setTexture(clienttcp.tanks[i].texture);
+		window.draw(tanks_sprite[i]);
 	}
 	window.clear();
 	// Draw the tank_sprite

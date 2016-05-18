@@ -113,7 +113,7 @@ void Czolg::move(int x, int y)
 		break;
 	}
 	//sound.play();
-	if (!(sprawdzKolizjeCzolgPrzeszkoda))
+	if (!(sprawdzKolizjeCzolgPrzeszkoda()))
 	{
 		this->y += y*movement;
 		this->x += x*movement;
