@@ -42,6 +42,8 @@ sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
 void gra(Czolg &tank)
 {
+	
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		tank.angle = 90;
@@ -79,7 +81,7 @@ void gra(Czolg &tank)
 	tank.sprawdzKolizjePociskowPrzeszkod();
 
 	
-
+	window.draw(GraDane::spriteMapa);
 	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
 		przeszkodaSprite.setTexture(GraDane::mapa.przeszkody[i].texture);
@@ -96,12 +98,11 @@ void gra(Czolg &tank)
 			window.draw(pociska);
 		}
 	}
-	window.display();
+	
 
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
-
-	cout << "TANKS: " << ClientTCP::nr_of_clients << endl;
+	
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		cout << "TANK "<< i <<": "<< ClientTCP::tanks[i].x << endl;
@@ -112,10 +113,12 @@ void gra(Czolg &tank)
 		tanks_sprite[i].setTexture(ClientTCP::tanks[i].texture);
 		window.draw(tanks_sprite[i]);
 	}
-	window.clear();
-	// Draw the tank_sprite
-	window.draw(GraDane::spriteMapa);
+	
 	window.draw(tank_sprite);
+	window.display();
+	//window.clear();
+	// Draw the tank_sprite
+	
 }
 int main()
 {
@@ -123,7 +126,7 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	/server_init.launch();
+	//server_init.launch();
 	
 	
 
