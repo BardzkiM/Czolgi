@@ -9,6 +9,7 @@
 #include "ClientTCP.h"
 #include <vector>
 #include "Wykonawcy.h"
+#include "LoadingPage.h"
 
 using namespace std;
 
@@ -37,6 +38,8 @@ sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
+
+bool gameready = false;
 
 
 void gra(Czolg &tank)
@@ -128,19 +131,20 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	server_init.launch();
+	//server_init.launch();
 	
 	
 
 	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
+	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
 	//clienttcp_thread1.launch();
 
 
 
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
+	LoadingPage loadingpage(&server_init);
 	Menu menu;
 	bool menu_open = true;
 	
@@ -217,13 +221,23 @@ int main()
 				{
 					if (menu.position == 1)
 					{
-						menu_open = false;
+						menu_open = false;						
+						clienttcp.adress=loadingpage.run(&window);
+						clienttcp_thread.launch();
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
 						server_init.terminate();
 						server_game.launch();
+						gameready = true;
 
+						/*menu_open = false;
+						tank_sprite.setTexture(tank.texturel);
+						music.stop();
+						musicTank.play();
+						server_init.terminate();
+						server_game.launch();
+*/
 						
 					}
 					if (menu.position == 2) //wykonawcy
@@ -247,7 +261,7 @@ int main()
 			
 		}
 		
-		if (!menu_open&&menu.position == 1)
+		if (!menu_open && gameready==true)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{

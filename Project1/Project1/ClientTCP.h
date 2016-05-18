@@ -26,10 +26,12 @@ public:
 	std::string numer_klienta;
 	
 	Czolg tanks[3];
+	std::string adress;
 
 private:
 	sf::TcpSocket socket;
 	Czolg *tank;
+
 	
 
 };

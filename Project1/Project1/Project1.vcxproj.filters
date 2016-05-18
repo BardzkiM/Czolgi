@@ -87,6 +87,12 @@
     <ClInclude Include="GraDane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czolg.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="GraDane.cpp">
       <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingPage.cpp">
+      <Filter>Source Files\views</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
