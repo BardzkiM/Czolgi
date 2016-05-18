@@ -21,7 +21,7 @@ std::string ServerTCP::serialize()
 	boost::archive::text_oarchive oarchive(archive_ostream);
 	oarchive << this->nr_of_clients;
 	serialized_data_str = archive_ostream.str();
-	std::cout << "[Server]serialized data: " << serialized_data_str << std::endl;
+	//std::cout << "[Server]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }
@@ -68,13 +68,13 @@ void ServerTCP::receive(int which_client)
 		//std::cout << output_string << std::endl;
 	} while (output_string.find("archive") == -1);
 
-	std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
+	//std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
 
 	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
 	tank[which_client].deserialize(output_string);							//tworzymy testowy obiekt czolg
 	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
 	
-	std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
+	//std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
 }
 
 void ServerTCP::RunInit()
@@ -131,17 +131,17 @@ void ServerTCP::runGame()
 	}
 	while (1)
 	{
-		std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
+		//std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 			
 			this->receive(i);
-			std::cout << "Server petla " << i << std::endl;
+			//std::cout << "Server petla " << i << std::endl;
 			for (int j = 0; j < nr_of_clients; j++)
 			{
 				//if (i == j)
 				//	continue;
-				std::cout << "HELLOO MIDURA" << std::endl;
+				//std::cout << "HELLOO MIDURA" << std::endl;
 				this->send(i, this->tank[j].serialize());
 			}
 		}
