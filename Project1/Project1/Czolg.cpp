@@ -124,21 +124,7 @@ void Czolg::removePocisk(int j)
 void Czolg::move(int x, int y)
 {
 	sound.setBuffer(bufferTank);
-	switch (angle)
-	{
-	case 0:
-		texture = texturel;
-		break;
-	case 90:
-		texture = textureu;
-		break;
-	case 180:
-		texture = texturer;
-		break;
-	case 270:
-		texture = textured;
-		break;
-	}
+	setRotation();
 	//sound.play();
 	if (!(sprawdzKolizjeCzolgPrzeszkoda()))
 	{
@@ -146,6 +132,8 @@ void Czolg::move(int x, int y)
 		this->x += x*movement;
 	}
 }
+
+
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
 	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
