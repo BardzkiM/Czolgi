@@ -14,6 +14,18 @@ ServerTCP::~ServerTCP()
 
 }
 
+std::string ServerTCP::serialize()
+{
+	std::ostringstream archive_ostream;
+	std::string serialized_data_str;
+	boost::archive::text_oarchive oarchive(archive_ostream);
+	oarchive << this->nr_of_clients;
+	serialized_data_str = archive_ostream.str();
+	std::cout << "[Server]serialized data: " << serialized_data_str << std::endl;
+	return serialized_data_str;
+
+}
+
 void ServerTCP::accept_client()
 {
 	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
@@ -76,12 +88,12 @@ void ServerTCP::RunInit()
 		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
 		exit(1);
 	}
-	const int clients_size = 4;
-	sf::Thread *clients[clients_size];
+	const int max_clients_size = 4;
+	sf::Thread *clients[max_clients_size];
 	
 
 
-	for (int i = 0; i < clients_size; i++)
+	for (int i = 0; i < max_clients_size+1; i++)
 	{
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
@@ -92,29 +104,44 @@ void ServerTCP::RunInit()
 		
 	}
 	listener.close();
-	while (1)
+	/*while (1)
 	{
 		for (int i = 0; i < nr_of_clients - 1; i++)
 		{
 			std::cout << "Server petla " << i << std::endl;
 			this->receive(i);
+
 			std::cout << "Server petla " << i << std::endl;
+
+			
 			this->send(i, this->tank[i].serialize());
 		}
-	}
+	}*/
 	
 }
 void ServerTCP::runGame()
 {
 	std::cout << "Server wszed³ w tryb ci¹g³y" << std::endl;
+	
+	for (int i = 0; i < nr_of_clients-1; i++) // wysy³amy iloœæ klientów do wszystkich klientów
+	{
+		this->send(i, this->serialize());
+	}
 	while (1)
 	{
+		std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients - 1; i++)
 		{
 			
 			this->receive(i);
 			std::cout << "Server petla " << i << std::endl;
-			this->send(i, this->tank[i].serialize());
+			for (int j = 0; j < nr_of_clients-1; j++)
+			{
+				if (i == j)
+					continue;
+				std::cout << "HELLOO MIDURA" << std::endl;
+				this->send(i, this->tank[j].serialize());
+			}
 		}
 	}
 		//this->send(0, std::to_string(nr_of_clients - 1));

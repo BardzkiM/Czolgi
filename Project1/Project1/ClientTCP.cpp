@@ -10,6 +10,14 @@ ClientTCP::~ClientTCP()
 {
 
 }
+void ClientTCP::deserialize(std::string stream)
+{
+	std::istringstream archive_istream(stream);
+	boost::archive::text_iarchive iarchive(archive_istream);
+	iarchive >> this->nr_of_clients;
+
+	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
+}
 
 void ClientTCP::send(std::string message)
 {
@@ -58,12 +66,17 @@ void ClientTCP::RunInit()
 	std::cout << "[Klient " << tmp << "] before serialize " << tmp << std::endl;
 	this->tank->deserialize(tmp);
 
-	
-	std::cout << "Klient wszed³ w tryb ci¹g³y" << std::endl;
+	deserialize(this->receive());	//odbieramy liczbê klientów
+	std::cout <<std::endl<< "Klient wszed³ w tryb ci¹g³y" << std::endl;
 	while (1)
 	{
+		std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
-		this->tank->deserialize(this->receive());
+		for (int i = 0; i < nr_of_clients - 2; i++)
+		{
+		
+			tanks[i].deserialize(this->receive());
+		}
 	}
 
 	

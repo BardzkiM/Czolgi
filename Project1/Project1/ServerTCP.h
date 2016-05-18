@@ -14,6 +14,8 @@ public:
 	ServerTCP();
 	~ServerTCP();
 
+	std::string serialize();
+
 	void accept_client();
 	void send(int which_client, std::string message);
 	void receive(int which_client);

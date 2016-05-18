@@ -135,7 +135,7 @@ int main()
 	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
-	clienttcp_thread1.launch();
+	//clienttcp_thread1.launch();
 
 
 
