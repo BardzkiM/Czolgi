@@ -9,7 +9,7 @@ std::string Czolg::serialize()
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
-	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp;
+	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp << this->nr_czolgu;
 	oarchive << this->pociski.size();
 	for (int i = 0; i < this->pociski.size(); i++)
 	{
@@ -18,7 +18,7 @@ std::string Czolg::serialize()
 		oarchive << pociski[i].angle;
 	}
 	serialized_data_str = archive_ostream.str();
-	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
+	//std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }
@@ -34,25 +34,21 @@ void Czolg::deserialize(std::string stream)
 	iarchive >> this->height;
 	iarchive >> this->width;
 	iarchive >> this->hp;
+	iarchive >> this->nr_czolgu;
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
-	cout <<"NUMBER OF BUTTLESESSES"<< number_of_bullets<< "  "<< pociski.size() << endl;
 	pociski.clear();
 	for (int i = 0; i < number_of_bullets; i++)
 	{
 		Pocisk pocisk_temp(0,0,0);
-
-		cout << "STAGE 1" << endl;
 		iarchive >> pocisk_temp.x;
-		cout << "STAGE 2" << endl;
 		iarchive >> pocisk_temp.y;
-		cout << "STAGE 3" << endl;
 		iarchive >> pocisk_temp.angle;
-		cout << "STAGE 4" << endl;
 		pociski.push_back(pocisk_temp);
 	}
 	
-	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
+	
+	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
 
@@ -122,11 +118,16 @@ void Czolg::removePocisk(int j)
 void Czolg::move(int x, int y)
 {
 	sound.setBuffer(bufferTank);
-
+	setRotation();
 	//sound.play();
-	this->y += y*movement;
-	this->x += x*movement;
+	if (!(sprawdzKolizjeCzolgPrzeszkoda()))
+	{
+		this->y += y*movement;
+		this->x += x*movement;
+	}
 }
+
+
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
 	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();

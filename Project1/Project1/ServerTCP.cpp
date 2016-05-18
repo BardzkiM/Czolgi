@@ -21,7 +21,7 @@ std::string ServerTCP::serialize()
 	boost::archive::text_oarchive oarchive(archive_ostream);
 	oarchive << this->nr_of_clients;
 	serialized_data_str = archive_ostream.str();
-	std::cout << "[Server]serialized data: " << serialized_data_str << std::endl;
+	//std::cout << "[Server]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }
@@ -68,13 +68,13 @@ void ServerTCP::receive(int which_client)
 		//std::cout << output_string << std::endl;
 	} while (output_string.find("archive") == -1);
 
-	std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
+	//std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
 
 	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
 	tank[which_client].deserialize(output_string);							//tworzymy testowy obiekt czolg
 	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
 	
-	std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
+	//std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
 }
 
 void ServerTCP::RunInit()
@@ -98,8 +98,8 @@ void ServerTCP::RunInit()
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
-		std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
-		
+		//std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
+		tank[i].nr_czolgu = i;
 		this->send(i, tank[i].serialize());	// wysy³amy do klienta jest pocz¹tkowe po³o¿enie 
 		//this->send(i, std::to_string(i));
 		nr_of_clients++;
@@ -131,21 +131,52 @@ void ServerTCP::runGame()
 	}
 	while (1)
 	{
-		std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
+		sprawdzKolizjePociskCzolgs();
+		//std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 			
 			this->receive(i);
-			std::cout << "Server petla " << i << std::endl;
+			//std::cout << "Server petla " << i << std::endl;
 			for (int j = 0; j < nr_of_clients; j++)
 			{
 				//if (i == j)
 				//	continue;
-				std::cout << "HELLOO MIDURA" << std::endl;
+				//std::cout << "HELLOO MIDURA" << std::endl;
 				this->send(i, this->tank[j].serialize());
 			}
 		}
 	}
 		//this->send(0, std::to_string(nr_of_clients - 1));
 	
+}
+void ServerTCP::sprawdzKolizjePociskCzolgs()
+{
+	for (int i = 0; i < nr_of_clients; i++)
+	{
+		sprawdzKolizjePociskCzolg(i);
+	}
+}
+void ServerTCP::sprawdzKolizjePociskCzolg(int index)
+{
+
+	for (int k = 0; k < tank[index].pociski.size(); k++)
+	{
+		Pocisk *pocisk = &tank[index].pociski[k];
+
+
+		for (int i = 0; i < nr_of_clients; i++)
+		{
+
+			if (((pocisk->x + pocisk->width) > tank[i].x) &&
+				(pocisk->x < (tank[i].x + tank[i].width)) &&
+				((pocisk->y + pocisk->height) >  tank[i].y) &&
+				(pocisk->y < (tank[i].y + tank[i].height )))
+			{
+				std::cout << "TRAFIONY MIDURA!" << std::endl;
+				tank[index].removePocisk(k);
+				tank[i].hp -= 20;
+			}
+		}
+	}
 }
