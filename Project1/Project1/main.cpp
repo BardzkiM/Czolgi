@@ -101,6 +101,7 @@ void gra(Czolg &tank)
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
 
+	cout << "TANKS: " << clienttcp.nr_of_clients << endl;
 	for (int i = 0; i < clienttcp.nr_of_clients; i++)
 	{
 		cout << "TANK "<< i <<": "<< clienttcp.tanks[i].x << endl;
