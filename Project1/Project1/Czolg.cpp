@@ -37,24 +37,18 @@ void Czolg::deserialize(std::string stream)
 	iarchive >> this->nr_czolgu;
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
-	cout <<"NUMBER OF BUTTLESESSES"<< number_of_bullets<< "  "<< pociski.size() << endl;
 	pociski.clear();
 	for (int i = 0; i < number_of_bullets; i++)
 	{
 		Pocisk pocisk_temp(0,0,0);
-
-		cout << "STAGE 1" << endl;
 		iarchive >> pocisk_temp.x;
-		cout << "STAGE 2" << endl;
 		iarchive >> pocisk_temp.y;
-		cout << "STAGE 3" << endl;
 		iarchive >> pocisk_temp.angle;
-		cout << "STAGE 4" << endl;
 		pociski.push_back(pocisk_temp);
 	}
 	
 	
-	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
+	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
 

@@ -123,7 +123,7 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	//server_init.launch();
+	server_init.launch();
 	
 	
 
