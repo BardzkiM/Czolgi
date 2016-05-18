@@ -9,7 +9,7 @@ std::string Czolg::serialize()
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
-	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp;
+	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp << this->nr_czolgu;
 	serialized_data_str = archive_ostream.str();
 	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
@@ -26,6 +26,7 @@ void Czolg::deserialize(std::string stream)
 	iarchive >> this->height;
 	iarchive >> this->width;
 	iarchive >> this->hp;
+	iarchive >> this->nr_czolgu;
 	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
@@ -96,10 +97,27 @@ void Czolg::removePocisk(int j)
 void Czolg::move(int x, int y)
 {
 	sound.setBuffer(bufferTank);
-
+	switch (angle)
+	{
+	case 0:
+		texture = texturel;
+		break;
+	case 90:
+		texture = textureu;
+		break;
+	case 180:
+		texture = texturer;
+		break;
+	case 270:
+		texture = textured;
+		break;
+	}
 	//sound.play();
-	this->y += y*movement;
-	this->x += x*movement;
+	if (!(sprawdzKolizjeCzolgPrzeszkoda))
+	{
+		this->y += y*movement;
+		this->x += x*movement;
+	}
 }
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {

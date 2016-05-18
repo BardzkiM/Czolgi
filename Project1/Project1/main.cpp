@@ -33,6 +33,8 @@ sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
 sf::Sprite tank_enemy_sprite[3];
 
+sf::Sprite tanks_sprite[3];
+
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
@@ -43,43 +45,23 @@ void gra(Czolg &tank)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		tank_sprite.setTexture(tank.textureu);
 		tank.angle = 90;
-		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
-		{
-			
-			tank.move(0,-1);
-		}
+		tank.move(0,-1);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		tank_sprite.setTexture(tank.textured);
 		tank.angle = 270;
-		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
-		{
-			
-			tank.move(0,1);
-		}
+		tank.move(0,1);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		tank_sprite.setTexture(tank.texturer);
 		tank.angle = 180;
-		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
-		{
-			
-			tank.move(1,0);
-		}
+		tank.move(1,0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		tank_sprite.setTexture(tank.texturel);
 		tank.angle = 0;
-		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
-		{
-			
-			tank.move(-1, 0);
-		}
+		tank.move(-1, 0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -91,17 +73,14 @@ void gra(Czolg &tank)
 			tank.addPocisk();
 			bullet_clock.restart();
 		}
-			
 		
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
+	tank_sprite.setTexture(tank.texture);
 	tank.sprawdzKolizjePociskowPrzeszkod();
 
-	window.clear();
-	// Draw the tank_sprite
-	window.draw(GraDane::spriteMapa);
-	window.draw(tank_sprite);
+	
 
 	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
@@ -121,6 +100,16 @@ void gra(Czolg &tank)
 	}
 	window.display();
 	tank_sprite.setPosition(tank.x, tank.y);
+	for (int i = 0; i < clienttcp.nr_of_clients; i++)
+	{
+		if (i == tank.nr_czolgu)
+			continue;
+		tanks_sprite[i].setTexture(clienttcp.tanks[i].texture);
+	}
+	window.clear();
+	// Draw the tank_sprite
+	window.draw(GraDane::spriteMapa);
+	window.draw(tank_sprite);
 }
 int main()
 {
