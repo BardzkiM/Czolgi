@@ -25,7 +25,6 @@ public:
 	void deserialize(std::string stream);
 	void sprawdzKolizjePociskowPrzeszkod();
 	bool sprawdzKolizjeCzolgPrzeszkoda();
-	int nr_czolgu = -1;
 
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;

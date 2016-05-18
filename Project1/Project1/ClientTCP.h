@@ -15,7 +15,7 @@ public:
 	ClientTCP(Czolg * source_tank_pointer);
 	~ClientTCP();
 
-	static int nr_of_clients;
+	int nr_of_clients = 0;
 	void deserialize(std::string stream);
 
 	void send(std::string message);

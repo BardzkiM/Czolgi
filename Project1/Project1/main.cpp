@@ -32,8 +32,7 @@ sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
-
-sf::Sprite tanks_sprite[4];
+sf::Sprite tank_enemy_sprite[3];
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
@@ -45,35 +44,45 @@ bool gameready = false;
 
 void gra(Czolg &tank)
 {
-	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
-	{
-		if (i == tank.nr_czolgu)
-		{
-			tank.pociski = ClientTCP::tanks[i].pociski;
-			break;
-		}
-			
-	}
-	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
+		tank_sprite.setTexture(tank.textureu);
 		tank.angle = 90;
-		tank.move(0,-1);
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
+		{
+			
+			tank.move(0,-1);
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
+		tank_sprite.setTexture(tank.textured);
 		tank.angle = 270;
-		tank.move(0,1);
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
+		{
+			
+			tank.move(0,1);
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
+		tank_sprite.setTexture(tank.texturer);
 		tank.angle = 180;
-		tank.move(1,0);
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
+		{
+			
+			tank.move(1,0);
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
+		tank_sprite.setTexture(tank.texturel);
 		tank.angle = 0;
-		tank.move(-1, 0);
+		if (!(tank.sprawdzKolizjeCzolgPrzeszkoda()))
+		{
+			
+			tank.move(-1, 0);
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -85,14 +94,18 @@ void gra(Czolg &tank)
 			tank.addPocisk();
 			bullet_clock.restart();
 		}
+			
 		
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
 	tank.sprawdzKolizjePociskowPrzeszkod();
 
-	
+	window.clear();
+	// Draw the tank_sprite
 	window.draw(GraDane::spriteMapa);
+	window.draw(tank_sprite);
+
 	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
 		przeszkodaSprite.setTexture(GraDane::mapa.przeszkody[i].texture);
@@ -109,36 +122,8 @@ void gra(Czolg &tank)
 			window.draw(pociska);
 		}
 	}
-	
-
-	tank_sprite.setTexture(tank.texture);
-	tank_sprite.setPosition(tank.x, tank.y);
-	
-	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
-	{
-		Czolg *czolg = &ClientTCP::tanks[i];
-		if (i == tank.nr_czolgu)
-			continue;
-		czolg->setRotation();
-		tanks_sprite[i].setPosition(czolg->x, czolg->y);
-		tanks_sprite[i].setTexture(czolg->texture);
-		window.draw(tanks_sprite[i]);
-
-		for (int j = 0; j < czolg->pociski.size(); j++)
-		{
-			Pocisk *pocisk = &ClientTCP::tanks[i].pociski[j];
-			pocisk->setRotation();
-			pociska.setPosition(pocisk->x, pocisk->y);
-			pociska.setTexture(pocisk->texture);
-			window.draw(pociska);
-		}
-	}
-	
-	window.draw(tank_sprite);
 	window.display();
-	//window.clear();
-	// Draw the tank_sprite
-	
+	tank_sprite.setPosition(tank.x, tank.y);
 }
 int main()
 {
