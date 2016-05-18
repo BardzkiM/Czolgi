@@ -103,6 +103,7 @@ void gra(Czolg &tank)
 
 	for (int i = 0; i < clienttcp.nr_of_clients; i++)
 	{
+		cout << "TANK "<< i <<": "<< clienttcp.tanks[i].x << endl;
 		if (i == tank.nr_czolgu)
 			continue;
 		clienttcp.tanks[i].setRotation();
@@ -121,7 +122,7 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	server_init.launch();
+	//server_init.launch();
 	
 	
 
