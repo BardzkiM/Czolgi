@@ -43,6 +43,7 @@ sf::Text LoadingPage::napisy(sf::Text text, std::string nazwa, float x, float y,
 std::string LoadingPage::run(sf::RenderWindow *window)
 {
 	sf::String adress;
+	bool is_server_running = false;
 	
 	sf::Time delay_after_first_page = sf::seconds(3.0);
 	sf::Time delay_after_character = sf::seconds(0.2);
@@ -56,7 +57,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 	sf::sleep(delay_after_first_page);
 	sf::Sprite sprite2(this->second_background);
 	window->draw(sprite2);	
-	window->draw(napisy(this->text, "192.168.0.1", 490, 202, true, 52));
+	window->draw(napisy(this->text, "", 490, 202, true, 52));
 	window->display();
 
 	while (1)
@@ -157,9 +158,10 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 			window->display();
 			sf::sleep(delay_after_character);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !is_server_running)
 		{
 			server_init->launch();
+			is_server_running = true;			
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
