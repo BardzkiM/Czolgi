@@ -131,6 +131,7 @@ void ServerTCP::runGame()
 	}
 	while (1)
 	{
+		sprawdzKolizjePociskCzolgs();
 		//std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
@@ -148,4 +149,33 @@ void ServerTCP::runGame()
 	}
 		//this->send(0, std::to_string(nr_of_clients - 1));
 	
+}
+void ServerTCP::sprawdzKolizjePociskCzolgs()
+{
+	for (int i = 0; i < nr_of_clients; i++)
+	{
+		sprawdzKolizjePociskCzolg(i);
+	}
+}
+void ServerTCP::sprawdzKolizjePociskCzolg(int index)
+{
+
+	for (int k = 0; k < tank[index].pociski.size(); k++)
+	{
+		Pocisk *pocisk = &tank[index].pociski[k];
+
+
+		for (int i = 0; i < nr_of_clients; i++)
+		{
+
+			if (((pocisk->x + pocisk->width) > tank[i].x) &&
+				(pocisk->x < (tank[i].x + tank[i].width)) &&
+				((pocisk->y + pocisk->height) >  tank[i].y) &&
+				(pocisk->y < (tank[i].y + tank[i].height )))
+			{
+				tank[index].removePocisk(k);
+				tank[i].hp -= 20;
+			}
+		}
+	}
 }

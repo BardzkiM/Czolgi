@@ -24,6 +24,8 @@ public:
 	
 	void RunInit();
 	void runGame();
+	void sprawdzKolizjePociskCzolg(int index);
+	void sprawdzKolizjePociskCzolgs();
 	Czolg tank[4];
 	
 private:
