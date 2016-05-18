@@ -101,15 +101,15 @@ void gra(Czolg &tank)
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
 
-	cout << "TANKS: " << ClientTCP.nr_of_clients << endl;
-	for (int i = 0; i < clienttcp.nr_of_clients; i++)
+	cout << "TANKS: " << ClientTCP::nr_of_clients << endl;
+	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
-		cout << "TANK "<< i <<": "<< clienttcp.tanks[i].x << endl;
+		cout << "TANK "<< i <<": "<< ClientTCP::tanks[i].x << endl;
 		if (i == tank.nr_czolgu)
 			continue;
-		clienttcp.tanks[i].setRotation();
-		tanks_sprite[i].setPosition(clienttcp.tanks[i].x, clienttcp.tanks[i].y);
-		tanks_sprite[i].setTexture(clienttcp.tanks[i].texture);
+		ClientTCP::tanks[i].setRotation();
+		tanks_sprite[i].setPosition(ClientTCP::tanks[i].x, ClientTCP::tanks[i].y);
+		tanks_sprite[i].setTexture(ClientTCP::tanks[i].texture);
 		window.draw(tanks_sprite[i]);
 	}
 	window.clear();
@@ -123,7 +123,7 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	server_init.launch();
+	//server_init.launch();
 	
 	
 
