@@ -76,7 +76,6 @@ void gra(Czolg &tank)
 		//pociska.setTexture(tank.pociski[nr].texture);
 		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	tank_sprite.setTexture(tank.texture);
 	tank.sprawdzKolizjePociskowPrzeszkod();
 
 	
@@ -98,11 +97,16 @@ void gra(Czolg &tank)
 		}
 	}
 	window.display();
+
+	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
+
 	for (int i = 0; i < clienttcp.nr_of_clients; i++)
 	{
 		if (i == tank.nr_czolgu)
 			continue;
+		clienttcp.tanks[i].setRotation();
+		tanks_sprite[i].setPosition(clienttcp.tanks[i].x, clienttcp.tanks[i].y);
 		tanks_sprite[i].setTexture(clienttcp.tanks[i].texture);
 		window.draw(tanks_sprite[i]);
 	}
