@@ -105,13 +105,23 @@ void gra(Czolg &tank)
 	
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
-		cout << "TANK "<< i <<": "<< ClientTCP::tanks[i].x << endl;
+		Czolg *czolg = &ClientTCP::tanks[i];
 		if (i == tank.nr_czolgu)
 			continue;
-		ClientTCP::tanks[i].setRotation();
-		tanks_sprite[i].setPosition(ClientTCP::tanks[i].x, ClientTCP::tanks[i].y);
-		tanks_sprite[i].setTexture(ClientTCP::tanks[i].texture);
+		czolg->setRotation();
+		tanks_sprite[i].setPosition(czolg->x, czolg->y);
+		tanks_sprite[i].setTexture(czolg->texture);
 		window.draw(tanks_sprite[i]);
+
+		int bullets_size = czolg->pociski.size();
+		for (int j = 0; j < bullets_size; j++)
+		{
+			Pocisk *pocisk = &ClientTCP::tanks[i].pociski[j];
+			pocisk->setRotation();
+			pociska.setPosition(pocisk->x, pocisk->y);
+			pociska.setTexture(pocisk->texture);
+			window.draw(pociska);
+		}
 	}
 	
 	window.draw(tank_sprite);
