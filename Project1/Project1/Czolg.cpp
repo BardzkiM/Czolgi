@@ -9,7 +9,7 @@ std::string Czolg::serialize()
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
-	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp;
+	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp << this->nr_czolgu;
 	oarchive << this->pociski.size();
 	for (int i = 0; i < this->pociski.size(); i++)
 	{
@@ -17,7 +17,6 @@ std::string Czolg::serialize()
 		oarchive << pociski[i].y;
 		oarchive << pociski[i].angle;
 	}
-	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp << this->nr_czolgu;
 	serialized_data_str = archive_ostream.str();
 	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
@@ -35,6 +34,7 @@ void Czolg::deserialize(std::string stream)
 	iarchive >> this->height;
 	iarchive >> this->width;
 	iarchive >> this->hp;
+	iarchive >> this->nr_czolgu;
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
 	cout <<"NUMBER OF BUTTLESESSES"<< number_of_bullets<< "  "<< pociski.size() << endl;
@@ -53,7 +53,7 @@ void Czolg::deserialize(std::string stream)
 		pociski.push_back(pocisk_temp);
 	}
 	
-	iarchive >> this->nr_czolgu;
+	
 	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
