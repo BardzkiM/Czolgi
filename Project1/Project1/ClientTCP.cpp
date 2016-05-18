@@ -1,6 +1,9 @@
 #include "ClientTCP.h"
 #include "Czolg.h"
 
+Czolg ClientTCP::tanks[3];
+int ClientTCP::nr_of_clients = 0;
+
 ClientTCP::ClientTCP(Czolg *source_tank_pointer)
 {
 	this->tank = source_tank_pointer;
