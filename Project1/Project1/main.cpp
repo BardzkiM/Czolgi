@@ -42,8 +42,16 @@ sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
 void gra(Czolg &tank)
 {
+	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
+	{
+		if (i == tank.nr_czolgu)
+		{
+			tank.pociski = ClientTCP::tanks[i].pociski;
+			break;
+		}
+			
+	}
 	
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		tank.angle = 90;

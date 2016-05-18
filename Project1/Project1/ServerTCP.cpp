@@ -173,6 +173,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 				((pocisk->y + pocisk->height) >  tank[i].y) &&
 				(pocisk->y < (tank[i].y + tank[i].height )))
 			{
+				std::cout << "TRAFIONY MIDURA!" << std::endl;
 				tank[index].removePocisk(k);
 				tank[i].hp -= 20;
 			}

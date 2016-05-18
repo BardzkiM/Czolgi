@@ -18,7 +18,7 @@ std::string Czolg::serialize()
 		oarchive << pociski[i].angle;
 	}
 	serialized_data_str = archive_ostream.str();
-	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
+	//std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }
