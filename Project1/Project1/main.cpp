@@ -113,8 +113,7 @@ void gra(Czolg &tank)
 		tanks_sprite[i].setTexture(czolg->texture);
 		window.draw(tanks_sprite[i]);
 
-		int bullets_size = czolg->pociski.size();
-		for (int j = 0; j < bullets_size; j++)
+		for (int j = 0; j < czolg->pociski.size(); j++)
 		{
 			Pocisk *pocisk = &ClientTCP::tanks[i].pociski[j];
 			pocisk->setRotation();
@@ -136,7 +135,7 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	server_init.launch();
+	//server_init.launch();
 	
 	
 
