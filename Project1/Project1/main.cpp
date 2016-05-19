@@ -42,15 +42,6 @@ sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
 void gra(Czolg &tank)
 {
-	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
-	{
-		if (i == tank.nr_czolgu)
-		{
-			tank.pociski = ClientTCP::tanks[i].pociski;
-			break;
-		}
-			
-	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -79,14 +70,11 @@ void gra(Czolg &tank)
 		cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
 		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
 		{ 
-			tank.addPocisk();
+			tank.strzelilem = true;
 			bullet_clock.restart();
 		}
 		
-		//pociska.setTexture(tank.pociski[nr].texture);
-		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	tank.sprawdzKolizjePociskowPrzeszkod();
 
 	
 	window.draw(GraDane::spriteMapa);
@@ -97,15 +85,6 @@ void gra(Czolg &tank)
 		window.draw(przeszkodaSprite);
 	}
 
-	if (!tank.pociski.empty())
-	{
-		for (int i = 0; i < tank.pociski.size(); i++)
-		{
-			pociska.setTexture(tank.pociski[i].texture);
-			pociska.setPosition(tank.pociski[i].x, tank.pociski[i].y);
-			window.draw(pociska);
-		}
-	}
 	
 
 	tank_sprite.setTexture(tank.texture);
@@ -114,8 +93,6 @@ void gra(Czolg &tank)
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		Czolg *czolg = &ClientTCP::tanks[i];
-		if (i == tank.nr_czolgu)
-			continue;
 		czolg->setRotation();
 		tanks_sprite[i].setPosition(czolg->x, czolg->y);
 		tanks_sprite[i].setTexture(czolg->texture);

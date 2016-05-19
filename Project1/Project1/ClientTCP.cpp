@@ -73,6 +73,7 @@ void ClientTCP::RunInit()
 	{
 		//std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
+		this->tank->strzelilem = false;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 		

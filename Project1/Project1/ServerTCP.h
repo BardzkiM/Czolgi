@@ -24,6 +24,8 @@ public:
 	
 	void RunInit();
 	void runGame();
+	void movePociski(int index, sf::Clock & clock);
+	void sprawdzCzyStrzelil(int index);
 	void sprawdzKolizjePociskCzolg(int index);
 	void sprawdzKolizjePociskCzolgs();
 	Czolg tank[4];
