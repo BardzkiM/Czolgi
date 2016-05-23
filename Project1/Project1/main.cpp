@@ -32,6 +32,7 @@ sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
+sf::Sprite tanks_sprite[4];
 sf::Sprite tank_enemy_sprite[3];
 
 sf::Sprite pociska;
@@ -40,6 +41,9 @@ sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
 bool gameready = false;
+
+int ClientTCP::nr_of_clients = 0;
+Czolg ClientTCP::tanks[3];
 
 
 void gra(Czolg &tank)
@@ -125,13 +129,13 @@ int main()
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
-	server_init.launch();
+	//server_init.launch();
 	
 	
 
 	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
+	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
 	//clienttcp_thread1.launch();
 
 

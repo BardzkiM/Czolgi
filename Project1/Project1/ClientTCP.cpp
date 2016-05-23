@@ -4,6 +4,7 @@
 ClientTCP::ClientTCP(Czolg *source_tank_pointer)
 {
 	this->tank = source_tank_pointer;
+	
 }
 
 ClientTCP::~ClientTCP()
