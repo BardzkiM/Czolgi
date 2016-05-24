@@ -9,7 +9,7 @@ std::string Czolg::serialize()
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
-	oarchive << this->x << this->y << this->angle << this->height << this->width << this->hp << this->nr_czolgu;
+	oarchive << x << y << angle << height << width << hp << nr_czolgu << strzelilem;
 	oarchive << this->pociski.size();
 	for (int i = 0; i < this->pociski.size(); i++)
 	{
@@ -18,7 +18,7 @@ std::string Czolg::serialize()
 		oarchive << pociski[i].angle;
 	}
 	serialized_data_str = archive_ostream.str();
-	std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
+	//std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	return serialized_data_str;
 
 }
@@ -35,6 +35,7 @@ void Czolg::deserialize(std::string stream)
 	iarchive >> this->width;
 	iarchive >> this->hp;
 	iarchive >> this->nr_czolgu;
+	iarchive >> this->strzelilem;
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
 	pociski.clear();
@@ -50,6 +51,35 @@ void Czolg::deserialize(std::string stream)
 	
 	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
+void Czolg::deserializeWithoutPociski(std::string stream)
+{
+	using namespace std;
+	std::istringstream archive_istream(stream);
+	boost::archive::text_iarchive iarchive(archive_istream);
+	iarchive >> this->x;
+	iarchive >> this->y;
+	iarchive >> this->angle;
+	iarchive >> this->height;
+	iarchive >> this->width;
+	iarchive >> this->hp;
+	iarchive >> this->nr_czolgu;
+	iarchive >> this->strzelilem;
+	int number_of_bullets;
+	iarchive >> number_of_bullets;
+	//pociski.clear();
+	for (int i = 0; i < number_of_bullets; i++)
+	{
+		Pocisk pocisk_temp(0, 0, 0);
+		iarchive >> pocisk_temp.x;
+		iarchive >> pocisk_temp.y;
+		iarchive >> pocisk_temp.angle;
+		//pociski.push_back(pocisk_temp);
+	}
+
+
+	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
+}
+
 
 
 Czolg::Czolg()
@@ -194,16 +224,14 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 
 void Czolg::sprawdzKolizjePociskowPrzeszkod()
 {
-	int p_size = pociski.size();
 
-	for (int i = 0; i < p_size; i++)
+	for (int i = 0; i < pociski.size(); i++)
 	{
 		if (pociski[i].sprawdzKolizjePociskPrzeszkoda())
 		{
 			
 			removePocisk(i);
 			i--; 
-			p_size--;
 		}
 		else
 		{

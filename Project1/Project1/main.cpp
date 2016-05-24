@@ -9,6 +9,7 @@
 #include "ClientTCP.h"
 #include <vector>
 #include "Wykonawcy.h"
+#include "LoadingPage.h"
 
 using namespace std;
 
@@ -31,19 +32,23 @@ sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
-
 sf::Sprite tanks_sprite[4];
+sf::Sprite tank_enemy_sprite[3];
 
 sf::Sprite pociska;
 sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
+bool gameready = false;
+
+int ClientTCP::nr_of_clients = 0;
+Czolg ClientTCP::tanks[3];
+
 
 void gra(Czolg &tank)
 {
 	
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		tank.angle = 90;
@@ -71,17 +76,17 @@ void gra(Czolg &tank)
 		cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
 		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
 		{ 
-			tank.addPocisk();
+			tank.strzelilem = true;
 			bullet_clock.restart();
 		}
 		
-		//pociska.setTexture(tank.pociski[nr].texture);
-		//pociska.setPosition(tank.pociski[nr].x, tank.pociski[nr].y);
 	}
-	tank.sprawdzKolizjePociskowPrzeszkod();
 
-	
+	window.clear();
+	// Draw the tank_sprite
 	window.draw(GraDane::spriteMapa);
+	window.draw(tank_sprite);
+
 	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
 		przeszkodaSprite.setTexture(GraDane::mapa.przeszkody[i].texture);
@@ -89,15 +94,6 @@ void gra(Czolg &tank)
 		window.draw(przeszkodaSprite);
 	}
 
-	if (!tank.pociski.empty())
-	{
-		for (int i = 0; i < tank.pociski.size(); i++)
-		{
-			pociska.setTexture(tank.pociski[i].texture);
-			pociska.setPosition(tank.pociski[i].x, tank.pociski[i].y);
-			window.draw(pociska);
-		}
-	}
 	
 
 	tank_sprite.setTexture(tank.texture);
@@ -106,8 +102,6 @@ void gra(Czolg &tank)
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		Czolg *czolg = &ClientTCP::tanks[i];
-		if (i == tank.nr_czolgu)
-			continue;
 		czolg->setRotation();
 		tanks_sprite[i].setPosition(czolg->x, czolg->y);
 		tanks_sprite[i].setTexture(czolg->texture);
@@ -141,13 +135,14 @@ int main()
 
 	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-	clienttcp_thread.launch();										//odpalenie pierwszego klienta	
+	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
 	//clienttcp_thread1.launch();
 
 
 
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
+	LoadingPage loadingpage(&server_init);
 	Menu menu;
 	bool menu_open = true;
 	
@@ -224,13 +219,23 @@ int main()
 				{
 					if (menu.position == 1)
 					{
-						menu_open = false;
+						menu_open = false;						
+						clienttcp.adress=loadingpage.run(&window);
+						clienttcp_thread.launch();
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
 						server_init.terminate();
 						server_game.launch();
+						gameready = true;
 
+						/*menu_open = false;
+						tank_sprite.setTexture(tank.texturel);
+						music.stop();
+						musicTank.play();
+						server_init.terminate();
+						server_game.launch();
+*/
 						
 					}
 					if (menu.position == 2) //wykonawcy
@@ -254,7 +259,7 @@ int main()
 			
 		}
 		
-		if (!menu_open&&menu.position == 1)
+		if (!menu_open && gameready==true)
 		{
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{

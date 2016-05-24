@@ -23,9 +23,11 @@ public:
 	void move(int x, int y);
 	std::string serialize();
 	void deserialize(std::string stream);
+	void deserializeWithoutPociski(std::string stream);
 	void sprawdzKolizjePociskowPrzeszkod();
 	bool sprawdzKolizjeCzolgPrzeszkoda();
 	int nr_czolgu = -1;
+	bool strzelilem = false;
 
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;

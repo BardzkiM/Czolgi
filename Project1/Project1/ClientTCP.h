@@ -14,7 +14,7 @@ public:
 	
 	ClientTCP(Czolg * source_tank_pointer);
 	~ClientTCP();
-
+	
 	static int nr_of_clients;
 	void deserialize(std::string stream);
 
@@ -26,10 +26,12 @@ public:
 	std::string numer_klienta;
 	
 	static Czolg tanks[3];
+	std::string adress;
 
 private:
 	sf::TcpSocket socket;
 	Czolg *tank;
+
 	
 
 };

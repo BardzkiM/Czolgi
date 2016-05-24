@@ -71,7 +71,7 @@ void ServerTCP::receive(int which_client)
 	//std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
 
 	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
-	tank[which_client].deserialize(output_string);							//tworzymy testowy obiekt czolg
+	tank[which_client].deserializeWithoutPociski(output_string);							//tworzymy testowy obiekt czolg
 	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
 	
 	//std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
@@ -129,14 +129,19 @@ void ServerTCP::runGame()
 	{
 		this->send(i, this->serialize());
 	}
+	sf::Clock clock;
 	while (1)
 	{
-		sprawdzKolizjePociskCzolgs();
+		
 		//std::cout << "###################[Server] numer klientów " << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 			
 			this->receive(i);
+			sprawdzCzyStrzelil(i);
+			movePociski(i, clock);
+			//sprawdzKolizjePociskCzolg(i);
+
 			//std::cout << "Server petla " << i << std::endl;
 			for (int j = 0; j < nr_of_clients; j++)
 			{
@@ -150,11 +155,21 @@ void ServerTCP::runGame()
 		//this->send(0, std::to_string(nr_of_clients - 1));
 	
 }
-void ServerTCP::sprawdzKolizjePociskCzolgs()
+
+void ServerTCP::movePociski(int index, sf::Clock &clock)
 {
-	for (int i = 0; i < nr_of_clients; i++)
+	if (clock.getElapsedTime().asMilliseconds() > 30)
 	{
-		sprawdzKolizjePociskCzolg(i);
+		tank[index].sprawdzKolizjePociskowPrzeszkod();
+		clock.restart();
+	}
+}
+void ServerTCP::sprawdzCzyStrzelil(int index)
+{
+	if (tank[index].strzelilem)
+	{
+		tank[index].strzelilem = false;
+		tank[index].addPocisk();
 	}
 }
 void ServerTCP::sprawdzKolizjePociskCzolg(int index)
@@ -173,6 +188,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 				((pocisk->y + pocisk->height) >  tank[i].y) &&
 				(pocisk->y < (tank[i].y + tank[i].height )))
 			{
+				std::cout << "TRAFIONY MIDURA!" << std::endl;
 				tank[index].removePocisk(k);
 				tank[i].hp -= 20;
 			}
