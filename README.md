@@ -3,7 +3,7 @@ Projekt_Cpp
 
 1. Gdzie znajdują się diagramy związane z projektem ?
 2. Co jest potrzebne do uruchomienia kodu ?
-3. Jak uruchomić kod ?4. 
+3. Jak uruchomić kod ? 
 4. Jak działa gra “Czołgi 2D” ?
 5. Kto go napisał ten projekt ?
 
