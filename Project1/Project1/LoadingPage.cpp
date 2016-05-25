@@ -42,9 +42,10 @@ sf::Text LoadingPage::napisy(sf::Text text, std::string nazwa, float x, float y,
 
 std::string LoadingPage::run(sf::RenderWindow *window)
 {
-	sf::String adress;
+	sf::String adress = "127.0.0.1";;
 	bool is_server_running = false;
-	
+	bool does_user_type_anything = false;
+
 	sf::Time delay_after_first_page = sf::seconds(1.4);
 	sf::Time delay_after_character = sf::seconds(0.2);
 
@@ -57,13 +58,18 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 	sf::sleep(delay_after_first_page);
 	sf::Sprite sprite2(this->second_background);
 	window->draw(sprite2);	
-	window->draw(napisy(this->text, "", 490, 202, true, 52));
-	window->display();
-
+	window->draw(napisy(this->text, adress, 490, 202, true, 52));
+	window->display();	
 	while (1)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
+
 			adress += "0";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -72,6 +78,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "1";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -80,6 +91,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "2";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -88,6 +104,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "3";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -96,6 +117,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "4";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -104,6 +130,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "5";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -112,6 +143,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "6";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -120,6 +156,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "7";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -128,6 +169,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "8";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -136,6 +182,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += "9";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -144,6 +195,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Period))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress += ".";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
@@ -152,6 +208,11 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
 		{
+			if (!does_user_type_anything)
+			{
+				adress = "";
+				does_user_type_anything = true;
+			}
 			adress = adress.substring(0,adress.getSize()-1);
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
