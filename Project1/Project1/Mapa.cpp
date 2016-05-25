@@ -39,6 +39,7 @@ void Mapa::initializeMap()
 		{0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0},
 	};
 
+
 	//przeszkody.push_back(Przeszkoda(50, 50));
 	for (int i = 0; i < 20; i++)
 	{
