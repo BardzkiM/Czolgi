@@ -89,12 +89,19 @@ Czolg::Czolg()
 	this->texturer.loadFromFile("images/tankr.png");
 	this->textured.loadFromFile("images/tankd.png");
 
+	this->textureBar1.loadFromFile("images/bar1.png");
+	this->textureBar2.loadFromFile("images/bar2.png");
+	this->textureBar3.loadFromFile("images/bar3.png");
+	this->textureBar4.loadFromFile("images/bar4.png");
+
 	this->texture.loadFromFile("images/tankl.png");
+	this->textureBar = textureBar4;
 
 	sf::Vector2u tankSize(texturel.getSize());
 	this->width = tankSize.x;
 	this->height = tankSize.y;
 	this->movement = 5;
+	this->hp = 100;
 
 	if (!bufferTank.loadFromFile("sounds/tankMove.wav"))
 	{
@@ -123,7 +130,26 @@ void Czolg::setInitialPosition(int x, int y)
 	this->y = y;
 
 }
+void Czolg::setBar()
+{
+	if (this->hp = 100)
+	{
+		this->textureBar = textureBar4;
+	}
+	else if (this->hp = 75)
+	{
+		this->textureBar = textureBar3;
+	}
+	else if (this->hp = 50)
+	{
+		this->textureBar = textureBar2;
+	}
+	else
+	{
+		this->textureBar = textureBar1;
+	}
 
+}
 void Czolg::addPocisk()
 {
 

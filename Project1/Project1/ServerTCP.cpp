@@ -192,7 +192,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 			{
 				std::cout << "TRAFIONY MIDURA!" << std::endl;
 				tank[index].removePocisk(k);
-				tank[i].hp -= 20;
+				tank[i].hp -= 25;
 			}
 		}
 	}

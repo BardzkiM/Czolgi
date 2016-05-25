@@ -34,6 +34,8 @@ sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
 sf::Sprite tanks_sprite[4];
 sf::Sprite tank_enemy_sprite[3];
+sf::Sprite enemyBar[4];
+sf::Sprite myBar;
 
 sf::Sprite pociska[100];
 sf::Sprite przeszkodaSprite;
@@ -101,8 +103,19 @@ void gra(Czolg &tank)
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
 
+	if (tank.y < 17)
+		myBar.setPosition(tank.x, tank.y + tank.height + 3);
+	else
+		myBar.setPosition(tank.x, tank.y - 17);
+	tank.setBar();
+	myBar.setTexture(tank.textureBar);
+	window.draw(myBar);
+
+
+
 	Pocisk * pocisk;
 	Czolg *czolg;
+	
 	window.draw(tank_sprite);
 	//rysowanie czo³gów klientów i ich pocisków
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
@@ -112,7 +125,18 @@ void gra(Czolg &tank)
 		tanks_sprite[i].setPosition(czolg->x, czolg->y);
 		tanks_sprite[i].setTexture(czolg->texture);
 		window.draw(tanks_sprite[i]);
-		
+
+		//ustalenie pozycji HP BAR
+		if (czolg->y < 17)
+			enemyBar[i].setPosition(czolg->x, czolg->y + czolg->height + 3);
+		else
+			enemyBar[i].setPosition(czolg->x, czolg->y - 17);
+		czolg->setBar();
+		enemyBar[i].setTexture(czolg->textureBar);
+		window.draw(enemyBar[i]);
+
+
+
 		for (int j = 0; j < czolg->pociski.size(); j++)
 		{
 			pocisk = &ClientTCP::tanks[i].pociski[j];
@@ -256,6 +280,11 @@ int main()
 						window.close();
 						break;
 					}
+					else
+					{
+						tank.x = -100;
+						tank.y = -100;
+					}
 
 				}
 			}
@@ -271,7 +300,10 @@ int main()
 			if(clock.getElapsedTime().asMilliseconds() > 30)
 			{
 				clock.restart();
-				gra(tank);
+				if (tank.hp > 0)
+				{
+					gra(tank);
+				}
 			}
 			
 

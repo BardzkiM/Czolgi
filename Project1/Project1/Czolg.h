@@ -28,6 +28,13 @@ public:
 	bool sprawdzKolizjeCzolgPrzeszkoda();
 	int nr_czolgu = -1;
 	bool strzelilem = false;
+	void setBar();
+
+	sf::Texture textureBar;
+	sf::Texture textureBar1;
+	sf::Texture textureBar2;
+	sf::Texture textureBar3;
+	sf::Texture textureBar4;
 
 	sf::SoundBuffer bufferTank;
 	sf::SoundBuffer bufferBullet;
