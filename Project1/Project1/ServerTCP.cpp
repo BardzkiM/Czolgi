@@ -53,12 +53,12 @@ void ServerTCP::send(int which_client, std::string message)
 
 void ServerTCP::receive(int which_client)
 {
-	char data[100];
+	char data[300];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (client[which_client].receive(&data, 100, received) != sf::Socket::Done)
+		if (client[which_client].receive(&data, 300, received) != sf::Socket::Done)
 		{
 			// error...
 			//std::cout << "Error during server receiveing";
@@ -139,6 +139,7 @@ void ServerTCP::runGame()
 			
 			this->receive(i);
 			sprawdzCzyStrzelil(i);
+
 			movePociski(i, clock);
 			//sprawdzKolizjePociskCzolg(i);
 
@@ -161,6 +162,7 @@ void ServerTCP::movePociski(int index, sf::Clock &clock)
 	if (clock.getElapsedTime().asMilliseconds() > 30)
 	{
 		tank[index].sprawdzKolizjePociskowPrzeszkod();
+		sprawdzKolizjePociskCzolg(index);
 		clock.restart();
 	}
 }

@@ -31,12 +31,12 @@ void ClientTCP::send(std::string message)
 
 std::string ClientTCP::receive()
 {
-	char data[100];
+	char data[300];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (socket.receive(&data, 100, received) != sf::Socket::Done)
+		if (socket.receive(&data, 300, received) != sf::Socket::Done)
 		{
 			// error...
 			//std::cout << "Error during client receiveing";
@@ -72,10 +72,12 @@ void ClientTCP::RunInit()
 		std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
+
+
 		for (int i = 0; i < nr_of_clients; i++)
 		{
-		
 			tanks[i].deserialize(this->receive());
+			
 		}
 	}
 

@@ -48,7 +48,7 @@ Czolg ClientTCP::tanks[3];
 
 void gra(Czolg &tank)
 {
-	
+	//obs³uga klawiatury
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		tank.angle = 90;
@@ -87,6 +87,8 @@ void gra(Czolg &tank)
 	window.draw(GraDane::spriteMapa);
 	window.draw(tank_sprite);
 
+
+	//rysowanie mapy
 	for (int i = 0; i < GraDane::mapa.przeszkody.size(); i++)
 	{
 		przeszkodaSprite.setTexture(GraDane::mapa.przeszkody[i].texture);
@@ -98,7 +100,9 @@ void gra(Czolg &tank)
 
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
-	
+
+
+	//rysowanie czo³gów klientów i ich pocisków
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		Czolg *czolg = &ClientTCP::tanks[i];
@@ -116,6 +120,7 @@ void gra(Czolg &tank)
 			window.draw(pociska);
 		}
 	}
+	
 	
 	window.draw(tank_sprite);
 	window.display();
