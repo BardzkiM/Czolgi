@@ -35,7 +35,7 @@ sf::Sprite tank_sprite;
 sf::Sprite tanks_sprite[4];
 sf::Sprite tank_enemy_sprite[3];
 
-sf::Sprite pociska;
+sf::Sprite pociska[100];
 sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
@@ -85,7 +85,7 @@ void gra(Czolg &tank)
 	window.clear();
 	// Draw the tank_sprite
 	window.draw(GraDane::spriteMapa);
-	window.draw(tank_sprite);
+	//window.draw(tank_sprite);
 
 
 	//rysowanie mapy
@@ -101,28 +101,30 @@ void gra(Czolg &tank)
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
 
-
+	Pocisk * pocisk;
+	Czolg *czolg;
+	window.draw(tank_sprite);
 	//rysowanie czo³gów klientów i ich pocisków
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
-		Czolg *czolg = &ClientTCP::tanks[i];
+		czolg = &ClientTCP::tanks[i];
 		czolg->setRotation();
 		tanks_sprite[i].setPosition(czolg->x, czolg->y);
 		tanks_sprite[i].setTexture(czolg->texture);
 		window.draw(tanks_sprite[i]);
-
+		
 		for (int j = 0; j < czolg->pociski.size(); j++)
 		{
-			Pocisk *pocisk = &ClientTCP::tanks[i].pociski[j];
+			pocisk = &ClientTCP::tanks[i].pociski[j];
 			pocisk->setRotation();
-			pociska.setPosition(pocisk->x, pocisk->y);
-			pociska.setTexture(pocisk->texture);
-			window.draw(pociska);
+			pociska[j].setPosition(pocisk->x, pocisk->y);
+			pociska[j].setTexture(pocisk->texture);
+			window.draw(pociska[j]);
 		}
 	}
 	
 	
-	window.draw(tank_sprite);
+
 	window.display();
 	//window.clear();
 	// Draw the tank_sprite
