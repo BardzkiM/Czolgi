@@ -6,6 +6,12 @@
 
 using namespace std::chrono;
 
+
+int temp;
+int number_of_bullets;
+Pocisk pocisk_temp(0, 0, 0);
+
+
 std::string Czolg::serialize()
 {
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
@@ -31,8 +37,7 @@ std::string Czolg::serialize()
 
 void Czolg::deserialize(std::string stream)
 {
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	Pocisk pocisk_temp(0, 0, 0);
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();	
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
 	iarchive >> this->x;
@@ -62,10 +67,7 @@ void Czolg::deserialize(std::string stream)
 }
 void Czolg::deserializeForServer(std::string stream)
 {
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	Pocisk pocisk_temp(0, 0, 0);
-	
-	int temp;
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();	
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
 	iarchive >> this->x;
@@ -75,8 +77,7 @@ void Czolg::deserializeForServer(std::string stream)
 	iarchive >> this->width;
 	iarchive >> temp;
 	iarchive >> this->nr_czolgu;
-	iarchive >> this->strzelilem;
-	int number_of_bullets;
+	iarchive >> this->strzelilem;	
 	iarchive >> number_of_bullets;
 	//pociski.clear();
 	for (int i = 0; i < number_of_bullets; i++)
@@ -87,7 +88,7 @@ void Czolg::deserializeForServer(std::string stream)
 		iarchive >> pocisk_temp.angle;
 		//pociski.push_back(pocisk_temp);
 	}
-
+	number_of_bullets = 0;
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(t2 - t1).count();
 	std::cout << "[Czolg] Deserializacja for server" << duration << std::endl;
