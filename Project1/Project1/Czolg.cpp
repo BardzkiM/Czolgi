@@ -46,7 +46,7 @@ void Czolg::deserialize(std::string stream)
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
 	pociski.clear();
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	
 	for (int i = 0; i < number_of_bullets; i++)
 	{
 		
@@ -54,8 +54,7 @@ void Czolg::deserialize(std::string stream)
 		iarchive >> pocisk_temp.y;
 		iarchive >> pocisk_temp.angle;
 		pociski.push_back(pocisk_temp);
-	}
-	
+	}	
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(t2 - t1).count();
 	std::cout << "[Czolg] Deserializacja " << duration << std::endl;
