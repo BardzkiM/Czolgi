@@ -53,12 +53,12 @@ void ServerTCP::send(int which_client, std::string message)
 
 void ServerTCP::receive(int which_client)
 {
-	char data[300];
+	char data[1500];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (client[which_client].receive(&data, 300, received) != sf::Socket::Done)
+		if (client[which_client].receive(&data, 1500, received) != sf::Socket::Done)
 		{
 			// error...
 			//std::cout << "Error during server receiveing";
