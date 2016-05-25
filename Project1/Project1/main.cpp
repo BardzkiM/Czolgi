@@ -280,11 +280,7 @@ int main()
 						window.close();
 						break;
 					}
-					else
-					{
-						tank.x = -100;
-						tank.y = -100;
-					}
+				
 
 				}
 			}
@@ -303,6 +299,11 @@ int main()
 				if (tank.hp > 0)
 				{
 					gra(tank);
+				}
+				else
+				{
+					tank.x = -100;
+					tank.y = -100;
 				}
 			}
 			
