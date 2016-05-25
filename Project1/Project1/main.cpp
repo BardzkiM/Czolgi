@@ -24,12 +24,12 @@ sf::Mutex mutex;
 //////// komyntosz
 Czolg tank;
 ServerTCP servertcp;
-ClientTCP clienttcp(&tank, &mutex);
+//ClientTCP clienttcp(&tank, &mutex);
 //ClientTCP clienttcp1(&tank);
 sf::Thread server_init(&ServerTCP::RunInit, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
-sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);
-sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
+//sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);
+//sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
@@ -203,7 +203,7 @@ int main()
 	
 	
 
-	ClientTCP clienttcp(&tank);										//stworzenie pierwszego klienta
+	ClientTCP clienttcp(&tank, &mutex);										//stworzenie pierwszego klienta
 	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
 	//clienttcp_thread1.launch();
