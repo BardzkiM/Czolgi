@@ -48,6 +48,7 @@ int ClientTCP::nr_of_clients = 0;
 Czolg ClientTCP::tanks[3];
 
 
+ 
 void gra(Czolg &tank)
 {
 	//obs³uga klawiatury
@@ -110,8 +111,7 @@ void gra(Czolg &tank)
 	tank.setBar();
 	myBar.setTexture(tank.textureBar);
 	window.draw(myBar);
-
-
+	
 
 	Pocisk * pocisk;
 	Czolg *czolg;
@@ -153,6 +153,11 @@ void gra(Czolg &tank)
 	//window.clear();
 	// Draw the tank_sprite
 	
+}
+void gameOver()
+{
+	tank.x = -100;
+	tank.y = -100;
 }
 int main()
 {
@@ -302,8 +307,7 @@ int main()
 				}
 				else
 				{
-					tank.x = -100;
-					tank.y = -100;
+					gameOver();
 				}
 			}
 			
