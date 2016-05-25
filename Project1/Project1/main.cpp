@@ -11,6 +11,7 @@
 #include "Wykonawcy.h"
 #include "LoadingPage.h"
 
+
 using namespace std;
 
 
@@ -161,7 +162,9 @@ void gameOver()
 }
 int main()
 {
-	
+	sf::Vector2u vect(800, 600);
+	window.setSize(vect);
+	window.setPosition(sf::Vector2i(100, 0));
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
