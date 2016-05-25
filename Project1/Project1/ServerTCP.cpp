@@ -150,6 +150,7 @@ void ServerTCP::runGame()
 				//	continue;
 				//std::cout << "HELLOO MIDURA" << std::endl;
 				this->send(i, this->tank[j].serialize());
+				std::cout << this->tank[j].hp << std::endl;
 			}
 		}
 	}
