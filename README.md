@@ -5,7 +5,7 @@ Projekt_Cpp
 2. Co jest potrzebne do uruchomienia kodu ?
 3. Jak uruchomić kod ? 
 4. Jak działa gra “Czołgi 2D” ?
-5. Kto go napisał ten projekt ?
+5. Kto napisał ten projekt ?
 
 Ad1. Diagram Klas znajduje się w folderze diagramy (Czolgi\Diagramy).
 
@@ -34,6 +34,9 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera, należy wpisać jego IP (nawet, jeśli chcemy zagrać sami) i potwiedzić dane klawiszem "Enter". 
+
+Gra jest obsługiwana za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
 
 Ad5. Projekt współtworzyli:
     Michał Bardzki - kierownik,
