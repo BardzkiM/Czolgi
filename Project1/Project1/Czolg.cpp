@@ -63,7 +63,7 @@ void Czolg::deserialize(std::string stream)
 void Czolg::deserializeForServer(std::string stream)
 {
 	Pocisk pocisk_temp(0, 0, 0);
-	using namespace std;
+	
 	int temp;
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
