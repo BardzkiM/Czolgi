@@ -24,7 +24,7 @@ void Blok::setRotation()
 			texture = texturer;
 			break;
 		case 270:
-			texture = textured;
+ 			texture = textured;
 			break;
 	}
 }

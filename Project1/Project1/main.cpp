@@ -215,18 +215,6 @@ int main()
 	Menu menu;
 	bool menu_open = true;
 	
-	
-
-	///////PRZYCISK TRZYMANIE BLOKADA////////////
-	//window.setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy
-
-
-
-	string msg = "1234567890111213141516171819";
-	string dsp = "";
-	int index = 0;
-
-	
 
 	
 	tank.setInitialPosition(0, 0);
