@@ -59,6 +59,7 @@ void Czolg::deserialize(std::string stream)
 }
 void Czolg::deserializeForServer(std::string stream)
 {
+	Pocisk pocisk_temp(0, 0, 0);
 	using namespace std;
 	int temp;
 	std::istringstream archive_istream(stream);
@@ -76,7 +77,7 @@ void Czolg::deserializeForServer(std::string stream)
 	//pociski.clear();
 	for (int i = 0; i < number_of_bullets; i++)
 	{
-		Pocisk pocisk_temp(0, 0, 0);
+		
 		iarchive >> pocisk_temp.x;
 		iarchive >> pocisk_temp.y;
 		iarchive >> pocisk_temp.angle;
