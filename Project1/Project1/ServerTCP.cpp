@@ -150,7 +150,6 @@ void ServerTCP::runGame()
 				//	continue;
 				//std::cout << "HELLOO MIDURA" << std::endl;
 				this->send(i, this->tank[j].serialize());
-				std::cout << this->tank[j].hp << std::endl;
 			}
 		}
 	}
@@ -191,7 +190,6 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 				((pocisk->y + pocisk->height) >  tank[i].y) &&
 				(pocisk->y < (tank[i].y + tank[i].height )))
 			{
-				std::cout << "TRAFIONY MIDURA!" << std::endl;
 				tank[index].removePocisk(k);
 				tank[i].hp -= 25;
 			}

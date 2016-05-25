@@ -140,7 +140,6 @@ void Czolg::setInitialPosition(int x, int y)
 }
 void Czolg::setBar()
 {
-	std::cout << "=============================" << hp << std::endl;
 	if (this->hp == 100)
 	{
 		this->textureBar = textureBar4;
