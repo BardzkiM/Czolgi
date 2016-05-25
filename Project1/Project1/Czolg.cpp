@@ -32,7 +32,7 @@ std::string Czolg::serialize()
 void Czolg::deserialize(std::string stream)
 {
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	using namespace std;
+	Pocisk pocisk_temp(0, 0, 0);
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
 	iarchive >> this->x;
@@ -48,7 +48,7 @@ void Czolg::deserialize(std::string stream)
 	pociski.clear();
 	for (int i = 0; i < number_of_bullets; i++)
 	{
-		Pocisk pocisk_temp(0,0,0);
+		
 		iarchive >> pocisk_temp.x;
 		iarchive >> pocisk_temp.y;
 		iarchive >> pocisk_temp.angle;
