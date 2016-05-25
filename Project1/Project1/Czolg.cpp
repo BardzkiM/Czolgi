@@ -1,11 +1,14 @@
 #include "Czolg.h"
 #include <iostream>
 #include <math.h>
+#include <chrono>
 #define M_PI 3.14159265358979323846
 
+using namespace std::chrono;
 
 std::string Czolg::serialize()
 {
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	std::ostringstream archive_ostream;
 	std::string serialized_data_str;
 	boost::archive::text_oarchive oarchive(archive_ostream);
@@ -19,6 +22,9 @@ std::string Czolg::serialize()
 	}
 	serialized_data_str = archive_ostream.str();
 	//std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(t2 - t1).count();
+	std::cout << duration;
 	return serialized_data_str;
 
 }
