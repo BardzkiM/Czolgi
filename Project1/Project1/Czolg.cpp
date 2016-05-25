@@ -64,7 +64,7 @@ void Czolg::deserializeForServer(std::string stream)
 {
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	Pocisk pocisk_temp(0, 0, 0);
-	using namespace std;
+	
 	int temp;
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
