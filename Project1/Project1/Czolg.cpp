@@ -132,15 +132,15 @@ void Czolg::setInitialPosition(int x, int y)
 }
 void Czolg::setBar()
 {
-	if (this->hp = 100)
+	if (this->hp == 100)
 	{
 		this->textureBar = textureBar4;
 	}
-	else if (this->hp = 75)
+	else if (this->hp == 75)
 	{
 		this->textureBar = textureBar3;
 	}
-	else if (this->hp = 50)
+	else if (this->hp == 50)
 	{
 		this->textureBar = textureBar2;
 	}
