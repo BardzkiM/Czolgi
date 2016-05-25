@@ -17,7 +17,7 @@ using namespace std;
 
 
 
-
+sf::Mutex mutex;
 
 
 
@@ -157,6 +157,7 @@ void gra(Czolg &tank)
 
 
 	//rysowanie czo³gów klientów i ich pocisków
+	mutex.lock();
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		czolg = &ClientTCP::tanks[i];
@@ -178,7 +179,7 @@ void gra(Czolg &tank)
 		
 	}
 	
-	
+	mutex.unlock();
 
 	window.display();
 	//window.clear();
