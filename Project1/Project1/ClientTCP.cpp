@@ -77,7 +77,10 @@ void ClientTCP::RunInit()
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 			tanks[i].deserialize(this->receive());
-			
+			if (i == tank->nr_czolgu)
+			{
+				tank->hp = tanks[i].hp;
+			}
 		}
 	}
 
