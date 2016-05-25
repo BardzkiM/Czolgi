@@ -46,7 +46,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 	bool is_server_running = false;
 	bool does_user_type_anything = false;
 
-	sf::Time delay_after_first_page = sf::seconds(1.4);
+	sf::Time delay_after_first_page = sf::seconds(0.3);
 	sf::Time delay_after_character = sf::seconds(0.2);
 
 	window->setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy

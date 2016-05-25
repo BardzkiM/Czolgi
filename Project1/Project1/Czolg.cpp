@@ -62,6 +62,7 @@ void Czolg::deserialize(std::string stream)
 }
 void Czolg::deserializeForServer(std::string stream)
 {
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	Pocisk pocisk_temp(0, 0, 0);
 	using namespace std;
 	int temp;
@@ -87,7 +88,9 @@ void Czolg::deserializeForServer(std::string stream)
 		//pociski.push_back(pocisk_temp);
 	}
 
-
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(t2 - t1).count();
+	std::cout << "[Czolg] Deserializacja for server" << duration << std::endl;
 	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
