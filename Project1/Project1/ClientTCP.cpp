@@ -17,7 +17,7 @@ void ClientTCP::deserialize(std::string stream)
 	boost::archive::text_iarchive iarchive(archive_istream);
 	iarchive >> this->nr_of_clients;
 
-	std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
+	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
 void ClientTCP::send(std::string message)
@@ -47,7 +47,7 @@ std::string ClientTCP::receive()
 	} while (output_string.find("archive")==-1);
 
 	
-	std::cout << "Odebrano: " << output_string << std::endl;
+	//std::cout << "Odebrano: " << output_string << std::endl;
 	return output_string;
 }
 
@@ -69,7 +69,7 @@ void ClientTCP::RunInit()
 	std::cout <<std::endl<< "Klient wszed³ w tryb ci¹g³y" << std::endl;
 	while (1)
 	{
-		std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
+		//std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
 

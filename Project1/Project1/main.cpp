@@ -48,7 +48,44 @@ bool gameready = false;
 int ClientTCP::nr_of_clients = 0;
 Czolg ClientTCP::tanks[3];
 
-
+void ustaleniePozycjiBar(Czolg *czolg, int index)
+{
+	if (czolg->y < 17)
+		enemyBar[index].setPosition(czolg->x, czolg->y + czolg->height + 3);
+	else
+		enemyBar[index].setPosition(czolg->x, czolg->y - 17);
+	czolg->setBar();
+}
+void ustaleniePozycjiBar()
+{
+	if (tank.y < 17)
+		myBar.setPosition(tank.x, tank.y + tank.height + 3);
+	else
+		myBar.setPosition(tank.x, tank.y - 17);
+	tank.setBar();
+}
+void rysujPociski(Czolg *czolg, int i)
+{
+	Pocisk * pocisk;
+	for (int j = 0; j < czolg->pociski.size(); j++)
+	{
+		pocisk = &ClientTCP::tanks[i].pociski[j];
+		pocisk->setRotation();
+		pociska[j].setPosition(pocisk->x, pocisk->y);
+		pociska[j].setTexture(pocisk->texture);
+		window.draw(pociska[j]);
+	}
+}
+void rysujPociski()
+{
+	for (int j = 0; j < tank.pociski.size(); j++)
+	{
+		tank.pociski[j].setRotation();
+		pociska[j].setPosition(tank.pociski[j].x, tank.pociski[j].y);
+		pociska[j].setTexture(tank.pociski[j].texture);
+		window.draw(pociska[j]);
+	}
+}
  
 void gra(Czolg &tank)
 {
@@ -77,7 +114,7 @@ void gra(Czolg &tank)
 	{
 		int nr = 0;
 		//tank.pociski.clear();
-		cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
+		//cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
 		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
 		{ 
 			tank.strzelilem = true;
@@ -105,47 +142,40 @@ void gra(Czolg &tank)
 	tank_sprite.setTexture(tank.texture);
 	tank_sprite.setPosition(tank.x, tank.y);
 
-	if (tank.y < 17)
-		myBar.setPosition(tank.x, tank.y + tank.height + 3);
-	else
-		myBar.setPosition(tank.x, tank.y - 17);
-	tank.setBar();
+	ustaleniePozycjiBar();
 	myBar.setTexture(tank.textureBar);
 	window.draw(myBar);
+
 	
 
-	Pocisk * pocisk;
+	
 	Czolg *czolg;
 	
 	window.draw(tank_sprite);
+
+
+
+
 	//rysowanie czo³gów klientów i ich pocisków
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		czolg = &ClientTCP::tanks[i];
-		czolg->setRotation();
-		tanks_sprite[i].setPosition(czolg->x, czolg->y);
-		tanks_sprite[i].setTexture(czolg->texture);
-		window.draw(tanks_sprite[i]);
-
-		//ustalenie pozycji HP BAR
-		if (czolg->y < 17)
-			enemyBar[i].setPosition(czolg->x, czolg->y + czolg->height + 3);
-		else
-			enemyBar[i].setPosition(czolg->x, czolg->y - 17);
-		czolg->setBar();
-		enemyBar[i].setTexture(czolg->textureBar);
-		window.draw(enemyBar[i]);
-
-
-
-		for (int j = 0; j < czolg->pociski.size(); j++)
+		if (i != tank.nr_czolgu)
 		{
-			pocisk = &ClientTCP::tanks[i].pociski[j];
-			pocisk->setRotation();
-			pociska[j].setPosition(pocisk->x, pocisk->y);
-			pociska[j].setTexture(pocisk->texture);
-			window.draw(pociska[j]);
+			czolg->setRotation();
+			tanks_sprite[i].setPosition(czolg->x, czolg->y);
+			tanks_sprite[i].setTexture(czolg->texture);
+			window.draw(tanks_sprite[i]);
+
+			//ustalenie pozycji HP BAR
+			ustaleniePozycjiBar(czolg, i);
+
+			enemyBar[i].setTexture(czolg->textureBar);
+			window.draw(enemyBar[i]);
 		}
+			rysujPociski(czolg, i);
+		
+		
 	}
 	
 	

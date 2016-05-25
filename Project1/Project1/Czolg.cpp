@@ -101,6 +101,7 @@ Czolg::Czolg()
 	this->width = tankSize.x;
 	this->height = tankSize.y;
 	this->movement = 5;
+	this->nr_czolgu = -1;
 	this->hp = 100;
 
 	if (!bufferTank.loadFromFile("sounds/tankMove.wav"))
