@@ -31,7 +31,7 @@ std::string Czolg::serialize()
 
 void Czolg::deserialize(std::string stream)
 {
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	
 	using namespace std;
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
@@ -46,6 +46,7 @@ void Czolg::deserialize(std::string stream)
 	int number_of_bullets;
 	iarchive >> number_of_bullets;
 	pociski.clear();
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for (int i = 0; i < number_of_bullets; i++)
 	{
 		Pocisk pocisk_temp(0,0,0);
