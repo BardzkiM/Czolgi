@@ -12,7 +12,7 @@ class ClientTCP
 {
 public:
 	
-	ClientTCP(Czolg * source_tank_pointer);
+	ClientTCP(Czolg * source_tank_pointer, sf::Mutex *mutex);
 	~ClientTCP();
 	
 	static int nr_of_clients;
@@ -27,6 +27,8 @@ public:
 	
 	static Czolg tanks[3];
 	std::string adress;
+
+	sf::Mutex *mutex;
 
 private:
 	sf::TcpSocket socket;

@@ -24,8 +24,8 @@ sf::Mutex mutex;
 //////// komyntosz
 Czolg tank;
 ServerTCP servertcp;
-ClientTCP clienttcp(&tank);
-ClientTCP clienttcp1(&tank);
+ClientTCP clienttcp(&tank, &mutex);
+//ClientTCP clienttcp1(&tank);
 sf::Thread server_init(&ServerTCP::RunInit, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);

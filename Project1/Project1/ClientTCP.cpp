@@ -1,9 +1,10 @@
 #include "ClientTCP.h"
 #include "Czolg.h"
 
-ClientTCP::ClientTCP(Czolg *source_tank_pointer)
+ClientTCP::ClientTCP(Czolg *source_tank_pointer, sf::Mutex *mutex)
 {
 	this->tank = source_tank_pointer;
+	this->mutex = mutex;
 	
 }
 
@@ -76,7 +77,9 @@ void ClientTCP::RunInit()
 
 		for (int i = 0; i < nr_of_clients; i++)
 		{
+			mutex->lock();
 			tanks[i].deserialize(this->receive());
+			mutex->unlock();
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;
