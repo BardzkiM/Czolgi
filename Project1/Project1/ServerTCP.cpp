@@ -71,7 +71,7 @@ void ServerTCP::receive(int which_client)
 	//std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
 
 	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
-	tank[which_client].deserializeWithoutPociski(output_string);							//tworzymy testowy obiekt czolg
+	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
 	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
 	
 	//std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;

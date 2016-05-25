@@ -23,7 +23,7 @@ public:
 	void move(int x, int y);
 	std::string serialize();
 	void deserialize(std::string stream);
-	void deserializeWithoutPociski(std::string stream);
+	void deserializeForServer(std::string stream);
 	void sprawdzKolizjePociskowPrzeszkod();
 	bool sprawdzKolizjeCzolgPrzeszkoda();
 	int nr_czolgu = -1;

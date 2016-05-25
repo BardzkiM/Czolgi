@@ -51,9 +51,10 @@ void Czolg::deserialize(std::string stream)
 	
 	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
-void Czolg::deserializeWithoutPociski(std::string stream)
+void Czolg::deserializeForServer(std::string stream)
 {
 	using namespace std;
+	int temp;
 	std::istringstream archive_istream(stream);
 	boost::archive::text_iarchive iarchive(archive_istream);
 	iarchive >> this->x;
@@ -61,7 +62,7 @@ void Czolg::deserializeWithoutPociski(std::string stream)
 	iarchive >> this->angle;
 	iarchive >> this->height;
 	iarchive >> this->width;
-	iarchive >> this->hp;
+	iarchive >> temp;
 	iarchive >> this->nr_czolgu;
 	iarchive >> this->strzelilem;
 	int number_of_bullets;
