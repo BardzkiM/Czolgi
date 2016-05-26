@@ -32,12 +32,12 @@ void ClientTCP::send(std::string message)
 
 std::string ClientTCP::receive()
 {
-	char data[1500];
+	char data[1000];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (socket.receive(&data, 1500, received) != sf::Socket::Done)
+		if (socket.receive(&data, 1000, received) != sf::Socket::Done)
 		{
 			// error...
 			std::cout << "Error during client receiveing";
