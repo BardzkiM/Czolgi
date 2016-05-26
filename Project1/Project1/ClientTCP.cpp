@@ -77,9 +77,13 @@ void ClientTCP::RunInit()
 
 		for (int i = 0; i < nr_of_clients; i++)
 		{
+			std::cout << "Przed mutextem Client"<<std::endl;
 			mutex->lock();
+			std::cout << "Po mutex Client" << std::endl;
 			tanks[i].deserialize(this->receive());
+			std::cout << "Po mutex Client 2" << std::endl;
 			mutex->unlock();
+			std::cout << "Po mutex Client 3" << std::endl;
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;

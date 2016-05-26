@@ -30,7 +30,7 @@ std::string Czolg::serialize()
 	//std::cout << "[TANK]serialized data: " << serialized_data_str << std::endl;
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(t2 - t1).count();
-	std::cout<<"[Czolg] Serializacja " << duration <<std::endl;
+	//std::cout<<"[Czolg] Serializacja " << duration <<std::endl;
 	return serialized_data_str;
 
 }
@@ -62,7 +62,7 @@ void Czolg::deserialize(std::string stream)
 	}	
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(t2 - t1).count();
-	std::cout << "[Czolg] Deserializacja " << duration << std::endl;
+	//std::cout << "[Czolg] Deserializacja " << duration << std::endl;
 	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 void Czolg::deserializeForServer(std::string stream)
@@ -91,7 +91,7 @@ void Czolg::deserializeForServer(std::string stream)
 	number_of_bullets = 0;
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(t2 - t1).count();
-	std::cout << "[Czolg] Deserializacja for server" << duration << std::endl;
+	//std::cout << "[Czolg] Deserializacja for server" << duration << std::endl;
 	//std::cout << "Czolg zostal poprawnie zdeserializowany" << std::endl;
 }
 
@@ -202,6 +202,7 @@ void Czolg::move(int x, int y)
 
 bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 {
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	int mapa_przeszkody_size = GraDane::mapa.przeszkody.size();
 	switch (angle)
 	{
@@ -261,12 +262,15 @@ bool Czolg::sprawdzKolizjeCzolgPrzeszkoda()
 		break;
 
 	}
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(t2 - t1).count();
+	//std::cout << "[Czolg] sprawdzKolizjeCzolgPrzeszkoda " << duration << std::endl;
 	return false;
 }
 
 void Czolg::sprawdzKolizjePociskowPrzeszkod()
 {
-
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for (int i = 0; i < pociski.size(); i++)
 	{
 		if (pociski[i].sprawdzKolizjePociskPrzeszkoda())
@@ -295,5 +299,7 @@ void Czolg::sprawdzKolizjePociskowPrzeszkod()
 			}
 		}
 	}
-
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(t2 - t1).count();
+	//std::cout << "[Czolg] sprawdzKolizjePociskowPrzeszkod " << duration << std::endl;
 }
