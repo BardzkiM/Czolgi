@@ -41,6 +41,8 @@ bool gameready = false;
 int ClientTCP::nr_of_clients = 0;
 Czolg ClientTCP::tanks[3];
 
+Menu menu;
+
 void rysujPociski(int i)
 {
 	Pocisk * pocisk;
@@ -120,8 +122,8 @@ void gra()
 			czolg->setBar();
 
 			//ustalenie pozycji HP BAR
-			window.draw(czolg[i].sprite);
-			window.draw(czolg[i].hpBar);
+			window.draw(czolg->sprite);
+			window.draw(czolg->hpBar);
 		}
 		rysujPociski(i);
 	}
@@ -130,10 +132,31 @@ void gra()
 	window.display();
 	
 }
+void drawMenu()
+{
+	menu.set_bg(&window);
+	menu.set_menu_pos_1(&window);
+}
 void gameOver()
 {
 	tank.x = -100;
 	tank.y = -100;
+	sf::Texture logoOver;
+	logoOver.loadFromFile("images/game_over.png");
+	sf::Sprite logoOverSprite;
+	logoOverSprite.setTexture(logoOver);
+	sf::Sprite gameOver;
+	sf::Texture texture2;
+	texture2.loadFromImage(window.capture());
+	gameOver.setTexture(texture2);
+	for (int i = 0; i < 361; i++)
+	{
+		window.clear();
+		window.draw(gameOver);
+		logoOverSprite.setPosition(480, i);
+		window.draw(logoOverSprite);
+		window.display();
+	}
 }
 int main()
 {
@@ -153,7 +176,7 @@ int main()
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
 	LoadingPage loadingpage(&server_init, &server_game, &clienttcp_thread, &clienttcp);
-	Menu menu;
+	
 	bool menu_open = true;
 	
 
@@ -163,8 +186,7 @@ int main()
 	
 	//Przeszkoda Przeszkoda();
 
-	menu.set_bg(&window);
-	menu.set_menu_pos_1(&window);
+	drawMenu();
 
 	sf::Clock clock;
 	
@@ -239,6 +261,12 @@ int main()
 				
 
 				}
+			}
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				menu_open = true;
+				menu.position = 1;
+				drawMenu();
 			}
 			
 
