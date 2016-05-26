@@ -116,8 +116,8 @@ void gra()
 		czolg = &ClientTCP::tanks[i];
 		if (i != tank.nr_czolgu)
 		{
-			czolg->setRotation();
-			czolg->setBar();
+			czolg[i].setRotation();
+			czolg[i].setBar();
 
 			//ustalenie pozycji HP BAR
 			window.draw(czolg[i].sprite);
