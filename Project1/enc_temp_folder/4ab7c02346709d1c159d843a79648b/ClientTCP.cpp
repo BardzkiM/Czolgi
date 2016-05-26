@@ -32,12 +32,12 @@ void ClientTCP::send(std::string message)
 
 std::string ClientTCP::receive()
 {
-	char data[200];
+	char data[100];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (socket.receive(&data, 200, received) != sf::Socket::Done)
+		if (socket.receive(&data, 100, received) != sf::Socket::Done)
 		{
 			// error...
 			std::cout << "Error during client receiveing";
@@ -54,7 +54,7 @@ std::string ClientTCP::receive()
 
 void ClientTCP::RunInit()
 {
-	sf::Time delay_complete_transmission = sf::seconds(0.02);
+	sf::Time delay_complete_transmission = sf::seconds(0.2);
 	std::cout << "Start w¹tku klienta" << std::endl;
 
 	sf::Socket::Status status = socket.connect(this->adress, 54000);
