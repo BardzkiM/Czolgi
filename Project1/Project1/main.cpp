@@ -43,6 +43,8 @@ sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
+Czolg *czolg;
+
 bool gameready = false;
 
 int ClientTCP::nr_of_clients = 0;
@@ -86,7 +88,7 @@ void rysujPociski()
 		window.draw(pociska[j]);
 	}
 }
-Czolg *czolg;
+
 void gra(Czolg &tank)
 {
 	//obs³uga klawiatury
