@@ -1,7 +1,7 @@
 #include "LoadingPage.h"
 #include "ServerTCP.h"
 
-LoadingPage::LoadingPage(sf::Thread *server_init)
+LoadingPage::LoadingPage(sf::Thread *server_init, sf::Thread *server_game)
 {
 	if (!first_background.loadFromFile("images/second_page_loading_page.png"))
 	{
@@ -19,6 +19,7 @@ LoadingPage::LoadingPage(sf::Thread *server_init)
 		exit(-12);
 	}
 	this->server_init = server_init;
+	this->server_game = server_game;
 }
 LoadingPage::~LoadingPage()
 {
@@ -47,7 +48,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 	bool does_user_type_anything = false;
 
 	sf::Time delay_after_first_page = sf::seconds(0.3);
-	sf::Time delay_after_character = sf::seconds(0.2);
+	sf::Time delay_after_character = sf::seconds(0.18);
 
 	window->setKeyRepeatEnabled(false); //przycisk siê wciœnie tylko raz, nawet jak trzymamy
 
@@ -226,6 +227,10 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
+			if (is_server_running == true)
+			{
+				server_game->launch();
+			}
 			return adress;
 		}
 

@@ -10,7 +10,7 @@
 class LoadingPage
 {
 public:
-	LoadingPage(sf::Thread * server_init);
+	LoadingPage(sf::Thread * server_init, sf::Thread * server_game);
 	~LoadingPage();
 	sf::Text napisy(sf::Text text, std::string nazwa, float x, float y, bool style, int size);
 	std::string run(sf::RenderWindow * window);
@@ -23,6 +23,7 @@ private:
 	sf::Text text;
 	sf::Font font;
 	sf::Thread *server_init;
+	sf::Thread *server_game;
 };
 
 #endif

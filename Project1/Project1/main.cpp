@@ -215,7 +215,7 @@ int main()
 
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
-	LoadingPage loadingpage(&server_init);
+	LoadingPage loadingpage(&server_init, &server_game);
 	Menu menu;
 	bool menu_open = true;
 	
@@ -287,7 +287,7 @@ int main()
 						music.stop();
 						musicTank.play();
 						server_init.terminate();
-						server_game.launch();
+						//server_game.launch();
 						gameready = true;
 
 						/*menu_open = false;
