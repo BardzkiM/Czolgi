@@ -74,17 +74,18 @@ void ClientTCP::RunInit()
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
 
-
+		mutex->lock();
 		for (int i = 0; i < nr_of_clients; i++)
 		{
-			mutex->lock();
+			
 			tanks[i].deserialize(this->receive());
-			mutex->unlock();
+			
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;
 			}
 		}
+		mutex->unlock();
 	}
 
 	
