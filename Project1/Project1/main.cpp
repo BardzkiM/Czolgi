@@ -281,6 +281,7 @@ int main()
 					{
 						menu_open = false;
 						wykonawcy.set_bg(&window);
+
 						
 					}
 					if (menu.position == 3)

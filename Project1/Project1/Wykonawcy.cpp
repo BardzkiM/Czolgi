@@ -129,5 +129,8 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		sf::sleep(delay);
 	}
 	
+
+	window->draw(napisy(this->powrot, "nacisnij klawisz ESCAPE, aby powróciæ do menu", 500 , 800, false, 40));
+	window->display();
 	return 1;
 }

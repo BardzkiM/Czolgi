@@ -24,6 +24,7 @@ public:
 	sf::Text wykonawca3;
 	sf::Text wykonawca4;
 	sf::Text wykonawca5;
+	sf::Text powrot;
 	sf::Texture miduraFace;
 	sf::Sprite miduraFaceSprite;
 	sf::SoundBuffer buffer;
