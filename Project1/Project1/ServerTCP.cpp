@@ -145,7 +145,7 @@ void ServerTCP::runGame()
 		//std::cout << "###################[Server] numer klientów " << nr_of_clients_const << std::endl;
 		for (int i = 0; i < nr_of_clients_const; i++)
 		{
-			
+			sf::sleep(sf::seconds(0.020));
 			this->receive(i);
 			sprawdzCzyStrzelil(i);
 			movePociski(i, clock);
