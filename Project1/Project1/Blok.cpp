@@ -27,4 +27,6 @@ void Blok::setRotation()
  			texture = textured;
 			break;
 	}
+	sprite.setTexture(texture);
+	sprite.setPosition(x, y);
 }
