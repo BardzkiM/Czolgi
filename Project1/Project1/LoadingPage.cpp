@@ -46,7 +46,7 @@ sf::Text LoadingPage::napisy(sf::Text text, std::string nazwa, float x, float y,
 
 std::string LoadingPage::run(sf::RenderWindow *window)
 {
-	sf::String adress = "127.0.0.1";;
+	sf::String adress = "127.0.0.1";
 	bool is_server_running = false;
 	bool does_user_type_anything = false;
 
@@ -223,10 +223,22 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 			window->display();
 			sf::sleep(delay_after_character);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !is_server_running)
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			server_init->launch();
-			is_server_running = true;			
+			if (is_server_running)
+			{
+				server_init->terminate();
+				server_game->launch();
+				sf::sleep(delay_after_character);
+			}
+			if (!is_server_running)
+			{
+				server_init->launch();
+				is_server_running = true;
+				sf::sleep(delay_after_character);
+			}
+			
+						
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
