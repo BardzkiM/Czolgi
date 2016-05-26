@@ -100,7 +100,7 @@ void ServerTCP::RunInit()
 
 
 	for (int i = 0; i < max_clients_size; i++)
-	{
+	{ 
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
