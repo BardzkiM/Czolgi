@@ -134,7 +134,22 @@ void gameOver()
 {
 	tank.x = -100;
 	tank.y = -100;
-	//sf::Image::cop
+	sf::Texture logoOver;
+	logoOver.loadFromFile("images/game_over.png");
+	sf::Sprite logoOverSprite;
+	logoOverSprite.setTexture(logoOver);
+	sf::Sprite gameOver;
+	sf::Texture texture2;
+	texture2.loadFromImage(window.capture());
+	gameOver.setTexture(texture2);
+	for (int i = 0; i < 361; i++)
+	{
+		window.clear();
+		window.draw(gameOver);
+		logoOverSprite.setPosition(480, i);
+		window.draw(logoOverSprite);
+		window.display();
+	}
 }
 int main()
 {
