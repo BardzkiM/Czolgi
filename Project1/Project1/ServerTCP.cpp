@@ -162,7 +162,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 				(pocisk->y < (tank[i].y + tank[i].height )))
 			{
 				tank[index].removePocisk(k);
-				tank[i].hp -= 25;W
+				tank[i].hp -= 25;
 			}
 		}
 	}
