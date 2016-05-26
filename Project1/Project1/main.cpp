@@ -43,12 +43,14 @@ sf::Sprite przeszkodaSprite;
 sf::Clock bullet_clock;
 sf::RenderWindow window(sf::VideoMode(1200, 900), "CZOLGI");
 
+Czolg *czolg;
+
 bool gameready = false;
 
 int ClientTCP::nr_of_clients = 0;
 Czolg ClientTCP::tanks[3];
 
-void ustaleniePozycjiBar(Czolg *czolg, int index)
+void ustaleniePozycjiBar(int index)
 {
 	if (czolg->y < 17)
 		enemyBar[index].setPosition(czolg->x, czolg->y + czolg->height + 3);
@@ -64,7 +66,7 @@ void ustaleniePozycjiBar()
 		myBar.setPosition(tank.x, tank.y - 17);
 	tank.setBar();
 }
-void rysujPociski(Czolg *czolg, int i)
+void rysujPociski(int i)
 {
 	Pocisk * pocisk;
 	for (int j = 0; j < czolg->pociski.size(); j++)
@@ -86,7 +88,7 @@ void rysujPociski()
 		window.draw(pociska[j]);
 	}
 }
- 
+
 void gra(Czolg &tank)
 {
 	//obs³uga klawiatury
@@ -149,7 +151,7 @@ void gra(Czolg &tank)
 	
 
 	
-	Czolg *czolg;
+	
 	
 	window.draw(tank_sprite);
 
@@ -171,12 +173,12 @@ void gra(Czolg &tank)
 			window.draw(tanks_sprite[i]);
 
 			//ustalenie pozycji HP BAR
-			ustaleniePozycjiBar(czolg, i);
+			ustaleniePozycjiBar( i);
 
 			enemyBar[i].setTexture(czolg->textureBar);
 			window.draw(enemyBar[i]);
 		}
-			rysujPociski(czolg, i);
+			rysujPociski(i);
 		
 		
 	}
@@ -248,11 +250,11 @@ int main()
 	music.play();
 	music.setLoop(true);
 	musicTank.setLoop(true);
-
+	sf::Event event;
 	while (window.isOpen())
 	{
 		// Process events
-		sf::Event event;
+		
 		
 		while (window.pollEvent(event))
 		{
