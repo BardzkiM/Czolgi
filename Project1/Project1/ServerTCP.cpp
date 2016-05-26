@@ -109,7 +109,7 @@ void ServerTCP::runGame()
 		this->send(i, this->serialize());
 	}
 	sf::Clock clock;
-	sf::Time latency = sf::seconds(0.0185);
+	sf::Time latency = sf::seconds(0.02);
 	while (1)
 	{
 		for (int i = 0; i < nr_of_clients_const; i++)
