@@ -116,12 +116,12 @@ void gra()
 		czolg = &ClientTCP::tanks[i];
 		if (i != tank.nr_czolgu)
 		{
-			czolg[i].setRotation();
-			czolg[i].setBar();
+			czolg->setRotation();
+			czolg->setBar();
 
 			//ustalenie pozycji HP BAR
-			window.draw(czolg[i].sprite);
-			window.draw(czolg[i].hpBar);
+			window.draw(czolg->sprite);
+			window.draw(czolg->hpBar);
 		}
 		rysujPociski(i);
 	}
