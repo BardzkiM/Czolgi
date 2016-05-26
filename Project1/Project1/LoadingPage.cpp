@@ -70,7 +70,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 				does_user_type_anything = true;
 			}
 
-			adress += "0";
+			adress += "127.0.0.1";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
 			window->display();
@@ -109,7 +109,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 				adress = "";
 				does_user_type_anything = true;
 			}
-			adress += "3";
+			adress += "192.168.1.3";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
 			window->display();
@@ -122,7 +122,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 				adress = "";
 				does_user_type_anything = true;
 			}
-			adress += "4";
+			adress += "192.168.1.4";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
 			window->display();
@@ -174,7 +174,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 				adress = "";
 				does_user_type_anything = true;
 			}
-			adress += "8";
+			adress += "192.168.1.8";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
 			window->display();
