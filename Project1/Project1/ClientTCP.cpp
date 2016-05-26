@@ -29,7 +29,7 @@ void ClientTCP::send(std::string message)
 		std::cout << "error";
 	}
 }
-
+using namespace std;
 std::string ClientTCP::receive()
 {
 	char data[1500];
@@ -37,14 +37,17 @@ std::string ClientTCP::receive()
 	std::string output_string;
 	do
 	{
+		cout << "::BEGIN SOCKET.RECEIVE::" << endl;
 		if (socket.receive(&data, 1500, received) != sf::Socket::Done)
 		{
 			// error...
 			//std::cout << "Error during client receiveing";
 		}
+		cout << "::END SOCKET>RECEIVE::" << endl;
 		std::string temp_string(data);
 		output_string = temp_string;
 		//std::cout << output_string << std::endl;
+		std::cout <<"RECIEVE"<< (output_string.find("archive") == -1) << std::endl;
 	} while (output_string.find("archive")==-1);
 
 	
@@ -70,26 +73,36 @@ void ClientTCP::RunInit()
 	std::cout <<std::endl<< "Klient wszed³ w tryb ci¹g³y" << std::endl;
 	while (1)
 	{
+		cout << "::WHILE BEGIN::" << endl;
 		//std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
-
+		std::cout << nr_of_clients << std::endl;
 		for (int i = 0; i < nr_of_clients; i++)
 		{
-			std::cout << "[ClientTCP] Przed mutex" << std::endl;
+			cout << "::FOR BEGIN::" << endl;
+			//std::cout << "[ClientTCP] Przed mutex" << std::endl;
 			//mutex->lock();
-			std::cout << "[ClientTCP] Po mutex" << std::endl;
-			tanks[i].deserialize(this->receive());
-			std::cout << "[ClientTCP] Klient Odebral" << std::endl;
-			std::cout << "[ClientTCP] Po mutex 2" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex" << std::endl;
+			
+			string _receive = this->receive();
+			cout << "::READ REC:: "<< _receive << endl;
+			tanks[i].deserialize(_receive);
+			cout << "::DESERIALIZE REC::" << endl;
+			//std::cout << "[ClientTCP] Klient Odebral" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex 2" << std::endl;
 			//mutex->unlock();
-			std::cout << "[ClientTCP] Po mutex 3" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex 3" << std::endl;
+			std::cout <<"AAAAAAAAAAAAAAAAAAAAAAAAAAAA: "<< i<<": "<< tank->nr_czolgu <<": "<< tanks[i].x << std::endl;
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;
 			}
+			std::cout << "::FOR END::" << nr_of_clients << std::endl;
 		}
+		cout << "::WHILE END::" << endl;
 	}
+	std::cout << "WHILE OUT" << std::endl;
 
 	
 }
