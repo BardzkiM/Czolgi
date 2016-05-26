@@ -17,5 +17,6 @@ public:
 	sf::Texture textureu;
 	sf::Texture texturer;
 	sf::Texture textured;
+	sf::Sprite sprite;
 };
 #endif
