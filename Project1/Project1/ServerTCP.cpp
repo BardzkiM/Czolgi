@@ -140,7 +140,7 @@ void ServerTCP::runGame()
 	sf::Clock clock;
 	while (1)
 	{
-		high_resolution_clock::time_point t1 = high_resolution_clock::now();
+		//high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		//std::cout << "###################[Server] numer klientów " << nr_of_clients_const << std::endl;
 		for (int i = 0; i < nr_of_clients_const; i++)
 		{
@@ -156,9 +156,9 @@ void ServerTCP::runGame()
 				std::cout << "[ServerTCP] wys³ano" << this->tank[j].serialize() <<std::endl;
 			}
 		}
-		high_resolution_clock::time_point t2 = high_resolution_clock::now();
-		auto duration = duration_cast<microseconds>(t2 - t1).count();
-		std::cout << "[ServerTCP] runGame " << nr_of_clients_const << " "<< duration << std::endl;
+		//high_resolution_clock::time_point t2 = high_resolution_clock::now();
+		//auto duration = duration_cast<microseconds>(t2 - t1).count();
+		//std::cout << "[ServerTCP] runGame " << nr_of_clients_const << " "<< duration << std::endl;
 		
 	}
 		//this->send(0, std::to_string(nr_of_clients_const - 1));
@@ -184,7 +184,7 @@ void ServerTCP::sprawdzCzyStrzelil(int index)
 }
 void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 {
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
 	for (int k = 0; k < tank[index].pociski.size(); k++)
 	{
@@ -204,7 +204,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 			}
 		}
 	}
-	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(t2 - t1).count();
+	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	//auto duration = duration_cast<microseconds>(t2 - t1).count();
 	//std::cout << "[ServerTCP] sprawdzKolizjePociskCzolg " << duration << std::endl;
 }
