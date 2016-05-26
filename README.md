@@ -34,9 +34,9 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 
-W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera, należy wpisać jego IP (nawet, jeśli chcemy zagrać sami) i potwiedzić dane klawiszem "Enter". 
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera, należy wpisać jego IP; domyślnie serwer ustawiony jest na localhost- jeśli chcemy grać sami. Wybór serwera potwierdzamy spacją. Rozpoczęcie gry nastąpi po wcisnięciu klawisza "Enter".  
 
-Gra jest obsługiwana za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
+Gra obsługiwana jest za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
 
 Ad5. Projekt współtworzyli:
     Michał Bardzki - kierownik,
