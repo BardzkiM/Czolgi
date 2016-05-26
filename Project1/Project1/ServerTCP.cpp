@@ -94,12 +94,12 @@ void ServerTCP::RunInit()
 		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
 		exit(1);
 	}
-	const int max_clients_size = 4;
+	const int max_clients_size = 3;
 	sf::Thread *clients[max_clients_size];
 	
 
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < max_clients_size; i++)
 	{
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
