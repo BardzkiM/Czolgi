@@ -86,7 +86,7 @@ void rysujPociski()
 		window.draw(pociska[j]);
 	}
 }
- 
+Czolg *czolg;
 void gra(Czolg &tank)
 {
 	//obs³uga klawiatury
@@ -149,7 +149,7 @@ void gra(Czolg &tank)
 	
 
 	
-	Czolg *czolg;
+	
 	
 	window.draw(tank_sprite);
 
@@ -248,11 +248,11 @@ int main()
 	music.play();
 	music.setLoop(true);
 	musicTank.setLoop(true);
-
+	sf::Event event;
 	while (window.isOpen())
 	{
 		// Process events
-		sf::Event event;
+		
 		
 		while (window.pollEvent(event))
 		{
