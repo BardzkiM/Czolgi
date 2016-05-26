@@ -24,14 +24,10 @@ sf::Mutex mutex;
 //////// komyntosz 
 Czolg tank;
 ServerTCP servertcp;
-//ClientTCP clienttcp(&tank, &mutex);
-//ClientTCP clienttcp1(&tank);
 sf::Thread server_init(&ServerTCP::RunInit, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 ClientTCP clienttcp(&tank, &mutex);										//stworzenie pierwszego klienta
 sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
-//sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);
-//sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
 sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
@@ -117,8 +113,6 @@ void gra(Czolg &tank)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		int nr = 0;
-		//tank.pociski.clear();
-		//cout << "Zegar dla pocisku: " << bullet_clock.getElapsedTime().asMilliseconds()  << endl;
 		if(bullet_clock.getElapsedTime().asMilliseconds()>1000)
 		{ 
 			tank.strzelilem = true;
@@ -130,7 +124,6 @@ void gra(Czolg &tank)
 	window.clear();
 	// Draw the tank_sprite
 	window.draw(GraDane::spriteMapa);
-	//window.draw(tank_sprite);
 
 
 	//rysowanie mapy
@@ -161,9 +154,7 @@ void gra(Czolg &tank)
 
 
 	//rysowanie czo³gów klientów i ich pocisków
-	//std::cout << "Przed mutexem main" << std::endl;
 	mutex.lock();
-	//std::cout << "Po mutex main" << std::endl;
 	
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
@@ -185,13 +176,9 @@ void gra(Czolg &tank)
 		
 		
 	}
-	//std::cout << "Po mutex main 2" << std::endl;
 	mutex.unlock();
-	//std::cout << "Po mutex main 3" << std::endl;
 
 	window.display();
-	//window.clear();
-	// Draw the tank_sprite
 	
 }
 void gameOver()
@@ -211,9 +198,6 @@ int main()
 	
 	
 
-	
-	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
-	//clienttcp_thread1.launch();
 
 
 
@@ -290,18 +274,8 @@ int main()
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
-						//server_init.terminate();
-						//server_game.launch();
 						gameready = true;
-
-						/*menu_open = false;
-						tank_sprite.setTexture(tank.texturel);
-						music.stop();
-						musicTank.play();
-						server_init.terminate();
-						server_game.launch();
-*/
-						
+				
 					}
 					if (menu.position == 2) //wykonawcy
 					{
@@ -318,8 +292,6 @@ int main()
 
 				}
 			}
-			
-			//tank_sprite.setTexture(tank.texture);
 			
 
 			
