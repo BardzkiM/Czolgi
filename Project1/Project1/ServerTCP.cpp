@@ -94,7 +94,7 @@ void ServerTCP::RunInit()
 		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
 		exit(1);
 	}
-	const int max_clients_size = 3;
+	const int max_clients_size = 4;
 	sf::Thread *clients[max_clients_size];
 	
 
@@ -147,7 +147,7 @@ void ServerTCP::runGame()
 			
 			this->receive(i);
 			sprawdzCzyStrzelil(i);
-
+			sf::sleep(sf::seconds(0.005));
 			movePociski(i, clock);
 			
 			for (int j = 0; j < nr_of_clients_const; j++)
