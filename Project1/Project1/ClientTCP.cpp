@@ -62,7 +62,7 @@ void ClientTCP::RunInit()
 		// error...
 		std::cout << "error";
 	}
-	
+	socket.setBlocking(false);
 	
 	this->tank->deserialize(this->receive()); // odbieramy w³asny czo³g przed gr¹
 
