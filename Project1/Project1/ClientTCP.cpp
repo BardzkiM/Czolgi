@@ -69,7 +69,6 @@ void ClientTCP::RunInit()
 
 	deserialize(this->receive());	//odbieramy liczbê klientów
 	std::cout <<std::endl<< "Klient wszed³ w tryb ci¹g³y" << std::endl;
-	int midura = 0;
 	while (1)
 	{
 		//std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
@@ -90,8 +89,6 @@ void ClientTCP::RunInit()
 				tank->hp = tanks[i].hp;
 			}
 		}
-		midura++;
-		//std::cout << "!@#$%^&*() #klient:     " << midura << std::endl;
 		
 	}
 

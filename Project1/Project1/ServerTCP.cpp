@@ -138,7 +138,6 @@ void ServerTCP::runGame()
 		this->send(i, this->serialize());
 	}
 	sf::Clock clock;
-	int midura = 0;
 	while (1)
 	{
 		//high_resolution_clock::time_point t1 = high_resolution_clock::now();
@@ -159,9 +158,6 @@ void ServerTCP::runGame()
 		//high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		//auto duration = duration_cast<microseconds>(t2 - t1).count();
 		//std::cout << "[ServerTCP] runGame " << nr_of_clients_const << " "<< duration << std::endl;
-		midura++;
-
-		//std::cout << "!@#$%^&*() #server:     " << midura << std::endl;
 	}
 		//this->send(0, std::to_string(nr_of_clients_const - 1));
 	
