@@ -74,7 +74,7 @@ void ClientTCP::RunInit()
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
 
-
+		mutex->lock();
 		for (int i = 0; i < nr_of_clients; i++)
 		{
 			std::cout << "[ClientTCP] Przed mutex" << std::endl;
@@ -90,6 +90,7 @@ void ClientTCP::RunInit()
 				tank->hp = tanks[i].hp;
 			}
 		}
+		mutex->unlock();
 	}
 
 	
