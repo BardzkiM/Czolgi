@@ -21,7 +21,7 @@ sf::Mutex mutex;
 
 
 
-//////// komyntosz
+//////// komyntosz 
 Czolg tank;
 ServerTCP servertcp;
 //ClientTCP clienttcp(&tank, &mutex);
