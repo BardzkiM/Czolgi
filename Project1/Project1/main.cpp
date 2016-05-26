@@ -28,6 +28,8 @@ ServerTCP servertcp;
 //ClientTCP clienttcp1(&tank);
 sf::Thread server_init(&ServerTCP::RunInit, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
 sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako funkcji w Klasie ServerTCP
+ClientTCP clienttcp(&tank, &mutex);										//stworzenie pierwszego klienta
+sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 //sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);
 //sf::Thread clienttcp_thread1(&ClientTCP::RunInit, &clienttcp1);
 
@@ -162,6 +164,7 @@ void gra(Czolg &tank)
 	//std::cout << "Przed mutexem main" << std::endl;
 	//mutex.lock();
 	//std::cout << "Po mutex main" << std::endl;
+	
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
 	{
 		czolg = &ClientTCP::tanks[i];
@@ -200,7 +203,7 @@ int main()
 {
 	sf::Vector2u vect(800, 600);
 	window.setSize(vect);
-	window.setPosition(sf::Vector2i(100, 0));
+	window.setPosition(sf::Vector2i(550, 0));
 	GraDane::mapa;
 	sf::Sprite spritemapa(GraDane::mapa.texture);
 	GraDane::spriteMapa = spritemapa;
@@ -208,8 +211,7 @@ int main()
 	
 	
 
-	ClientTCP clienttcp(&tank, &mutex);										//stworzenie pierwszego klienta
-	sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
+	
 	//clienttcp_thread.launch();										//odpalenie pierwszego klienta	
 	//clienttcp_thread1.launch();
 
