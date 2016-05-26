@@ -29,7 +29,6 @@ sf::Thread server_game(&ServerTCP::runGame, &servertcp);	//ustawienie w¹tku jako
 ClientTCP clienttcp(&tank, &mutex);										//stworzenie pierwszego klienta
 sf::Thread clienttcp_thread(&ClientTCP::RunInit, &clienttcp);		//stworzenie w¹tku pierwszego klienta
 
-sf::CircleShape shape(100.f); //ko³o
 sf::Sprite tank_sprite;
 sf::Sprite tanks_sprite[4];
 sf::Sprite tank_enemy_sprite[3];
