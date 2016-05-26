@@ -259,7 +259,7 @@ int main()
 						
 					}
 					if (menu.position == 3)
-					{
+					{ 
 						window.close();
 						break;
 					}
