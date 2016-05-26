@@ -215,7 +215,7 @@ int main()
 
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
-	LoadingPage loadingpage(&server_init, &server_game);
+	LoadingPage loadingpage(&server_init, &server_game, &clienttcp_thread, &clienttcp);
 	Menu menu;
 	bool menu_open = true;
 	
@@ -282,7 +282,7 @@ int main()
 					{
 						menu_open = false;						
 						clienttcp.adress=loadingpage.run(&window);
-						clienttcp_thread.launch();
+						//clienttcp_thread.launch();
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
