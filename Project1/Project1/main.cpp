@@ -120,8 +120,8 @@ void gra()
 			czolg->setBar();
 
 			//ustalenie pozycji HP BAR
-			window.draw(czolg[i].sprite);
-			window.draw(czolg[i].hpBar);
+			window.draw(czolg->sprite);
+			window.draw(czolg->hpBar);
 		}
 		rysujPociski(i);
 	}
