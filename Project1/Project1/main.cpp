@@ -139,6 +139,9 @@ void drawMenu()
 }
 void gameOver()
 {
+	std::cout << "Game Over" << std::endl;
+	clienttcp_thread.terminate();
+	server_game.terminate();
 	tank.x = -100;
 	tank.y = -100;
 	sf::Texture logoOver;
@@ -148,12 +151,14 @@ void gameOver()
 	sf::Sprite gameOver;
 	sf::Texture texture2;
 	texture2.loadFromImage(window.capture());
+	
 	gameOver.setTexture(texture2);
-	for (int i = 0; i < 361; i++)
+	gameOver.scale(1.5, 1.5);
+	for (int i = 0; i < 316; i++)
 	{
 		window.clear();
 		window.draw(gameOver);
-		logoOverSprite.setPosition(480, i);
+		logoOverSprite.setPosition(420, i);
 		window.draw(logoOverSprite);
 		window.display();
 	}
@@ -264,9 +269,8 @@ int main()
 			}
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				menu_open = true;
-				menu.position = 1;
-				drawMenu();
+				window.close();
+				break;
 			}
 			
 
@@ -285,6 +289,7 @@ int main()
 				else
 				{
 					gameOver();
+					gameready = false;
 				}
 			}
 			
