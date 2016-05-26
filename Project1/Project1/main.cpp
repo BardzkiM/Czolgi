@@ -47,6 +47,8 @@ bool gameready = false;
 int ClientTCP::nr_of_clients = 0;
 Czolg ClientTCP::tanks[3];
 
+Menu menu;
+
 void ustaleniePozycjiBar(int index)
 {
 	if (czolg->y < 17)
@@ -180,6 +182,11 @@ void gra(Czolg &tank)
 	window.display();
 	
 }
+void drawMenu()
+{
+	menu.set_bg(&window);
+	menu.set_menu_pos_1(&window);
+}
 void gameOver()
 {
 	tank.x = -100;
@@ -203,7 +210,7 @@ int main()
 	//int menu_pos = 1;
 	Wykonawcy wykonawcy;
 	LoadingPage loadingpage(&server_init, &server_game, &clienttcp_thread, &clienttcp);
-	Menu menu;
+	
 	bool menu_open = true;
 	
 
@@ -214,8 +221,7 @@ int main()
 	
 	//Przeszkoda Przeszkoda();
 
-	menu.set_bg(&window);
-	menu.set_menu_pos_1(&window);
+	drawMenu();
 
 	sf::Clock clock;
 	
@@ -291,6 +297,13 @@ int main()
 				
 
 				}
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+
+				menu_open = true;
+				menu.position = 1;
+				drawMenu();
 			}
 			
 
