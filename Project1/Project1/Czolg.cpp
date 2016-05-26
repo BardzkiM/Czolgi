@@ -164,7 +164,11 @@ void Czolg::setBar()
 	{
 		this->textureBar = textureBar1;
 	}
-
+	if (y < 17)
+		hpBar.setPosition(x, y + height + 3);
+	else
+		hpBar.setPosition(x, y - 17);
+	hpBar.setTexture(textureBar);
 }
 void Czolg::addPocisk()
 {

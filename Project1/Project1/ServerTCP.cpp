@@ -36,17 +36,12 @@ void ServerTCP::accept_client()
 {
 	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
 		
-		//sf::TcpSocket *temp = new sf::TcpSocket[nr_of_clients];
-		////std::copy(client, client + (nr_of_clients - 1), temp);
-		//memcpy(temp,client,nr_of_clients-1);
-		//delete[] client;
-		//client = temp;
+
 		if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
 		{
 			// error...
 			std::cout << "error";
 		}
-		//this->receive(nr_of_clients-1);	
 }
 
 void ServerTCP::send(int which_client, std::string message)
@@ -59,34 +54,25 @@ void ServerTCP::send(int which_client, std::string message)
 
 void ServerTCP::receive(int which_client)
 {
-	char data[1000];
+	char data[200];
 	std::size_t received;
 	std::string output_string;
 	do
 	{
-		if (client[which_client].receive(&data, 1000, received) != sf::Socket::Done)
+		if (client[which_client].receive(&data, 200, received) != sf::Socket::Done)
 		{
-			// error...
-			//std::cout << "Error during server receiveing";
+			std::cout << "Error during server receiveing";
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-		//std::cout << output_string << std::endl;
 	} while (output_string.find("archive") == -1);
 
-	//std::cout << std::endl << "[SERVER] po odbiorze" << std::endl;
-
-	//std::string	received_data_str(data);			//tworzymy nowy string na podstawie tablicy charów
 	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
-	//czolg_test.deserialize(output_string);		//deserializujemy obiekt (czyli wczytujemy spowrotem wszystkie dane dla niego niezbêdne)
-	
-	//std::cout << "[SERVER] Received " << received <<  " bytes" << " " << output_string << std::endl;
 }
 
 void ServerTCP::RunInit()
 {
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
-	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
 
 	if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
@@ -100,31 +86,16 @@ void ServerTCP::RunInit()
 
 
 	for (int i = 0; i < max_clients_size; i++)
-	{
+	{ 
 		clients[i] = new sf::Thread(&ServerTCP::accept_client, this);
 		clients[i]->launch();
 		clients[i]->wait();
-		//std::cout << " Po³¹czono z klientem " << i << " [SERVER]" << std::endl;
 		tank[i].nr_czolgu = i;
 		this->send(i, tank[i].serialize());	// wysy³amy do klienta jest pocz¹tkowe po³o¿enie 
-		//this->send(i, std::to_string(i));
 		nr_of_clients++;
 		
 	}
 	listener.close();
-	/*while (1)
-	{
-		for (int i = 0; i < nr_of_clients - 1; i++)
-		{
-			std::cout << "Server petla " << i << std::endl;
-			this->receive(i);
-
-			std::cout << "Server petla " << i << std::endl;
-
-			
-			this->send(i, this->tank[i].serialize());
-		}
-	}*/
 	
 }
 void ServerTCP::runGame()
@@ -138,14 +109,12 @@ void ServerTCP::runGame()
 		this->send(i, this->serialize());
 	}
 	sf::Clock clock;
-	int midura = 0;
+	sf::Time latency = sf::seconds(0.0185);
 	while (1)
 	{
-		//high_resolution_clock::time_point t1 = high_resolution_clock::now();
-		//std::cout << "###################[Server] numer klientów " << nr_of_clients_const << std::endl;
 		for (int i = 0; i < nr_of_clients_const; i++)
 		{
-			sf::sleep(sf::seconds(0.020));
+			sf::sleep(latency);
 			this->receive(i);
 			sprawdzCzyStrzelil(i);
 			movePociski(i, clock);
@@ -153,17 +122,9 @@ void ServerTCP::runGame()
 			for (int j = 0; j < nr_of_clients_const; j++)
 			{				
 				this->send(i, this->tank[j].serialize());
-				//std::cout << "[ServerTCP] wys³ano" << this->tank[j].serialize() <<std::endl;
 			}
 		}
-		//high_resolution_clock::time_point t2 = high_resolution_clock::now();
-		//auto duration = duration_cast<microseconds>(t2 - t1).count();
-		//std::cout << "[ServerTCP] runGame " << nr_of_clients_const << " "<< duration << std::endl;
-		midura++;
-
-		//std::cout << "!@#$%^&*() #server:     " << midura << std::endl;
 	}
-		//this->send(0, std::to_string(nr_of_clients_const - 1));
 	
 }
 
@@ -186,7 +147,6 @@ void ServerTCP::sprawdzCzyStrzelil(int index)
 }
 void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 {
-	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
 	for (int k = 0; k < tank[index].pociski.size(); k++)
 	{
@@ -206,7 +166,4 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 			}
 		}
 	}
-	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	//auto duration = duration_cast<microseconds>(t2 - t1).count();
-	//std::cout << "[ServerTCP] sprawdzKolizjePociskCzolg " << duration << std::endl;
 }
