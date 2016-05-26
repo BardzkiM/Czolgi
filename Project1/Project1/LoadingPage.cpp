@@ -1,7 +1,8 @@
 #include "LoadingPage.h"
 #include "ServerTCP.h"
 
-LoadingPage::LoadingPage(sf::Thread *server_init, sf::Thread *server_game)
+
+LoadingPage::LoadingPage(sf::Thread *server_init, sf::Thread *server_game, sf::Thread *client_tcp_thread, ClientTCP *client_tcp)
 {
 	if (!first_background.loadFromFile("images/second_page_loading_page.png"))
 	{
@@ -20,6 +21,8 @@ LoadingPage::LoadingPage(sf::Thread *server_init, sf::Thread *server_game)
 	}
 	this->server_init = server_init;
 	this->server_game = server_game;
+	this->client_tcp_thread = client_tcp_thread;
+	this->client_tcp = client_tcp;
 }
 LoadingPage::~LoadingPage()
 {
@@ -229,8 +232,17 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		{
 			if (is_server_running == true)
 			{
+				client_tcp->adress = adress;
+				client_tcp_thread->launch();
+				sf::Time delay_after_client_connection = sf::seconds(0.3);
+				sf::sleep(delay_after_client_connection);
 				server_init->terminate();
 				server_game->launch();
+			}
+			else
+			{
+				client_tcp->adress = adress;
+				client_tcp_thread->launch();
 			}
 			return adress;
 		}
