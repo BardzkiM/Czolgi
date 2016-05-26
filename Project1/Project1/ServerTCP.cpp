@@ -129,6 +129,7 @@ void ServerTCP::RunInit()
 }
 void ServerTCP::runGame()
 {
+	
 	const int nr_of_clients_const = nr_of_clients;
 	std::cout << "Server wszed³ w tryb ci¹g³y" << std::endl;
 	
@@ -158,6 +159,7 @@ void ServerTCP::runGame()
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(t2 - t1).count();
 		std::cout << "[ServerTCP] runGame " << nr_of_clients_const << " "<< duration << std::endl;
+		
 	}
 		//this->send(0, std::to_string(nr_of_clients_const - 1));
 	

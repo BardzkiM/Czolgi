@@ -54,6 +54,7 @@ std::string ClientTCP::receive()
 
 void ClientTCP::RunInit()
 {
+	sf::Time delay_complete_transmission = sf::seconds(0.02);
 	std::cout << "Start w¹tku klienta" << std::endl;
 
 	sf::Socket::Status status = socket.connect(this->adress, 54000);
@@ -89,6 +90,7 @@ void ClientTCP::RunInit()
 				tank->hp = tanks[i].hp;
 			}
 		}
+		sf::sleep(delay_complete_transmission);
 	}
 
 	
