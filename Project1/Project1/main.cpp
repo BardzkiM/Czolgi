@@ -134,6 +134,7 @@ void gameOver()
 {
 	tank.x = -100;
 	tank.y = -100;
+	//sf::Image::cop
 }
 int main()
 {
