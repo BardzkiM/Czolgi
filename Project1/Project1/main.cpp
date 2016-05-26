@@ -162,7 +162,7 @@ void gra(Czolg &tank)
 
 	//rysowanie czo³gów klientów i ich pocisków
 	//std::cout << "Przed mutexem main" << std::endl;
-	//mutex.lock();
+	mutex.lock();
 	//std::cout << "Po mutex main" << std::endl;
 	
 	for (int i = 0; i < ClientTCP::nr_of_clients; i++)
@@ -186,7 +186,7 @@ void gra(Czolg &tank)
 		
 	}
 	//std::cout << "Po mutex main 2" << std::endl;
-	//mutex.unlock();
+	mutex.unlock();
 	//std::cout << "Po mutex main 3" << std::endl;
 
 	window.display();
