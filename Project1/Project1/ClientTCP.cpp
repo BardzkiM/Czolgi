@@ -40,11 +40,11 @@ std::string ClientTCP::receive()
 		if (socket.receive(&data, 1500, received) != sf::Socket::Done)
 		{
 			// error...
-			std::cout << "Error during client receiveing";
+			//std::cout << "Error during client receiveing";
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-		std::cout <<"[ClientTCP] receive"<< output_string << std::endl;
+		//std::cout << output_string << std::endl;
 	} while (output_string.find("archive")==-1);
 
 	
@@ -62,7 +62,7 @@ void ClientTCP::RunInit()
 		// error...
 		std::cout << "error";
 	}
-	socket.setBlocking(false);
+	
 	
 	this->tank->deserialize(this->receive()); // odbieramy w³asny czo³g przed gr¹
 
@@ -74,21 +74,18 @@ void ClientTCP::RunInit()
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
 
+		//mutex->lock();
 		for (int i = 0; i < nr_of_clients; i++)
 		{
-			std::cout << "[ClientTCP] Przed mutex" << std::endl;
-			//mutex->lock();
-			std::cout << "[ClientTCP] Po mutex" << std::endl;
+			
 			tanks[i].deserialize(this->receive());
-			std::cout << "[ClientTCP] Klient Odebral" << std::endl;
-			std::cout << "[ClientTCP] Po mutex 2" << std::endl;
-			//mutex->unlock();
-			std::cout << "[ClientTCP] Po mutex 3" << std::endl;
+			
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;
 			}
 		}
+		//mutex->unlock();
 	}
 
 	

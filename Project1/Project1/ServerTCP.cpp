@@ -152,7 +152,6 @@ void ServerTCP::runGame()
 			for (int j = 0; j < nr_of_clients_const; j++)
 			{				
 				this->send(i, this->tank[j].serialize());
-				std::cout << "[ServerTCP] wys³ano" << this->tank[j].serialize() <<std::endl;
 			}
 		}
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
