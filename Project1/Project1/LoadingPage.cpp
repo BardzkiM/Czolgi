@@ -229,6 +229,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 		{
 			if (is_server_running == true)
 			{
+				server_init->terminate();
 				server_game->launch();
 			}
 			return adress;

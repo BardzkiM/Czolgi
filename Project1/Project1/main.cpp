@@ -286,7 +286,7 @@ int main()
 						tank_sprite.setTexture(tank.texturel);
 						music.stop();
 						musicTank.play();
-						server_init.terminate();
+						//server_init.terminate();
 						//server_game.launch();
 						gameready = true;
 
