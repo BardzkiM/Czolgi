@@ -40,11 +40,11 @@ std::string ClientTCP::receive()
 		if (socket.receive(&data, 1500, received) != sf::Socket::Done)
 		{
 			// error...
-			//std::cout << "Error during client receiveing";
+			std::cout << "Error during client receiveing";
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-		//std::cout << output_string << std::endl;
+		std::cout <<"[ClientTCP] receive"<< output_string << std::endl;
 	} while (output_string.find("archive")==-1);
 
 	
