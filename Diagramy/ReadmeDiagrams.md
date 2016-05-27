@@ -1,7 +1,9 @@
-Diagramy zosta≥y stworzone na podstawie poniøszych ürÛde≥:
+Diagramy zosta≈Çy stworzone na podstawie poni≈ºszych ≈∫r√≥de≈Ç:
+<ul>
+<li>diagram klas:
+http://brasil.cel.agh.edu.pl/~09sbfraczek/diagram-klas,1,11.html </li>
 
-diagram klas:
-http://brasil.cel.agh.edu.pl/~09sbfraczek/diagram-klas,1,11.html
+<li>diagram ELH:
+http://prac.us.edu.pl/~siminski/ip_psi/psi_elh.pdf</li>
 
-diagram ELH:
-http://prac.us.edu.pl/~siminski/ip_psi/psi_elh.pdf
+</ul>
