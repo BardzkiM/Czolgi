@@ -1,7 +1,7 @@
 # Czolgi
 Projekt_Cpp
 
-1. <b>Gdzie znajdują się diagramy związane z projektem ?</b>
+1. Gdzie znajdują się diagramy związane z projektem ?
 2. Co jest potrzebne do uruchomienia kodu ?
 3. Jak uruchomić kod ? 
 4. Jak działa gra “Czołgi 2D” ?
@@ -34,15 +34,15 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 
-W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:
-a) gra w trybie single-player:
-    wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)
-b) gra w trybie multiplayer - my jesteśmy serwerem - i nie chcemy brać udziału w grze:
-    wciskamy spację, czekamy na podłączenie dwóch klientów. Po wyświetleniu w konsoli dwóch aktywnych klientów, wciskamy ponownie spację, czym potwierdzamy, że jesteśmy serwerem i nie bierzemy udziału w grze
-c) gra w trybie multiplayer - my jesteśmy serwerem i chcemy wziąć udział w grze:
-    wciskamy spację i czekamy na podłączenie się klienta (drugiego gracza). Po wyświetleniu w konsoli aktywego klienta, wciskamy Enter, przechodząc bezpośrednio do gry.
-d) gra w trybie multiplayer - my jesteśmy klientem:
-    wpisujemy adres IP serwera (pod warunkiem, że serwer jest już uruchomiony(!)), akceptujemy wybór Enterem i czekamy na uruchomienie gry przez serwer.
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:<br>
+a) gra w trybie <b> single-player </b>:<br>
+    wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)<br>
+b) gra w trybie multiplayer -<b> my jesteśmy serwerem - i nie chcemy brać udziału w grze</b>:<br>
+    wciskamy spację, czekamy na podłączenie dwóch klientów. Po wyświetleniu w konsoli dwóch aktywnych klientów, wciskamy ponownie spację, czym potwierdzamy, że jesteśmy serwerem i nie bierzemy udziału w grze<br>
+c) gra w trybie multiplayer - <b>my jesteśmy serwerem i chcemy wziąć udział w grze</b>:<br>
+    wciskamy spację i czekamy na podłączenie się klienta (drugiego gracza). Po wyświetleniu w konsoli aktywego klienta, wciskamy Enter, przechodząc bezpośrednio do gry.<br>
+d) gra w trybie multiplayer - <b>my jesteśmy klientem</b>:<br>
+    wpisujemy adres IP serwera (pod warunkiem, że serwer jest już uruchomiony(!)), akceptujemy wybór Enterem i czekamy na uruchomienie gry przez serwer.<br>
     
 Gra obsługiwana jest za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
 
