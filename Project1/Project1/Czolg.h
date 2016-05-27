@@ -40,6 +40,8 @@ public:
 	sf::SoundBuffer bufferBullet;
 	sf::Sound sound;
 	sf::Music music;
+
+	sf::Sprite hpBar;
 	
 private:
 

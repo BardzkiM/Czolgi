@@ -9,7 +9,7 @@ Pocisk::Pocisk(int x, int y, int rot)
 	this->texturer.loadFromFile("images/pociskr.png");
 	this->textured.loadFromFile("images/pociskd.png");
 	this->angle = rot;
-	setTexture();
+	setRotation();
 	sf::Vector2u pociskSize(texturel.getSize());
 	this->width = pociskSize.x;
 	this->height = pociskSize.y;
@@ -17,32 +17,11 @@ Pocisk::Pocisk(int x, int y, int rot)
 	this->y = y;
 	setStartPosition();
 	this->movement = 8;
-	
-	//setRotation();
 }
 
 
 Pocisk::~Pocisk()
 {
-}
-void Pocisk::setTexture()
-{
-	if (this->angle == 0)
-	{
-		this->texture = this->texturel;
-	}
-	if (this->angle == 90)
-	{
-		this->texture = this->textureu;
-	}
-	if (this->angle == 180)
-	{
-		this->texture = this->texturer;
-	}
-	if (this->angle == 270)
-	{
-		this->texture = this->textured;
-	}
 }
 void Pocisk::setStartPosition()
 {
@@ -86,9 +65,6 @@ bool Pocisk::sprawdzKolizjePociskPrzeszkoda()
 				((y + height) > GraDane::mapa.przeszkody[i].y) &&
 				(y < (GraDane::mapa.przeszkody[i].y + GraDane::mapa.przeszkody[i].height + movement)))
 			{
-				//
-				//if (!pociski.empty())
-				//daæ do tank remove pocisk
 
 				return true;
 			}

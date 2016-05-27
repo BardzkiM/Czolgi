@@ -44,7 +44,7 @@ std::string ClientTCP::receive()
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-		std::cout <<"[ClientTCP] receive"<< output_string << std::endl;
+		//std::cout <<"[ClientTCP] receive"<< output_string << std::endl;
 	} while (output_string.find("archive")==-1);
 
 	
@@ -74,23 +74,22 @@ void ClientTCP::RunInit()
 		//std::cout << "jestem w ³ajlu Klienta  !!!!!!!!!" << nr_of_clients << std::endl;
 		this->send(this->tank->serialize());
 		this->tank->strzelilem = false;
-
 		for (int i = 0; i < nr_of_clients; i++)
 		{
-			std::cout << "[ClientTCP] Przed mutex" << std::endl;
+			//std::cout << "[ClientTCP] Przed mutex" << std::endl;
 			mutex->lock();
-			std::cout << "[ClientTCP] Po mutex" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex" << std::endl;
 			tanks[i].deserialize(this->receive());
-			std::cout << "[ClientTCP] Klient Odebral" << std::endl;
-			std::cout << "[ClientTCP] Po mutex 2" << std::endl;
+			//std::cout << "[ClientTCP] Klient Odebral" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex 2" << std::endl;
 			mutex->unlock();
-			std::cout << "[ClientTCP] Po mutex 3" << std::endl;
+			//std::cout << "[ClientTCP] Po mutex 3" << std::endl;
 			if (i == tank->nr_czolgu)
 			{
 				tank->hp = tanks[i].hp;
 			}
 		}
-		sf::sleep(delay_complete_transmission);
+		
 	}
 
 	
