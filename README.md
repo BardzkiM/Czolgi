@@ -5,9 +5,9 @@ Projekt_Cpp
 2. Co jest potrzebne do uruchomienia kodu ?
 3. Jak uruchomić kod ? 
 4. Jak działa gra “Czołgi 2D” ?
-5. Kto napisał ten projekt ?
+5. Kto napisał projekt ?
 
-Ad1. Diagram Klas znajduje się w folderze diagramy (Czolgi\Diagramy).
+Ad1. Diagramy (klas, ELH) znajdują się w folderze diagramy (Czolgi\Diagramy).
 
 Ad2. Kod gry został napisany w języku C++ z wykorzystaniem silnika graficznego SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
 https://www.youtube.com/watch?v=Z6alClFOGoM ).
@@ -34,8 +34,16 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 
-W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera, należy wpisać jego IP; domyślnie serwer ustawiony jest na localhost- jeśli chcemy grać sami. Wybór serwera potwierdzamy spacją. Rozpoczęcie gry nastąpi po wcisnięciu klawisza "Enter".  
-
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:
+a)gra w trybie single-player:
+    wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)
+b)gra w trybie multiplayer - my jesteśmy serwerem - i nie chcemy brać udziału w grze:
+    wciskamy spację, czekamy na podłączenie dwóch klientów. Po wyświetleniu w konsoli dwóch aktywnych klientów, wciskamy ponownie spację, czym potwierdzamy, że jesteśmy serwerem i nie bierzemy udziału w grze
+c)gra w trybie multiplayer - my jesteśmy serwerem i chcemy wziąć udział w grze:
+    wciskamy spację i czekamy na podłączenie się klienta (drugiego gracza). Po wyświetleniu w konsoli aktywego klienta, wciskamy Enter, przechodząc bezpośrednio do gry.
+d)gra w trybie multiplayer - my jesteśmy klientem:
+    wpisujemy adres IP serwera (pod warunkiem, że serwer jest już uruchomiony(!)), akceptujemy wybór Enterem i czekamy na uruchomienie gry przez serwer.
+    
 Gra obsługiwana jest za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
 
 Ad5. Projekt współtworzyli:
