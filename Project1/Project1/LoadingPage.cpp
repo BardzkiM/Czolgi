@@ -74,7 +74,7 @@ std::string LoadingPage::run(sf::RenderWindow *window)
 				does_user_type_anything = true;
 			}
 
-			adress += "127.0.0.1";
+			adress += "0";//"127.0.0.1";
 			window->draw(sprite2);
 			window->draw(napisy(this->text, adress, 490, 202, true, 52));
 			window->display();
