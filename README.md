@@ -1,7 +1,7 @@
 # Czolgi
 Projekt_Cpp
 
-1. Gdzie znajdują się diagramy związane z projektem ?
+1. <b>Gdzie znajdują się diagramy związane z projektem ?</b>
 2. Co jest potrzebne do uruchomienia kodu ?
 3. Jak uruchomić kod ? 
 4. Jak działa gra “Czołgi 2D” ?
