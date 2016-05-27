@@ -110,9 +110,6 @@
     <ClCompile Include="Mapa.cpp">
       <Filter>Source Files\modules\gra\mapa</Filter>
     </ClCompile>
-    <ClCompile Include="Obiekt.cpp">
-      <Filter>Source Files\net</Filter>
-    </ClCompile>
     <ClCompile Include="Przeszkoda.cpp">
       <Filter>Source Files\modules\przeszkoda</Filter>
     </ClCompile>
