@@ -29,6 +29,9 @@ public:
 	void sprawdzKolizjePociskCzolg(int index);
 	void sprawdzKolizjePociskCzolgs();
 	Czolg tank[4];
+
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 	
 private:
 
