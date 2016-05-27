@@ -44,13 +44,15 @@ W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, g
 <li> gra w trybie multiplayer - <b>my jesteśmy klientem</b>:<br>
     wpisujemy adres IP serwera (pod warunkiem, że serwer jest już uruchomiony(!)), akceptujemy wybór Enterem i czekamy na uruchomienie gry przez serwer.</li>
 </ol>
-<br>
+
 Gra obsługiwana jest za pomocą strzałek - poruszanie czołgiem. Strzelanie odbywa się za pomocą spacji.
 
 Ad5. Projekt współtworzyli:
-    Michał Bardzki - kierownik,
-    Dominik Pawlik,
-    Piotr Fic,
-    Anna Gawor,
-    Mikołaj Midura.
+<ul>
+    <li>Michał Bardzki - kierownik,</li>
+    <li>Dominik Pawlik,</li>
+    <li>Piotr Fic,</li>
+    <li>Anna Gawor,</li>
+    <li>Mikołaj Midura.</li>
+</ul>
 
