@@ -26,8 +26,7 @@ Wykonawcy::Wykonawcy()
 		exit(-12);
 	}
 
-	this->miduraFace.loadFromFile("images/przeszkoda.png");
-	this->miduraFaceSprite.setTexture(miduraFace);
+	
 }
 Wykonawcy::~Wykonawcy()
 {
