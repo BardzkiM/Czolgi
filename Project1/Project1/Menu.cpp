@@ -8,12 +8,7 @@ Menu::Menu()
 		std::cerr<< "blad czytania mapy" << std::endl;
 		exit(-12);
 	}
-	/*if (!music.openFromFile("sounds/musicBG.ogg"))
-	{
-		std::cerr << "blad czytania muzyki w tle!" << std::endl;
-		exit(-12);
-	}*/
-	
+		
 
 	if (!buffer.loadFromFile("sounds/menuOption.wav"))
 	{
