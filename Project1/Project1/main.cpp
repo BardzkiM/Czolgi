@@ -266,6 +266,8 @@ int main()
 					{
 						menu_open = false;
 						wykonawcy.set_bg(&window);
+
+						
 					}
 					if (menu.position == 3)
 					{ 
@@ -278,19 +280,8 @@ int main()
 			}
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				if(menu.position==2)
-				{
-					menu_open = true;
-					//menu.position = 1;
-					
-					drawMenu();
-					menu.set_menu_pos_2(&window);
-				}
-				else
-				{
-					window.close();
-					break;
-				}
+				window.close();
+				break;
 			}
 			
 

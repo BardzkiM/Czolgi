@@ -4,7 +4,7 @@
 #include <chrono>
 
 using namespace std::chrono;
-using boost::asio::ip::tcp;
+
 
 
 ServerTCP::ServerTCP()
@@ -40,86 +40,52 @@ std::string ServerTCP::serialize()
 
 void ServerTCP::accept_client()
 {
-	//std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
-	//	
+	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
+		
 
-	//	if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
-	//	{
-	//		// error...
-	//		std::cout << "error";
-	//	}
-	
-	tcp::socket sock(io_service);
-	a->accept(sock);
-	client[nr_of_clients] = &sock;	
-	//boost::asio::write(*client[nr_of_clients], boost::asio::buffer("Hello", 10));
-	
+		if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
+		{
+			// error...
+			std::cout << "error";
+		}
 }
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	/*if (this->client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
+	if (this->client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
-	}*/
-	try {
-		boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
 	}
-	catch (const std::exception& error) {
-		// Should print the actual error message
-		std::cerr << error.what() << std::endl;
-	}
-	
 }
 
 void ServerTCP::receive(int which_client)
 {
-	/*char data[200];
+	char data[200];
 	std::size_t received;
-	std::string output_string;*/
-	/*do
+	std::string output_string;
+	do
 	{
-		if (this->client[which_client].receive(&data, 200, received) != sf::Socket::Done)
+		if (client[which_client].receive(&data, 200, received) != sf::Socket::Done)
 		{
 			std::cout << "Error during server receiveing";
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-	} while (output_string.find("archive") == -1);*/
-	try {
-		char data[1024];
-		std::string output_string;
-		boost::system::error_code error;
-		size_t length = client[which_client]->read_some(boost::asio::buffer(data), error);
-		if (error == boost::asio::error::eof)
-			std::cout << "Connection closed cleanly by peer.";//break; // Connection closed cleanly by peer.
-		else if (error)
-		{
-			std::cout << "[ServerTCP] receive error" << std::endl;
-			throw boost::system::system_error(error); // Some other error.
-		}
+	} while (output_string.find("archive") == -1);
 
-		std::string temp_string(data);
-		output_string = temp_string;
-		tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
-	}
-	catch (const std::exception& error) {
-		// Should print the actual error message
-		std::cerr<< "[SERVER TCP]" << error.what() << std::endl;
-	}
-	
+	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
 }
 
 void ServerTCP::RunInit()
 {
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
-	a = new tcp::acceptor(io_service, tcp::endpoint(tcp::v4(), 54000));
-	//if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
-	//{
-	//	std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
-	//	exit(1);
-	//}
+
+	if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
+	{
+		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
+		exit(1);
+	}
 	const int max_clients_size = 4;
 	sf::Thread *clients[max_clients_size];
 	
@@ -135,7 +101,7 @@ void ServerTCP::RunInit()
 		nr_of_clients++;
 		
 	}
-	/*listener.close();*/
+	listener.close();
 	
 }
 void ServerTCP::runGame()

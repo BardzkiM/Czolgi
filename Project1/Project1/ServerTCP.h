@@ -2,14 +2,10 @@
 
 #ifndef _SERVERTCP_H
 #define _SERVERTCP_H
-//#include <SFML/Network.hpp>
-//#include <SFML/System.hpp>
-#include "Czolg.h"
-#include <cstdlib>
+#include <SFML/Network.hpp>
+#include <SFML/System.hpp>
 #include <iostream>
-#include <thread>
-#include <utility>
-#include <boost/asio.hpp>
+#include "Czolg.h"
 
 class ServerTCP
 {
@@ -39,13 +35,11 @@ public:
 	
 private:
 
-	//sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
+	sf::TcpListener listener; // tworzymy gniazdo nas³uchujace
 	//sf::TcpSocket *client = NULL;// new sf::TcpSocket[1];
 	int nr_of_clients=0;
-	//sf::TcpSocket client[4];
-	boost::asio::ip::tcp::socket *client[4];
-	boost::asio::io_service io_service;
-	boost::asio::ip::tcp::acceptor *a;
+	sf::TcpSocket client[4];
+	
 
 };
 
