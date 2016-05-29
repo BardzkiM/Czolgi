@@ -23,7 +23,7 @@ public:
 
 	void send(std::string message);
 
-	std::string receive();
+	std::string receive(boost::asio::ip::tcp::socket socket);
 
 	void RunInit();
 	std::string numer_klienta;
@@ -37,9 +37,7 @@ private:
 	//sf::TcpSocket socket;
 	
 	Czolg *tank;
-	boost::asio::io_service io_service;
-	boost::asio::ip::tcp::socket *socket;
-	boost::asio::ip::tcp::resolver *resolver;
+	
 
 	
 
