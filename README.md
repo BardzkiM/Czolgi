@@ -34,7 +34,7 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 <ol type="a">
-W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:<br>
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:<br><br>
 <li> gra w trybie <b> single-player </b>:<br>
     wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)</li><br>
 <li> gra w trybie multiplayer -<b> my jesteśmy serwerem - i nie chcemy brać udziału w grze</b>:<br>
