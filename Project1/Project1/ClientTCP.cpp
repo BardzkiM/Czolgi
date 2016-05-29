@@ -78,8 +78,8 @@ void ClientTCP::RunInit()
 	//	std::cout << "error";
 	//}
 	socket = new tcp::socket(io_service);
-	tcp::resolver resolver(io_service);
-	boost::asio::connect(*socket, resolver.resolve({ "127.0.0.1", "54000" }));
+	resolver = new tcp::resolver(io_service);
+	boost::asio::connect(*socket, resolver->resolve({ "127.0.0.1", "54000" }));
 	
 	
 	this->tank->deserialize(this->receive()); // odbieramy w³asny czo³g przed gr¹

@@ -52,6 +52,7 @@ void ServerTCP::accept_client()
 	tcp::socket sock(io_service);
 	a->accept(sock);
 	client[nr_of_clients] = &sock;	
+	//boost::asio::write(*client[nr_of_clients], boost::asio::buffer("Hello", 10));
 	
 }
 
@@ -61,7 +62,7 @@ void ServerTCP::send(int which_client, std::string message)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
 	}*/
-	boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
+	//boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
 }
 
 void ServerTCP::receive(int which_client)
