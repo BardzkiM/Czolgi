@@ -139,6 +139,16 @@ void drawMenu()
 }
 void gameOver()
 {
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+	if (!buffer.loadFromFile("sounds/gameover.wav"))
+	{
+		std::cerr << "blad czytania dzwieku! (gameover.wav)" << std::endl;
+		exit(-12);
+	}
+	sound.setBuffer(buffer);
+	sound.play();
+	
 	std::cout << "Game Over" << std::endl;
 	clienttcp_thread.terminate();
 	server_game.terminate();
@@ -162,6 +172,7 @@ void gameOver()
 		window.draw(logoOverSprite);
 		window.display();
 	}
+	sf::sleep(sf::milliseconds(500));
 }
 int main()
 {
@@ -199,12 +210,12 @@ int main()
 	sf::Music musicTank;
 	if (!music.openFromFile("sounds/musicBG.ogg"))
 	{
-		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		std::cerr << "blad czytania muzyki w tle!(musicBG.ogg)" << std::endl;
 		exit(-12);
 	}
 	if (!musicTank.openFromFile("sounds/tankMusic.ogg"))
 	{
-		std::cerr << "blad czytania muzyki w tle!" << std::endl;
+		std::cerr << "blad czytania muzyki w tle! (tankMusic.ogg)" << std::endl;
 		exit(-12);
 	}
 
@@ -294,6 +305,7 @@ int main()
 				if (tank.hp > 0)
 				{
 					gra();
+					
 				}
 				else
 				{

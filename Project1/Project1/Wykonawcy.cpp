@@ -26,8 +26,7 @@ Wykonawcy::Wykonawcy()
 		exit(-12);
 	}
 
-	this->miduraFace.loadFromFile("images/przeszkoda.png");
-	this->miduraFaceSprite.setTexture(miduraFace);
+	
 }
 Wykonawcy::~Wykonawcy()
 {
@@ -122,15 +121,13 @@ int Wykonawcy::set_bg(sf::RenderWindow *window)
 		window->draw(napisy(this->wykonawca2, "Piotr Fic", 820, 345, false, 45));
 		window->draw(napisy(this->wykonawca3, "Dominik Pawlik", 780, 415, false, 45));//760,415
 		window->draw(napisy(this->wykonawca3, "Anna Gawor", 810, 485, false, 45)); //790,485
-		miduraFaceSprite.setPosition(k - 65, 555);
-		window->draw(miduraFaceSprite);
 		window->draw(napisy(this->wykonawca3, "Mikolaj Midura", k, 555, false, 45)); //760,555
 		window->display();
 		sf::sleep(delay);
 	}
 	
 
-	window->draw(napisy(this->powrot, "nacisnij klawisz ESCAPE, aby powróciæ do menu", 500 , 800, false, 40));
+	window->draw(napisy(this->powrot, "nacisnij klawisz ESCAPE, aby powrócic do menu", 500 , 800, false, 40));
 	window->display();
 	return 1;
 }

@@ -13,6 +13,12 @@ ServerTCP::ServerTCP()
 	tank[1].setInitialPosition(1140, 840);
 	tank[2].setInitialPosition(0, 840);
 	tank[3].setInitialPosition(1140, 0);
+
+	if (!buffer.loadFromFile("sounds/bomb.wav"))
+	{
+		std::cerr << "blad czytania dzwieku niszczenia (bomb.wav)!" << std::endl;
+		exit(-12);
+	}
 }
 
 ServerTCP::~ServerTCP()
@@ -109,7 +115,7 @@ void ServerTCP::runGame()
 		this->send(i, this->serialize());
 	}
 	sf::Clock clock;
-	sf::Time latency = sf::seconds(0.02);
+	sf::Time latency = sf::seconds(0.021);
 	while (1)
 	{
 		for (int i = 0; i < nr_of_clients_const; i++)
@@ -147,7 +153,8 @@ void ServerTCP::sprawdzCzyStrzelil(int index)
 }
 void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 {
-
+	sound.setBuffer(buffer);
+	
 	for (int k = 0; k < tank[index].pociski.size(); k++)
 	{
 		Pocisk *pocisk = &tank[index].pociski[k];
@@ -163,6 +170,7 @@ void ServerTCP::sprawdzKolizjePociskCzolg(int index)
 			{
 				tank[index].removePocisk(k);
 				tank[i].hp -= 25;
+				sound.play();
 			}
 		}
 	}
