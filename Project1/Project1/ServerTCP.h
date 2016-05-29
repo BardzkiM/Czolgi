@@ -45,6 +45,7 @@ private:
 	//sf::TcpSocket client[4];
 	boost::asio::ip::tcp::socket *client[4];
 	boost::asio::io_service io_service;
+	boost::asio::ip::tcp::acceptor *a;
 
 };
 

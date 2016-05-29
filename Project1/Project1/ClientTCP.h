@@ -2,11 +2,14 @@
 
 #ifndef _CLIENTTCP_H
 #define _CLIENTTCP_H
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
+//#include <SFML/Network.hpp>
+//#include <SFML/System.hpp>
 #include <iostream>
 #include "Czolg.h"
 #include "GraDane.h"
+#include <cstdlib>
+#include <cstring>
+#include <boost/asio.hpp>
 
 class ClientTCP
 {
@@ -31,8 +34,11 @@ public:
 	sf::Mutex *mutex;
 
 private:
-	sf::TcpSocket socket;
+	//sf::TcpSocket socket;
+	
 	Czolg *tank;
+	boost::asio::io_service io_service;
+	boost::asio::ip::tcp::socket *socket;
 
 	
 

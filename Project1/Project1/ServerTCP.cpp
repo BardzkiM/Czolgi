@@ -48,9 +48,9 @@ void ServerTCP::accept_client()
 	//		// error...
 	//		std::cout << "error";
 	//	}
-	tcp::acceptor a(io_service, tcp::endpoint(tcp::v4(), 54000));
+	
 	tcp::socket sock(io_service);
-	a.accept(sock);
+	a->accept(sock);
 	client[nr_of_clients] = &sock;	
 	
 }
@@ -61,7 +61,7 @@ void ServerTCP::send(int which_client, std::string message)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
 	}*/
-	boost::asio::write(client[which_client], boost::asio::buffer(message, message.length()));
+	boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
 }
 
 void ServerTCP::receive(int which_client)
@@ -85,7 +85,11 @@ void ServerTCP::receive(int which_client)
 	if (error == boost::asio::error::eof)
 		std::cout << "Connection closed cleanly by peer.";//break; // Connection closed cleanly by peer.
 	else if (error)
+	{
+		std::cout << "[ServerTCP] receive error" << std::endl;
 		throw boost::system::system_error(error); // Some other error.
+	}
+		
 	std::string temp_string(data);
 	output_string = temp_string;
 	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
@@ -95,7 +99,7 @@ void ServerTCP::RunInit()
 {
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
-
+	a = new tcp::acceptor(io_service, tcp::endpoint(tcp::v4(), 54000));
 	//if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
 	//{
 	//	std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
