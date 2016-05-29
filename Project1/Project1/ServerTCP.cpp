@@ -4,8 +4,8 @@
 #include <chrono>
 
 using namespace std::chrono;
-
-
+using boost::asio::ip::tcp;
+tcp::socket *client[4];
 
 ServerTCP::ServerTCP()
 {
@@ -40,19 +40,24 @@ std::string ServerTCP::serialize()
 
 void ServerTCP::accept_client()
 {
-	std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
-		
+	//std::cout << "Oczekiwanie na akceptacjê klienta"<< std::endl;
+	//	
 
-		if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
-		{
-			// error...
-			std::cout << "error";
-		}
+	//	if (listener.accept(this->client[nr_of_clients]) != sf::Socket::Done)
+	//	{
+	//		// error...
+	//		std::cout << "error";
+	//	}
+	tcp::acceptor a(io_service, tcp::endpoint(tcp::v4(), 54000));
+	tcp::socket sock(io_service);
+	a.accept(sock);
+	client[nr_of_clients] = &sock;	
+	
 }
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	if (this->client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
+	if (client[which_client].send(message.c_str(), message.length() + 1))
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
 	}
@@ -65,7 +70,7 @@ void ServerTCP::receive(int which_client)
 	std::string output_string;
 	do
 	{
-		if (client[which_client].receive(&data, 200, received) != sf::Socket::Done)
+		if (this->client[which_client].receive(&data, 200, received) != sf::Socket::Done)
 		{
 			std::cout << "Error during server receiveing";
 		}
