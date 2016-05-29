@@ -5,7 +5,7 @@
 
 using namespace std::chrono;
 using boost::asio::ip::tcp;
-tcp::socket *client[4];
+
 
 ServerTCP::ServerTCP()
 {
@@ -57,18 +57,19 @@ void ServerTCP::accept_client()
 
 void ServerTCP::send(int which_client, std::string message)
 {
-	if (client[which_client].send(message.c_str(), message.length() + 1))
+	/*if (this->client[which_client].send(message.c_str(), message.length() + 1) != sf::Socket::Done)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
-	}
+	}*/
+	boost::asio::write(client[which_client], boost::asio::buffer(message, message.length()));
 }
 
 void ServerTCP::receive(int which_client)
 {
-	char data[200];
+	/*char data[200];
 	std::size_t received;
-	std::string output_string;
-	do
+	std::string output_string;*/
+	/*do
 	{
 		if (this->client[which_client].receive(&data, 200, received) != sf::Socket::Done)
 		{
@@ -76,8 +77,17 @@ void ServerTCP::receive(int which_client)
 		}
 		std::string temp_string(data);
 		output_string = temp_string;
-	} while (output_string.find("archive") == -1);
-
+	} while (output_string.find("archive") == -1);*/
+	char data[1024];
+	std::string output_string;
+	boost::system::error_code error;
+	size_t length = client[which_client]->read_some(boost::asio::buffer(data), error);
+	if (error == boost::asio::error::eof)
+		std::cout << "Connection closed cleanly by peer.";//break; // Connection closed cleanly by peer.
+	else if (error)
+		throw boost::system::system_error(error); // Some other error.
+	std::string temp_string(data);
+	output_string = temp_string;
 	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
 }
 
@@ -86,11 +96,11 @@ void ServerTCP::RunInit()
 	std::cout << std::endl << "Start w¹tku servera "<< argument << std::endl;
 	unsigned int port = 54000; // port, na którym bêdziemy nas³uchiwaæ
 
-	if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
-	{
-		std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
-		exit(1);
-	}
+	//if (listener.listen(port) != sf::Socket::Done) // rozpoczynamy nas³uchiwanie na porcie 'port'
+	//{
+	//	std::cerr << "Nie mogê rozpocz¹æ nas³uchiwania na porcie " << port << std::endl;
+	//	exit(1);
+	//}
 	const int max_clients_size = 4;
 	sf::Thread *clients[max_clients_size];
 	
@@ -106,7 +116,7 @@ void ServerTCP::RunInit()
 		nr_of_clients++;
 		
 	}
-	listener.close();
+	/*listener.close();*/
 	
 }
 void ServerTCP::runGame()
