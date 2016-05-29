@@ -9,7 +9,7 @@ Projekt_Cpp
 
 Ad1. Diagramy (Klas, ELH, Maszyny Stanowej) znajdują się w folderze diagramy (Czolgi\Diagramy).
 
-Ad2. Kod gry został napisany w języku C++ z wykorzystaniem silnika graficznego SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
+Ad2. Kod gry został napisany w języku C++ z wykorzystaniem biblioteki graficznej SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
 https://www.youtube.com/watch?v=Z6alClFOGoM ).
 
 Ad3. Jak uruchomić kod?
