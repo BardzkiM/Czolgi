@@ -52,18 +52,25 @@ std::string ClientTCP::receive()
 	//	output_string = temp_string;
 	//	//std::cout <<"[ClientTCP] receive"<< output_string << std::endl;
 	//} while (output_string.find("archive")==-1);
-
-	char reply[1024];
-	std::string output_string;
-	size_t reply_length = boost::asio::read(*socket, boost::asio::buffer(reply, 1024));
-	std::cout << "Reply is: ";
-	std::cout.write(reply, reply_length);
-	std::cout << "\n";
-	std::string temp_string(reply);
-	output_string = temp_string;
+	try {
+		char reply[1024];
+		std::string output_string;
+		size_t reply_length = boost::asio::read(*socket, boost::asio::buffer(reply, 1024));
+		std::cout << "Reply is: ";
+		std::cout.write(reply, reply_length);
+		std::cout << "\n";
+		std::string temp_string(reply);
+		output_string = temp_string;
+		return output_string;
+	}
+	catch (const std::exception& error) {
+		// Should print the actual error message
+		std::cerr<< "[ClientTCP] " << error.what() << std::endl;
+	}
+	
 	
 	//std::cout << "Odebrano: " << output_string << std::endl;
-	return output_string;
+	
 }
 
 void ClientTCP::RunInit()

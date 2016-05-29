@@ -62,7 +62,14 @@ void ServerTCP::send(int which_client, std::string message)
 	{
 		std::cout << "Bl¹d wysy³ania do klienta";
 	}*/
-	//boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
+	try {
+		boost::asio::write(*client[which_client], boost::asio::buffer(message.c_str(), message.length()));
+	}
+	catch (const std::exception& error) {
+		// Should print the actual error message
+		std::cerr << error.what() << std::endl;
+	}
+	
 }
 
 void ServerTCP::receive(int which_client)
@@ -79,21 +86,28 @@ void ServerTCP::receive(int which_client)
 		std::string temp_string(data);
 		output_string = temp_string;
 	} while (output_string.find("archive") == -1);*/
-	char data[1024];
-	std::string output_string;
-	boost::system::error_code error;
-	size_t length = client[which_client]->read_some(boost::asio::buffer(data), error);
-	if (error == boost::asio::error::eof)
-		std::cout << "Connection closed cleanly by peer.";//break; // Connection closed cleanly by peer.
-	else if (error)
-	{
-		std::cout << "[ServerTCP] receive error" << std::endl;
-		throw boost::system::system_error(error); // Some other error.
+	try {
+		char data[1024];
+		std::string output_string;
+		boost::system::error_code error;
+		size_t length = client[which_client]->read_some(boost::asio::buffer(data), error);
+		if (error == boost::asio::error::eof)
+			std::cout << "Connection closed cleanly by peer.";//break; // Connection closed cleanly by peer.
+		else if (error)
+		{
+			std::cout << "[ServerTCP] receive error" << std::endl;
+			throw boost::system::system_error(error); // Some other error.
+		}
+
+		std::string temp_string(data);
+		output_string = temp_string;
+		tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
 	}
-		
-	std::string temp_string(data);
-	output_string = temp_string;
-	tank[which_client].deserializeForServer(output_string);							//tworzymy testowy obiekt czolg
+	catch (const std::exception& error) {
+		// Should print the actual error message
+		std::cerr<< "[SERVER TCP]" << error.what() << std::endl;
+	}
+	
 }
 
 void ServerTCP::RunInit()
