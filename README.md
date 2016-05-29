@@ -7,7 +7,7 @@ Projekt_Cpp
 4. Jak działa gra “Czołgi 2D” ?
 5. Kto napisał projekt ?
 
-Ad1. Diagramy (klas, ELH) znajdują się w folderze diagramy (Czolgi\Diagramy).
+Ad1. Diagramy (Klas, ELH, Maszyny Stanowej) znajdują się w folderze diagramy (Czolgi\Diagramy).
 
 Ad2. Kod gry został napisany w języku C++ z wykorzystaniem silnika graficznego SFML, w środowisku Visual Studio 2015. Dlatego do uruchomienia kodu zalecane jest posiadanie skonfigurowanego Visual Studio, pod kątem SMFL (z założenia środowisko to, jest już przystosowane do tej dodatkowej biblioteki, jednak warto się upewnić. W razie problemów z instalacją:
 https://www.youtube.com/watch?v=Z6alClFOGoM ).
@@ -34,13 +34,13 @@ Ciesz się grą :)
 
 Ad4. Jak działa gra
 <ol type="a">
-W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:<br>
+W celu rozpoczęcia gry należy w menu wybrać opcję "Start gry". Następnie, gdy gra przeniesie nas do panelu wyboru serwera:<br><br>
 <li> gra w trybie <b> single-player </b>:<br>
-    wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)</li>
+    wciskamy spację, następnie "Enter" (potwierdzamy tym samym wybór serwera jako localhost i przystępujemy do gry)</li><br>
 <li> gra w trybie multiplayer -<b> my jesteśmy serwerem - i nie chcemy brać udziału w grze</b>:<br>
-    wciskamy spację, czekamy na podłączenie dwóch klientów. Po wyświetleniu w konsoli dwóch aktywnych klientów, wciskamy ponownie spację, czym potwierdzamy, że jesteśmy serwerem i nie bierzemy udziału w grze</li>
+    wciskamy spację, czekamy na podłączenie dwóch klientów. Po wyświetleniu w konsoli dwóch aktywnych klientów, wciskamy ponownie spację, czym potwierdzamy, że jesteśmy serwerem i nie bierzemy udziału w grze</li><br>
 <li> gra w trybie multiplayer - <b>my jesteśmy serwerem i chcemy wziąć udział w grze</b>:<br>
-    wciskamy spację i czekamy na podłączenie się klienta (drugiego gracza). Po wyświetleniu w konsoli aktywego klienta, wciskamy Enter, przechodząc bezpośrednio do gry.</li>
+    wciskamy spację i czekamy na podłączenie się klienta (drugiego gracza). Po wyświetleniu w konsoli aktywego klienta, wciskamy Enter, przechodząc bezpośrednio do gry.</li><br>
 <li> gra w trybie multiplayer - <b>my jesteśmy klientem</b>:<br>
     wpisujemy adres IP serwera (pod warunkiem, że serwer jest już uruchomiony(!)), akceptujemy wybór Enterem i czekamy na uruchomienie gry przez serwer.</li>
 </ol>
