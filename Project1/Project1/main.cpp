@@ -172,7 +172,7 @@ void gameOver()
 		window.draw(logoOverSprite);
 		window.display();
 	}
-	sf::sleep(sf::milliseconds(500));
+	sf::sleep(sf::milliseconds(1500));
 }
 int main()
 {
