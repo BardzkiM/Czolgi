@@ -280,8 +280,16 @@ int main()
 			}
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				window.close();
-				break;
+				if (menu.position == 2)
+				{
+					menu_open = true;
+					drawMenu();
+				}
+				else
+				{
+					window.close();
+					break;
+				}
 			}
 			
 
